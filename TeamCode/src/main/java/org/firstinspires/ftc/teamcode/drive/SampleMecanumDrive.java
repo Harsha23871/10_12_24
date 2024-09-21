@@ -78,7 +78,7 @@ public class SampleMecanumDrive extends MecanumDrive {
     private TrajectoryFollower follower;
 
     private DcMotorEx leftFront, leftRear, rightRear, rightFront;
-    private Servo autoFinger;
+
     private List<DcMotorEx> motors;
     private List<Servo> servos;
 
@@ -112,13 +112,13 @@ public class SampleMecanumDrive extends MecanumDrive {
 //        IMU.Parameters parameters = new IMU.Parameters(new RevHubOrientationOnRobot(
 //                DriveConstants.LOGO_FACING_DIR, DriveConstants.USB_FACING_DIR));
 //        imu.initialize(parameters);
+      //  motors = Arrays.asList(leftFront, leftRear, rightRear, rightFront);
+        leftFront = hardwareMap.get(DcMotorEx.class, "front_left");
+        leftRear = hardwareMap.get(DcMotorEx.class, "rear_left");
+        rightRear = hardwareMap.get(DcMotorEx.class, "rear_right");
+        rightFront = hardwareMap.get(DcMotorEx.class, "front_right");
 
-        leftFront = hardwareMap.get(DcMotorEx.class, "leftFront");
-        leftRear = hardwareMap.get(DcMotorEx.class, "leftRear");
-        rightRear = hardwareMap.get(DcMotorEx.class, "rightRear");
-        rightFront = hardwareMap.get(DcMotorEx.class, "rightFront");
 
-        autoFinger = hardwareMap.get(ServoImpl.class, "autoFinger");
 
         leftRear.setDirection(DcMotorSimple.Direction.REVERSE);
         leftFront.setDirection(DcMotorSimple.Direction.REVERSE);
