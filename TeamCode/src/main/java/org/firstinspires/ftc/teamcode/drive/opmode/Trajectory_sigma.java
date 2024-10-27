@@ -20,24 +20,60 @@ public class Trajectory_sigma extends LinearOpMode {
 
     @Override
 
-// 12 -58
+// 12 -5
 
     public void runOpMode() {
         Telemetry telemetry = new MultipleTelemetry(this.telemetry, FtcDashboard.getInstance().getTelemetry());
         SampleMecanumDrive drive = new SampleMecanumDrive(hardwareMap);
-        Pose2d startPose = new Pose2d(-36, -58, Math.toRadians(90)); // =36, -59
+        Pose2d startPose = new Pose2d(-37,  -61, Math.toRadians(270));
         drive.setPoseEstimate(startPose);
-
-
-        TrajectorySequence trajectory7 = drive.trajectorySequenceBuilder(new Pose2d(-36.41, -59.99, Math.toRadians(90.00)))
-                .splineTo(new Vector2d(-40.86, -45.60), Math.toRadians(107.19))
-                .splineTo(new Vector2d(-44.42, -36.11), Math.toRadians(110.56))
-                .splineTo(new Vector2d(-49.31, -25.73), Math.toRadians(115.24))
-                .splineTo(new Vector2d(-51.68, -30.33), Math.toRadians(242.70))
-                .splineTo(new Vector2d(-55.84, -38.48), Math.toRadians(243.02))
-                .splineTo(new Vector2d(-59.84, -49.16), Math.toRadians(249.44))
-                .splineTo(new Vector2d(-61.92, -60.73), Math.toRadians(259.82))
+        TrajectorySequence trajectory0 = drive.trajectorySequenceBuilder(new Pose2d(-37, -61, Math.toRadians(270)))
+                .splineToConstantHeading(new Vector2d(-2, -38), Math.toRadians(34.39))//Red bucket side specimen scoring
                 .build();
+
+
+
+        drive.followTrajectorySequence(trajectory0);
+
+
+        waitForStart();
+
+
+
+
+
+
+
+
+        /*TrajectorySequence trajectory7 = drive.trajectorySequenceBuilder(new Pose2d(11, -62, Math.toRadians(90.00)))
+                .lineTo(new Vector2d(51.83, -62.36)) //Red side observation Auto( Preload into Observation zone)
+                .lineTo(new Vector2d(10.90, -61.03))
+                .build();*/
+
+
+
+
+
+
+
+
+               /*
+                TrajectorySequence trajectory7 = drive.trajectorySequenceBuilder(new Pose2d(11, -62, Math.toRadians(90.00)))
+                .lineTo(new Vector2d(51.83, -62.36)) //Red side observation Auto( Preload into Observation zone)
+                .lineTo(new Vector2d(10.90, -61.03))
+                .build();*/
+
+
+
+
+
+
+
+
+
+
+                /*.splineTo(new Vector2d(-49.46, -26.18), Math.toRadians(111.36))
+
 
 
      //   Trajectory myTrajectory = drive.trajectoryBuilder(Traj1.end())
@@ -75,8 +111,8 @@ public class Trajectory_sigma extends LinearOpMode {
         drive.followTrajectorySequence(middleSpike);//might need to change*/
 
 
-    }
+    }   }
 
 
 
-}
+
