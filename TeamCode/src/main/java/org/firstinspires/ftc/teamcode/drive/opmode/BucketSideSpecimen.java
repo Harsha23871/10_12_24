@@ -1,42 +1,40 @@
 package org.firstinspires.ftc.teamcode.drive.opmode;
 
-import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.hardwareMap;
-
 import com.acmerobotics.dashboard.FtcDashboard;
 import com.acmerobotics.dashboard.telemetry.MultipleTelemetry;
 import com.acmerobotics.roadrunner.geometry.Pose2d;
 import com.acmerobotics.roadrunner.geometry.Vector2d;
-import com.acmerobotics.roadrunner.trajectory.Trajectory;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import com.qualcomm.robotcore.hardware.HardwareMap;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive;
 import org.firstinspires.ftc.teamcode.trajectorysequence.TrajectorySequence;
 
-@Autonomous(group = "a", name="Test RR auto")
-public class Trajectory_sigma extends LinearOpMode {
+@Autonomous(group = "a", name="Bucket Side Specimen")
+public class BucketSideSpecimen extends LinearOpMode {
 
     @Override
 
 // 12 -5
 
     public void runOpMode() {
+        waitForStart();
         Telemetry telemetry = new MultipleTelemetry(this.telemetry, FtcDashboard.getInstance().getTelemetry());
         SampleMecanumDrive drive = new SampleMecanumDrive(hardwareMap);
+
         Pose2d startPose = new Pose2d(-37,  -61, Math.toRadians(270));
+
         drive.setPoseEstimate(startPose);
+
         TrajectorySequence trajectory0 = drive.trajectorySequenceBuilder(new Pose2d(-37, -61, Math.toRadians(270)))
-                .splineToConstantHeading(new Vector2d(-2, -38), Math.toRadians(34.39))//Red bucket side specimen scoring
+                .splineToConstantHeading(new Vector2d(-2, -34), Math.toRadians(34.39))//Red bucket side specimen scoring
                 .build();
 
 
 
         drive.followTrajectorySequence(trajectory0);
 
-
-        waitForStart();
 
 
 
