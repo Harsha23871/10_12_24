@@ -26,9 +26,9 @@ public class BucketScore extends LinearOpMode {
         Pose2d startPose = new Pose2d(-37, -61, Math.toRadians(270));
 
         drive.setPoseEstimate(startPose);
-
+// try 0
         TrajectorySequence trajectory0 = drive.trajectorySequenceBuilder(new Pose2d(-37, -61, Math.toRadians(225)))
-                .splineToConstantHeading(new Vector2d(-52.13, -54.95), Math.toRadians(34.39))
+                .splineToConstantHeading(new Vector2d(-54, -53), Math.toRadians(34.39))
                 .build();
 
 
