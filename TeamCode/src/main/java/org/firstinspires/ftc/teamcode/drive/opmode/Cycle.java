@@ -25,7 +25,7 @@ public class Cycle extends LinearOpMode {
         Pose2d startPose = new Pose2d(0,  34, Math.toRadians(270));
         drive.setPoseEstimate(startPose);
 
-        TrajectorySequence trajectory0 = drive.trajectorySequenceBuilder(new Pose2d(0, 34, Math.toRadians(90.00)))
+        TrajectorySequence trajectory0 = drive.trajectorySequenceBuilder(new Pose2d(0.0, 34.0, Math.toRadians(90.00)))
                 .splineToConstantHeading(new Vector2d(-55.69, 56.13), Math.toRadians(90.00))
                 .build();
 
