@@ -38,9 +38,32 @@ public class ObservationSideSpecimen extends LinearOpMode {
 
 
 
-        TrajectorySequence trajectory3 = drive.trajectorySequenceBuilder(trajectory0.end())
-                .splineToConstantHeading(new Vector2d(49, -64), Math.toRadians(34.39)) // 270
+        TrajectorySequence trajectory1 = drive.trajectorySequenceBuilder(trajectory0.end())
+                .splineToConstantHeading(new Vector2d(11.5, -62), Math.toRadians(34.39)) // 270
                 .build();
+
+
+        TrajectorySequence trajectory2 = drive.trajectorySequenceBuilder(trajectory1.end())
+                .splineToConstantHeading(new Vector2d(47.98, -0.07), Math.toRadians(71.84))
+
+
+
+
+                .lineTo(new Vector2d(60, -0.22))
+                .lineTo(new Vector2d(60, -61.77))
+
+
+
+
+
+                .build();
+// 35.81,-37.15 start pos
+
+
+
+
+
+
 
 
 
@@ -49,8 +72,8 @@ public class ObservationSideSpecimen extends LinearOpMode {
 
         drive.followTrajectorySequence(trajectory0);
         sleep(2000);
-
-
+        drive.followTrajectorySequence(trajectory1);
+        drive.followTrajectorySequence(trajectory2);
 
 
 
