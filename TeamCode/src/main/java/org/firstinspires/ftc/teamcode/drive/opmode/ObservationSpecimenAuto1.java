@@ -12,8 +12,8 @@ import org.firstinspires.ftc.teamcode.drive.DriveConstants;
 import org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive;
 import org.firstinspires.ftc.teamcode.trajectorysequence.TrajectorySequence;
 
-@Autonomous(group = "a", name="Testboooooi")
-public class ObservationSideSpecimen extends LinearOpMode {
+@Autonomous(group = "a", name="ObservationSideSpecimen")
+public class ObservationSpecimenAuto1 extends LinearOpMode {
 
     @Override
 
@@ -25,11 +25,11 @@ public class ObservationSideSpecimen extends LinearOpMode {
         SampleMecanumDrive drive = new SampleMecanumDrive(hardwareMap);
         Pose2d startPose = new Pose2d(11,  -61, Math.toRadians(270));
         drive.setPoseEstimate(startPose);
-        TrajectorySequence trajectory0 = drive.trajectorySequenceBuilder(new Pose2d(11.5, -62, Math.toRadians(270)))
-                .splineToConstantHeading(new Vector2d(2, -31.5), Math.toRadians(34.39)
+        TrajectorySequence trajectory0 = drive.trajectorySequenceBuilder(new Pose2d(11, -61, Math.toRadians(270)))
+                .splineToConstantHeading(new Vector2d(0, -30), Math.toRadians(34.39),
 
-                       // SampleMecanumDrive.getVelocityConstraint(20, DriveConstants.MAX_ANG_VEL, DriveConstants.TRACK_WIDTH),
-                  //      SampleMecanumDrive.getAccelerationConstraint(DriveConstants.MAX_ACCEL)
+                        SampleMecanumDrive.getVelocityConstraint(20, DriveConstants.MAX_ANG_VEL, DriveConstants.TRACK_WIDTH),
+                        SampleMecanumDrive.getAccelerationConstraint(DriveConstants.MAX_ACCEL)
 
 
 
@@ -37,6 +37,10 @@ public class ObservationSideSpecimen extends LinearOpMode {
                 .build();
 
 
+
+   //     TrajectorySequence trajectory1 = drive.trajectorySequenceBuilder(trajectory0.end())
+     //           .splineToConstantHeading(new Vector2d(11, -61), Math.toRadians(34.39)) // 270
+    //            .build();
 
         TrajectorySequence trajectory3 = drive.trajectorySequenceBuilder(trajectory0.end())
                 .splineToConstantHeading(new Vector2d(49, -64), Math.toRadians(34.39)) // 270
@@ -50,7 +54,8 @@ public class ObservationSideSpecimen extends LinearOpMode {
         drive.followTrajectorySequence(trajectory0);
         sleep(2000);
 
-
+    //    drive.followTrajectorySequence(trajectory1);
+        drive.followTrajectorySequence(trajectory3);
 
 
 
