@@ -6,6 +6,9 @@ import com.acmerobotics.roadrunner.geometry.Pose2d;
 import com.acmerobotics.roadrunner.geometry.Vector2d;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorEx;
+import com.qualcomm.robotcore.hardware.HardwareMap;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.drive.DriveConstants;
@@ -15,65 +18,60 @@ import org.firstinspires.ftc.teamcode.trajectorysequence.TrajectorySequence;
 @Autonomous(group = "a", name="Testboooooi")
 public class ObservationSideSpecimen extends LinearOpMode {
 
-    @Override
 
-// 12 -5
+
+        private DcMotor elevator = null;
 
     public void runOpMode() {
+        HwMapForAuto hw = new HwMapForAuto(hardwareMap);
+//        hwMapForAuto.elevator_Scoring_Pos();  // Moves elevator to scoring position
+//        hwMapForAuto.elevator_Resting_Pos();
+//      elevator = hardwareMap.get(DcMotor.class,"elevator_motor");
+
         waitForStart();
+
+//        elevator.setMode(DcMotorEx.RunMode.STOP_AND_RESET_ENCODER);
+//        elevator.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
+         // Moves elevator to resting position
+
         Telemetry telemetry = new MultipleTelemetry(this.telemetry, FtcDashboard.getInstance().getTelemetry());
         SampleMecanumDrive drive = new SampleMecanumDrive(hardwareMap);
         Pose2d startPose = new Pose2d(11,  -61, Math.toRadians(270));
         drive.setPoseEstimate(startPose);
-        TrajectorySequence trajectory0 = drive.trajectorySequenceBuilder(new Pose2d(11.5, -62, Math.toRadians(270)))
-                .splineToConstantHeading(new Vector2d(2, -31.5), Math.toRadians(34.39)
+        TrajectorySequence trajectory0 = drive.trajectorySequenceBuilder(new Pose2d(11, -61, Math.toRadians(270.00)))
+                .splineToConstantHeading(new Vector2d(0, -34), Math.toRadians(34.39))
 
-                       // SampleMecanumDrive.getVelocityConstraint(20, DriveConstants.MAX_ANG_VEL, DriveConstants.TRACK_WIDTH),
-                  //      SampleMecanumDrive.getAccelerationConstraint(DriveConstants.MAX_ACCEL)
-
-
-
-                )
-                .build();
-
-
-
-        TrajectorySequence trajectory1 = drive.trajectorySequenceBuilder(trajectory0.end())
-                .splineToConstantHeading(new Vector2d(11.5, -62), Math.toRadians(34.39)) // 270
-                .build();
-
-
-        TrajectorySequence trajectory2 = drive.trajectorySequenceBuilder(trajectory1.end())
-                .splineToConstantHeading(new Vector2d(47.98, -0.07), Math.toRadians(71.84))
-
-
-
-
-                .lineTo(new Vector2d(60, -0.22))
-                .lineTo(new Vector2d(60, -61.77))
-
-
-
+//                .addTemporalMarker(1, () -> {
+//                    elevator.setTargetPosition(2000);
+//                    elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+//                    elevator.setPower(0.5);
+//
+//
+//                })
+//                .addTemporalMarker(5, () -> {
+//                    elevator.setPower(0);
+//                    elevator.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+//
+//
+//                })
 
 
                 .build();
-// 35.81,-37.15 start pos
-
-
-
-
-
-
-
-
-
-
-
-
+        hw.elevator_Scoring_Pos();
+        hw.elevator_Resting_Pos();
         drive.followTrajectorySequence(trajectory0);
-        sleep(2000);
-        drive.followTrajectorySequence(trajectory1);
-        drive.followTrajectorySequence(trajectory2);
+
+
+
+
+
+
+// 35.81,-37.15 start pos
+        if (isStopRequested()) return;
+        //robot.hwMap();
+
+//        sleep(2000);
+
 
 
 
