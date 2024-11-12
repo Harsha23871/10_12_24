@@ -8,7 +8,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 public class HwMapForAuto {
 
     private int elevator_resting_pos = 0;
-    private int elevator_scoring_pos = 700;
+    private int elevator_scoring_pos = 1800;
 
     private HardwareMap hw = null;
     private ElapsedTime runtime = new ElapsedTime();

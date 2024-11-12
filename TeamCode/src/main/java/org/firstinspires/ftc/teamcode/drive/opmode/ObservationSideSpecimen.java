@@ -15,7 +15,7 @@ import org.firstinspires.ftc.teamcode.drive.DriveConstants;
 import org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive;
 import org.firstinspires.ftc.teamcode.trajectorysequence.TrajectorySequence;
 
-@Autonomous(group = "a", name="Testboooooi")
+@Autonomous(group = "a", name="Auto Leaugue meet one")
 public class ObservationSideSpecimen extends LinearOpMode {
 
 
@@ -26,7 +26,7 @@ public class ObservationSideSpecimen extends LinearOpMode {
         HwMapForAuto hw = new HwMapForAuto(hardwareMap);
 //        hwMapForAuto.elevator_Scoring_Pos();  // Moves elevator to scoring position
 //        hwMapForAuto.elevator_Resting_Pos();
-//      elevator = hardwareMap.get(DcMotor.class,"elevator_motor");
+      //elevator = hardwareMap.get(DcMotor.class,"elevator_motor");
 
         waitForStart();
 
@@ -58,7 +58,7 @@ public class ObservationSideSpecimen extends LinearOpMode {
 
                 .build();
         hw.elevator_Scoring_Pos();
-//        hw.elevator_Resting_Pos();
+        hw.elevator_Resting_Pos();
         drive.followTrajectorySequence(trajectory0);
 
 

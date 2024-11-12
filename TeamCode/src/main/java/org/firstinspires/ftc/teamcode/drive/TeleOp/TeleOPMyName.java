@@ -27,9 +27,7 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-
 package org.firstinspires.ftc.teamcode.drive.TeleOp;
-
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
@@ -39,6 +37,7 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
+import org.firstinspires.ftc.teamcode.util.Encoder;
 
 /*
  * This file contains an example of a Linear "OpMode".
@@ -68,41 +67,34 @@ import com.qualcomm.robotcore.util.ElapsedTime;
  * Remove or comment out the @Disabled line to add this OpMode to the Driver Station OpMode list
  */
 
-
-@TeleOp(name="Sigma Sourish teleOp"  + "")
+@TeleOp(name="League meet 1 Teleop"  + "")
 //@Disabled
-
 
 // the current teleop
 public class TeleOPMyName extends LinearOpMode {
     int currentPos_arm_motor = 0;
     int newTargetPos = 0;
     private ElapsedTime runtime = new ElapsedTime();
+    //    private Team6976HWMap2023 hwMap2023 = new Team6976HWMap2023();
     private DcMotor leftFrontDrive, leftBackDrive, rightFrontDrive, rightBackDrive, armMotor, elevator = null;
+    //    private Encoder leftODO, rightODO = null;
     private Servo claw, bucket, wrist = null;
     public CRServo intake = null;
     private ElapsedTime armTimer = new ElapsedTime();
 
 
-
-
     // private int pos = 0;
-
-
 
 
     private double finger_score = 0.75;
     private int arm_resting_pos = 100;
     private int arm_scoring_pos = 500;
-    public int elevator_scoring_pos = 700; // value needs to be tweaked
-    private int elevator_resting_pos = 0;
-
-
+    private int elevator_scoring_pos = 1800;
+    private int elevator_resting_pos = 50;
 
 
     @Override
     public void runOpMode() {
-
 
         //.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -112,15 +104,12 @@ public class TeleOPMyName extends LinearOpMode {
         rightFrontDrive = hardwareMap.get(DcMotor.class, "right_front_drive");
         rightBackDrive = hardwareMap.get(DcMotor.class, "right_back_drive");
 
-
         armMotor = hardwareMap.get(DcMotor.class, "arm_motor");
         elevator = hardwareMap.get(DcMotor.class, "elevator_motor");
         claw =  hardwareMap.get(Servo.class, "claw");
         bucket = hardwareMap.get(Servo.class,"bucket");
         intake = hardwareMap.get(CRServo.class, "intake");
         wrist = hardwareMap.get(Servo.class, "wrist");
-
-
 
 
 ////////////////////////////////////////////////////////////////////////////////////
@@ -132,20 +121,10 @@ public class TeleOPMyName extends LinearOpMode {
 
 
 
-
-
-
         armMotor.setDirection(DcMotorSimple.Direction.REVERSE);
         elevator.setDirection(DcMotor.Direction.REVERSE);
-        elevator.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        elevator.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         armMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER); // Reset encoder to zero*/
         armMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-
-
-
-
-
 
 
 
@@ -155,13 +134,10 @@ public class TeleOPMyName extends LinearOpMode {
         waitForStart();
         runtime.reset();
 
-
         // run until the end of the match (driver presses STOP)
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         while (opModeIsActive()) {
             double max;
-
-
 
 
             //game pad 1
@@ -179,26 +155,17 @@ public class TeleOPMyName extends LinearOpMode {
 
 
 
-
-
-
-//elevator
             if (gamepad2.a) { /* elevator down */ // might require boolean controller
-                elevator.setTargetPosition(elevator_resting_pos);
-                elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                 elevator.setPower(0.8);
-                while (elevator.isBusy()) {}
             }
-
 
             if (gamepad2.y) { /* elevator up */
-                elevator.setTargetPosition(elevator_scoring_pos);
-                elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                 elevator.setPower(-0.8);
-                while (elevator.isBusy()) {}
+
+            } else {
+
+                elevator.setPower(0);
             }
-
-
 
 
 //   if (gamepad2.left_bumper) {
@@ -225,7 +192,6 @@ public class TeleOPMyName extends LinearOpMode {
                 bucket.setPosition(0.2);
             }
 
-
             // Intake control
             if (gamepad2.left_bumper) {
                 intake.setPower(1);  // Start intake when the button is pressed
@@ -241,28 +207,21 @@ public class TeleOPMyName extends LinearOpMode {
             int TargetPosition = 25;
 
 
-
-
             if(gamepad2.dpad_up){ // lift arm linkage to 90Deg from chasise
                 armMotor.setPower(0.8);
-
 
             }else {
                 armMotor.setPower(0);
             }
 
 
-
-
             if (gamepad2.dpad_down) { /// move arm to 180 deg from chassie ie == straigm out
- /*              armMotor.setTargetPosition(armintakepos);
-               armMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);*/
+  /*              armMotor.setTargetPosition(armintakepos);
+                armMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);*/
                 armMotor.setPower(-0.8);
             } else {
                 armMotor.setPower(0);
             }
-
-
 
 
             if (gamepad2.dpad_right) {
@@ -272,20 +231,14 @@ public class TeleOPMyName extends LinearOpMode {
                 wrist.setDirection(Servo.Direction.REVERSE);
                 wrist.setPosition(1);
 
-
             }
 
 
 
 
-
-
-
-
-            // Telemetry to monitor encoder position
-            telemetry.addData("Arm Motor Position", armMotor.getCurrentPosition());
-            telemetry.update();
-
+                // Telemetry to monitor encoder position
+                telemetry.addData("Arm Motor Position", armMotor.getCurrentPosition());
+                telemetry.update();
 
 //          if (armTimer.seconds() >= 3) {
 //             armMotor.setTargetPosition(arm_resting_pos);
@@ -295,31 +248,24 @@ public class TeleOPMyName extends LinearOpMode {
 //              telemetry.update();
 //         }
 
-
-            max = Math.max(Math.abs(leftFrontPower), Math.abs(rightFrontPower));
-            max = Math.max(max, Math.abs(leftBackPower));
-            max = Math.max(max, Math.abs(rightBackPower));
-
+                max = Math.max(Math.abs(leftFrontPower), Math.abs(rightFrontPower));
+                max = Math.max(max, Math.abs(leftBackPower));
+                max = Math.max(max, Math.abs(rightBackPower));
 
 
-
-            if (max > 1.0) {
-                leftFrontPower /= max;
-                rightFrontPower /= max;
-                leftBackPower /= max;
-                rightBackPower /= max;
-            }
-            leftFrontDrive.setPower(leftFrontPower);
-            rightFrontDrive.setPower(rightFrontPower);
-            leftBackDrive.setPower(leftBackPower);
-            rightBackDrive.setPower(rightBackPower);
-
-
+                if (max > 1.0) {
+                    leftFrontPower /= max;
+                    rightFrontPower /= max;
+                    leftBackPower /= max;
+                    rightBackPower /= max;
+                }
+                leftFrontDrive.setPower(leftFrontPower);
+                rightFrontDrive.setPower(rightFrontPower);
+                leftBackDrive.setPower(leftBackPower);
+                rightBackDrive.setPower(rightBackPower);
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        }
+            }
 
-
-    }}
-
+        }}
