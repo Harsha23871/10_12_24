@@ -17,13 +17,13 @@ import org.firstinspires.ftc.teamcode.trajectorysequence.TrajectorySequence;
 
 @Autonomous(group = "a", name="Auto Leaugue meet one")
 public class ObservationSideSpecimen extends LinearOpMode {
+    public DcMotor elevator = null;
 
-
-
-        private DcMotor elevator = null;
 
     public void runOpMode() {
-        HwMapForAuto hw = new HwMapForAuto(hardwareMap);
+        elevator = hardwareMap.get(DcMotor.class,"elevator_motor");
+
+
 //        hwMapForAuto.elevator_Scoring_Pos();  // Moves elevator to scoring position
 //        hwMapForAuto.elevator_Resting_Pos();
       //elevator = hardwareMap.get(DcMotor.class,"elevator_motor");
@@ -41,6 +41,7 @@ public class ObservationSideSpecimen extends LinearOpMode {
         TrajectorySequence trajectory0 = drive.trajectorySequenceBuilder(new Pose2d(11, -61, Math.toRadians(270.00)))
                 .splineToConstantHeading(new Vector2d(0, -34), Math.toRadians(34.39))
 
+
 //                .addTemporalMarker(1, () -> {
 //                    elevator.setTargetPosition(2000);
 //                    elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION);
@@ -57,9 +58,18 @@ public class ObservationSideSpecimen extends LinearOpMode {
 
 
                 .build();
-        hw.elevator_Scoring_Pos();
-        hw.elevator_Resting_Pos();
+
+        elevator.setTargetPosition(3000);
+        elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        elevator.setPower(0.5);
+
+
+
+
+
+
         drive.followTrajectorySequence(trajectory0);
+        sleep(4000);
 
 
 
