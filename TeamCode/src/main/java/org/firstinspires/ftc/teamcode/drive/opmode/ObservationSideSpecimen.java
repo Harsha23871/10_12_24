@@ -58,7 +58,7 @@ public class ObservationSideSpecimen extends LinearOpMode {
 
                 .build();
         hw.elevator_Scoring_Pos();
-        hw.elevator_Resting_Pos();
+//        hw.elevator_Resting_Pos();
         drive.followTrajectorySequence(trajectory0);
 
 
