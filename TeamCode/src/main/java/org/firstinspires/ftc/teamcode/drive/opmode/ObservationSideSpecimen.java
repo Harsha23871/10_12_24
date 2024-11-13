@@ -51,6 +51,14 @@ public class ObservationSideSpecimen extends LinearOpMode {
                         SampleMecanumDrive.getVelocityConstraint(20, DriveConstants.MAX_ANG_VEL, DriveConstants.TRACK_WIDTH),
                         SampleMecanumDrive.getAccelerationConstraint(DriveConstants.MAX_ACCEL)
 
+                )
+                .build();
+        TrajectorySequence trajectory1 = drive.trajectorySequenceBuilder(trajectory0.end())
+                .splineToConstantHeading(new Vector2d(48, -58.5), Math.toRadians(34.39),
+
+                        SampleMecanumDrive.getVelocityConstraint(20, DriveConstants.MAX_ANG_VEL, DriveConstants.TRACK_WIDTH),
+                        SampleMecanumDrive.getAccelerationConstraint(DriveConstants.MAX_ACCEL)
+
 
                 )
 
@@ -66,14 +74,19 @@ public class ObservationSideSpecimen extends LinearOpMode {
         elevator.setPower(0.6);
 
         drive.followTrajectorySequence(trajectory0);
-
         elevator.setTargetPosition(1500);
         elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         elevator.setPower(0.9);
 
         sleep(3000);
 
+        claw.setPosition(0.7);
+        elevator.setTargetPosition(0);
+        elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        elevator.setPower(0.9);
 
+        sleep(1000);
+        drive.followTrajectorySequence(trajectory1);
 
 
 
