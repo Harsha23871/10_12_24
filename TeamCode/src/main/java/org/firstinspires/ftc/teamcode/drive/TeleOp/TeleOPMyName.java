@@ -67,7 +67,7 @@ import org.firstinspires.ftc.teamcode.util.Encoder;
  * Remove or comment out the @Disabled line to add this OpMode to the Driver Station OpMode list
  */
 
-@TeleOp(name="League meet 1 Teleop"  + "")
+@TeleOp(name="Sigma Sourish teleOp"  + "")
 //@Disabled
 
 // the current teleop
@@ -114,10 +114,10 @@ public class TeleOPMyName extends LinearOpMode {
 
 ////////////////////////////////////////////////////////////////////////////////////
         //drive
-        leftFrontDrive.setDirection(DcMotor.Direction.FORWARD);
-        leftBackDrive.setDirection(DcMotor.Direction.FORWARD);
-        rightFrontDrive.setDirection(DcMotor.Direction.REVERSE);
-        rightBackDrive.setDirection(DcMotor.Direction.FORWARD);
+        leftFrontDrive.setDirection(DcMotor.Direction.REVERSE);
+        leftBackDrive.setDirection(DcMotor.Direction.REVERSE);
+        rightFrontDrive.setDirection(DcMotor.Direction.FORWARD);
+        rightBackDrive.setDirection(DcMotor.Direction.REVERSE);
 
 
 
@@ -161,10 +161,10 @@ public class TeleOPMyName extends LinearOpMode {
 
             if (gamepad2.y) { /* elevator up */
                 elevator.setPower(-0.8);
-
             } else {
 
                 elevator.setPower(0);
+                elevator.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
             }
 
 
@@ -229,7 +229,7 @@ public class TeleOPMyName extends LinearOpMode {
             }
             if (gamepad2.dpad_left) {
                 wrist.setDirection(Servo.Direction.REVERSE);
-                wrist.setPosition(1);
+                wrist.setPosition(0.8);
 
             }
 

@@ -9,6 +9,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.HardwareMap;
+import com.qualcomm.robotcore.hardware.Servo;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.drive.DriveConstants;
@@ -18,16 +19,22 @@ import org.firstinspires.ftc.teamcode.trajectorysequence.TrajectorySequence;
 @Autonomous(group = "a", name="Auto Leaugue meet one")
 public class ObservationSideSpecimen extends LinearOpMode {
     public DcMotor elevator = null;
+    public Servo claw = null;
+
 
 
     public void runOpMode() {
         elevator = hardwareMap.get(DcMotor.class,"elevator_motor");
+        claw =  hardwareMap.get(Servo.class, "claw");
+        elevator.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        elevator.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
 
 //        hwMapForAuto.elevator_Scoring_Pos();  // Moves elevator to scoring position
 //        hwMapForAuto.elevator_Resting_Pos();
       //elevator = hardwareMap.get(DcMotor.class,"elevator_motor");
-
+        claw.setDirection(Servo.Direction.FORWARD);
+        claw.setPosition(1);
         waitForStart();
 
 //        elevator.setMode(DcMotorEx.RunMode.STOP_AND_RESET_ENCODER);
@@ -39,37 +46,33 @@ public class ObservationSideSpecimen extends LinearOpMode {
         Pose2d startPose = new Pose2d(11,  -61, Math.toRadians(270));
         drive.setPoseEstimate(startPose);
         TrajectorySequence trajectory0 = drive.trajectorySequenceBuilder(new Pose2d(11, -61, Math.toRadians(270.00)))
-                .splineToConstantHeading(new Vector2d(0, -34), Math.toRadians(34.39))
+                .splineToConstantHeading(new Vector2d(0, -31.5), Math.toRadians(34.39),
+
+                        SampleMecanumDrive.getVelocityConstraint(20, DriveConstants.MAX_ANG_VEL, DriveConstants.TRACK_WIDTH),
+                        SampleMecanumDrive.getAccelerationConstraint(DriveConstants.MAX_ACCEL)
 
 
-//                .addTemporalMarker(1, () -> {
-//                    elevator.setTargetPosition(2000);
-//                    elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-//                    elevator.setPower(0.5);
-//
-//
-//                })
-//                .addTemporalMarker(5, () -> {
-//                    elevator.setPower(0);
-//                    elevator.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-//
-//
-//                })
+                )
 
 
-                .build();
+//      elevator.setTargetPosition(3000);
+//        elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+//        elevator.setPower(-0.8);
 
-        elevator.setTargetPosition(3000);
+
+        .build();
+       elevator.setTargetPosition(1900);
         elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        elevator.setPower(0.5);
-
-
-
-
-
+        elevator.setPower(0.6);
 
         drive.followTrajectorySequence(trajectory0);
-        sleep(4000);
+
+        elevator.setTargetPosition(1500);
+        elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        elevator.setPower(0.9);
+
+        sleep(3000);
+
 
 
 
@@ -157,7 +160,6 @@ public class ObservationSideSpecimen extends LinearOpMode {
 
 
     }   }
-
 
 
 
