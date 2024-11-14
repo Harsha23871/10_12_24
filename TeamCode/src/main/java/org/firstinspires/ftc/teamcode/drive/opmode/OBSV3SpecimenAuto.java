@@ -16,8 +16,8 @@ import org.firstinspires.ftc.teamcode.drive.DriveConstants;
 import org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive;
 import org.firstinspires.ftc.teamcode.trajectorysequence.TrajectorySequence;
 
-@Autonomous(group = "a", name="OBSV Specimen ")
-public class ObservationSideSpecimen extends LinearOpMode {
+@Autonomous(group = "a", name="Test Cycle")
+public class OBSV3SpecimenAuto extends LinearOpMode {
     public DcMotor elevator = null;
     public Servo claw = null;
 
@@ -32,74 +32,77 @@ public class ObservationSideSpecimen extends LinearOpMode {
 
 //        hwMapForAuto.elevator_Scoring_Pos();  // Moves elevator to scoring position
 //        hwMapForAuto.elevator_Resting_Pos();
-      //elevator = hardwareMap.get(DcMotor.class,"elevator_motor");
+        //elevator = hardwareMap.get(DcMotor.class,"elevator_motor");
         claw.setDirection(Servo.Direction.FORWARD);
         claw.setPosition(1);
         waitForStart();
 
 //        elevator.setMode(DcMotorEx.RunMode.STOP_AND_RESET_ENCODER);
 //        elevator.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
-         // Moves elevator to resting position
+        // Moves elevator to resting position
 
-        Telemetry telemetry = new MultipleTelemetry(this.telemetry, FtcDashboard.getInstance().getTelemetry());
-        SampleMecanumDrive drive = new SampleMecanumDrive(hardwareMap);
-        Pose2d startPose = new Pose2d(11,  -61, Math.toRadians(270));
-        drive.setPoseEstimate(startPose);
-        TrajectorySequence trajectory0 = drive.trajectorySequenceBuilder(new Pose2d(11, -61, Math.toRadians(270.00)))
-                .splineToConstantHeading(new Vector2d(0, -31.5), Math.toRadians(34.39),
 
-                        SampleMecanumDrive.getVelocityConstraint(20, DriveConstants.MAX_ANG_VEL, DriveConstants.TRACK_WIDTH),
-                        SampleMecanumDrive.getAccelerationConstraint(DriveConstants.MAX_ACCEL)
+    //  for (int i = 0; i < 5; i++) {
 
-                )
+          Telemetry telemetry = new MultipleTelemetry(this.telemetry, FtcDashboard.getInstance().getTelemetry());
+          SampleMecanumDrive drive = new SampleMecanumDrive(hardwareMap);
+          Pose2d startPose = new Pose2d(12, -62, Math.toRadians(270));
+          drive.setPoseEstimate(startPose);
+
+
+          TrajectorySequence trajectory0 = drive.trajectorySequenceBuilder(new Pose2d(12, -62, Math.toRadians(270)))
+                  .splineToConstantHeading(new Vector2d(0, -31), Math.toRadians(34.39))
+                  .build();
+
+
+          TrajectorySequence trajectory1 = drive.trajectorySequenceBuilder(trajectory0.end())
+                  .splineToConstantHeading(new Vector2d(12, -62), Math.toRadians(34.39))
+                  .build();
+
+           TrajectorySequence trajectory2 = drive.trajectorySequenceBuilder(trajectory1.end())
+                 .splineToConstantHeading(new Vector2d(47, -62), Math.toRadians(34.39))
                 .build();
-        TrajectorySequence trajectory1 = drive.trajectorySequenceBuilder(trajectory0.end())
-                .splineToConstantHeading(new Vector2d(48, -58.5), Math.toRadians(34.39),
-
-                        SampleMecanumDrive.getVelocityConstraint(20, DriveConstants.MAX_ANG_VEL, DriveConstants.TRACK_WIDTH),
-                        SampleMecanumDrive.getAccelerationConstraint(DriveConstants.MAX_ACCEL)
-
-
-                )
-
-
-//      elevator.setTargetPosition(3000);
-//        elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-//        elevator.setPower(-0.8);
-
-
-        .build();
-        elevator.setTargetPosition(1900);
-        elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        elevator.setPower(0.6);
-
-        drive.followTrajectorySequence(trajectory0);
-        elevator.setTargetPosition(1500);
-        elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        elevator.setPower(0.9);
-
-        sleep(3000);
-
-        claw.setPosition(0.7);
-        elevator.setTargetPosition(0);
-        elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        elevator.setPower(0.9);
-
-        sleep(1000);
-        drive.followTrajectorySequence(trajectory1);
 
 
 
 
 
-// 35.81,-37.15 start pos
-        if (isStopRequested()) return;
-        //robot.hwMap();
+
+        for (int i = 0; i < 3; i++) {
+            sleep(2000);
+            claw.setPosition(0);
+
+            elevator.setTargetPosition(1900);
+            elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            elevator.setPower(0.6);
+            drive.followTrajectorySequence(trajectory0);
+            elevator.setTargetPosition(1500);
+            elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            elevator.setPower(0.9);
+
+            sleep(1000);
+
+            claw.setPosition(0.7);
+            elevator.setTargetPosition(0);
+            elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            elevator.setPower(0.9);
+
+            drive.followTrajectorySequence(trajectory1);
+
+
+        }
+
+        drive.followTrajectorySequence(trajectory2);
+
+
+        // 35.81,-37.15 start pos
+          if (isStopRequested()) return;
+          //robot.hwMap();
 
 //        sleep(2000);
 
 
-
+   //   }
 
 
 

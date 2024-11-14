@@ -67,11 +67,11 @@ import org.firstinspires.ftc.teamcode.util.Encoder;
  * Remove or comment out the @Disabled line to add this OpMode to the Driver Station OpMode list
  */
 
-@TeleOp(name="Sourish teleOp" )
+@TeleOp(name="LG1Teleop Test"  + "")
 //@Disabled
 
 // the current teleop
-public class TeleOPMyName extends LinearOpMode {
+public class TeleOPTest extends LinearOpMode {
     int currentPos_arm_motor = 0;
     int newTargetPos = 0;
     private ElapsedTime runtime = new ElapsedTime();
@@ -160,7 +160,11 @@ public class TeleOPMyName extends LinearOpMode {
             }
 
             if (gamepad2.y) { /* elevator up */
+
+                elevator.setTargetPosition(1900);
+                elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                 elevator.setPower(-0.8);
+
             } else {
 
                 elevator.setPower(0);
@@ -236,9 +240,9 @@ public class TeleOPMyName extends LinearOpMode {
 
 
 
-                // Telemetry to monitor encoder position
-                telemetry.addData("Arm Motor Position", armMotor.getCurrentPosition());
-                telemetry.update();
+            // Telemetry to monitor encoder position
+            telemetry.addData("Arm Motor Position", armMotor.getCurrentPosition());
+            telemetry.update();
 
 //          if (armTimer.seconds() >= 3) {
 //             armMotor.setTargetPosition(arm_resting_pos);
@@ -248,24 +252,24 @@ public class TeleOPMyName extends LinearOpMode {
 //              telemetry.update();
 //         }
 
-                max = Math.max(Math.abs(leftFrontPower), Math.abs(rightFrontPower));
-                max = Math.max(max, Math.abs(leftBackPower));
-                max = Math.max(max, Math.abs(rightBackPower));
+            max = Math.max(Math.abs(leftFrontPower), Math.abs(rightFrontPower));
+            max = Math.max(max, Math.abs(leftBackPower));
+            max = Math.max(max, Math.abs(rightBackPower));
 
 
-                if (max > 1.0) {
-                    leftFrontPower /= max;
-                    rightFrontPower /= max;
-                    leftBackPower /= max;
-                    rightBackPower /= max;
-                }
-                leftFrontDrive.setPower(leftFrontPower);
-                rightFrontDrive.setPower(rightFrontPower);
-                leftBackDrive.setPower(leftBackPower);
-                rightBackDrive.setPower(rightBackPower);
+            if (max > 1.0) {
+                leftFrontPower /= max;
+                rightFrontPower /= max;
+                leftBackPower /= max;
+                rightBackPower /= max;
+            }
+            leftFrontDrive.setPower(leftFrontPower);
+            rightFrontDrive.setPower(rightFrontPower);
+            leftBackDrive.setPower(leftBackPower);
+            rightBackDrive.setPower(rightBackPower);
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            }
+        }
 
-        }}
+    }}

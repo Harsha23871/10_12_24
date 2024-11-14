@@ -69,7 +69,7 @@ public class BucketSpecimen extends LinearOpMode {
 
 
                 .build();
-        elevator.setTargetPosition(1900);
+        elevator.setTargetPosition(1900); // 1900
         elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         elevator.setPower(0.6);
 
