@@ -16,8 +16,8 @@ import org.firstinspires.ftc.teamcode.drive.DriveConstants;
 import org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive;
 import org.firstinspires.ftc.teamcode.trajectorysequence.TrajectorySequence;
 
-@Autonomous(group = "a", name="OBSV Specimen ")
-public class ObservationSideSpecimen extends LinearOpMode {
+@Autonomous(group = "a", name="DelayedBucketSpecimen")
+public class DelayedBucketSpecimen extends LinearOpMode {
     public DcMotor elevator = null;
     public Servo claw = null;
 
@@ -32,20 +32,20 @@ public class ObservationSideSpecimen extends LinearOpMode {
 
 //        hwMapForAuto.elevator_Scoring_Pos();  // Moves elevator to scoring position
 //        hwMapForAuto.elevator_Resting_Pos();
-      //elevator = hardwareMap.get(DcMotor.class,"elevator_motor");
+        //elevator = hardwareMap.get(DcMotor.class,"elevator_motor");
         claw.setDirection(Servo.Direction.FORWARD);
         claw.setPosition(1);
         waitForStart();
 
 //        elevator.setMode(DcMotorEx.RunMode.STOP_AND_RESET_ENCODER);
 //        elevator.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
-         // Moves elevator to resting position
+        // Moves elevator to resting position
 
         Telemetry telemetry = new MultipleTelemetry(this.telemetry, FtcDashboard.getInstance().getTelemetry());
         SampleMecanumDrive drive = new SampleMecanumDrive(hardwareMap);
-        Pose2d startPose = new Pose2d(11,  -61, Math.toRadians(270));
+        Pose2d startPose = new Pose2d(-37,  -61, Math.toRadians(270));
         drive.setPoseEstimate(startPose);
-        TrajectorySequence trajectory0 = drive.trajectorySequenceBuilder(new Pose2d(11, -61, Math.toRadians(270.00)))
+        TrajectorySequence trajectory0 = drive.trajectorySequenceBuilder(new Pose2d(-37, -61, Math.toRadians(270.00)))
                 .splineToConstantHeading(new Vector2d(0, -31.5), Math.toRadians(34.39),
 
                         SampleMecanumDrive.getVelocityConstraint(20, DriveConstants.MAX_ANG_VEL, DriveConstants.TRACK_WIDTH),
@@ -68,8 +68,9 @@ public class ObservationSideSpecimen extends LinearOpMode {
 //        elevator.setPower(-0.8);
 
 
-        .build();
-       elevator.setTargetPosition(1900);
+                .build();
+        sleep(15000);
+        elevator.setTargetPosition(1900);
         elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         elevator.setPower(0.6);
 

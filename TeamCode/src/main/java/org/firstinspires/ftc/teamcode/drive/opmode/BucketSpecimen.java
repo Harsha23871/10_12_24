@@ -6,40 +6,97 @@ import com.acmerobotics.roadrunner.geometry.Pose2d;
 import com.acmerobotics.roadrunner.geometry.Vector2d;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorEx;
+import com.qualcomm.robotcore.hardware.HardwareMap;
+import com.qualcomm.robotcore.hardware.Servo;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
+import org.firstinspires.ftc.teamcode.drive.DriveConstants;
 import org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive;
 import org.firstinspires.ftc.teamcode.trajectorysequence.TrajectorySequence;
 
-@Autonomous(group = "a", name="Cycle.java")
-public class Cycle extends LinearOpMode {
+@Autonomous(group = "a", name="BucketSpecimen")
+public class BucketSpecimen extends LinearOpMode {
+    public DcMotor elevator = null;
+    public Servo claw = null;
 
-    @Override
 
-// 12 -5
 
     public void runOpMode() {
+        elevator = hardwareMap.get(DcMotor.class,"elevator_motor");
+        claw =  hardwareMap.get(Servo.class, "claw");
+        elevator.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        elevator.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
+
+//        hwMapForAuto.elevator_Scoring_Pos();  // Moves elevator to scoring position
+//        hwMapForAuto.elevator_Resting_Pos();
+        //elevator = hardwareMap.get(DcMotor.class,"elevator_motor");
+        claw.setDirection(Servo.Direction.FORWARD);
+        claw.setPosition(1);
         waitForStart();
+
+//        elevator.setMode(DcMotorEx.RunMode.STOP_AND_RESET_ENCODER);
+//        elevator.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
+        // Moves elevator to resting position
+
         Telemetry telemetry = new MultipleTelemetry(this.telemetry, FtcDashboard.getInstance().getTelemetry());
         SampleMecanumDrive drive = new SampleMecanumDrive(hardwareMap);
-        Pose2d startPose = new Pose2d(0,  34, Math.toRadians(270));
+        Pose2d startPose = new Pose2d(-37,  -61, Math.toRadians(270));
         drive.setPoseEstimate(startPose);
+        TrajectorySequence trajectory0 = drive.trajectorySequenceBuilder(new Pose2d(-37, -61, Math.toRadians(270.00)))
+                .splineToConstantHeading(new Vector2d(0, -31.5), Math.toRadians(34.39),
 
-        TrajectorySequence trajectory0 = drive.trajectorySequenceBuilder(new Pose2d(0.0, 34.0, Math.toRadians(90.00)))
-                .splineToConstantHeading(new Vector2d(-55.69, 56.13), Math.toRadians(90.00))
+                        SampleMecanumDrive.getVelocityConstraint(20, DriveConstants.MAX_ANG_VEL, DriveConstants.TRACK_WIDTH),
+                        SampleMecanumDrive.getAccelerationConstraint(DriveConstants.MAX_ACCEL)
+
+                )
                 .build();
+        TrajectorySequence trajectory1 = drive.trajectorySequenceBuilder(trajectory0.end())
+                .splineToConstantHeading(new Vector2d(48, -58.5), Math.toRadians(34.39),
+
+                        SampleMecanumDrive.getVelocityConstraint(20, DriveConstants.MAX_ANG_VEL, DriveConstants.TRACK_WIDTH),
+                        SampleMecanumDrive.getAccelerationConstraint(DriveConstants.MAX_ACCEL)
 
 
+                )
 
 
-        //TrajectorySequence trajectory0 = drive.trajectorySequenceBuilder(new Pose2d(11, -61, Math.toRadians(270)))
-          //      .splineToConstantHeading(new Vector2d(59.10, -47.83), Math.toRadians(34.39))
-            //    .build();
+//      elevator.setTargetPosition(3000);
+//        elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+//        elevator.setPower(-0.8);
 
 
-
+                .build();
+        elevator.setTargetPosition(1900);
+        elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        elevator.setPower(0.6);
 
         drive.followTrajectorySequence(trajectory0);
+        elevator.setTargetPosition(1500);
+        elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        elevator.setPower(0.9);
+
+        sleep(3000);
+
+        claw.setPosition(0.7);
+        elevator.setTargetPosition(0);
+        elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        elevator.setPower(0.9);
+
+        sleep(1000);
+        drive.followTrajectorySequence(trajectory1);
+
+
+
+
+
+// 35.81,-37.15 start pos
+        if (isStopRequested()) return;
+        //robot.hwMap();
+
+//        sleep(2000);
 
 
 
@@ -116,7 +173,6 @@ public class Cycle extends LinearOpMode {
 
 
     }   }
-
 
 
 

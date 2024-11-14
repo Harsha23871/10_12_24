@@ -16,7 +16,7 @@ import org.firstinspires.ftc.teamcode.drive.DriveConstants;
 import org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive;
 import org.firstinspires.ftc.teamcode.trajectorysequence.TrajectorySequence;
 
-@Autonomous(group = "a", name="Delayed Auto LG 1")
+@Autonomous(group = "a", name="Delayed OBSV Specimen")
 public class DelayedOBSVSpecimen extends LinearOpMode {
     public DcMotor elevator = null;
     public Servo claw = null;
@@ -69,7 +69,7 @@ public class DelayedOBSVSpecimen extends LinearOpMode {
 
 
                 .build();
-        sleep(10000);
+        sleep(15000);
         elevator.setTargetPosition(1900);
         elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         elevator.setPower(0.6);
