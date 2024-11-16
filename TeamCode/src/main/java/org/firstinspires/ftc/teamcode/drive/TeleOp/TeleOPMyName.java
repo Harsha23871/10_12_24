@@ -225,11 +225,11 @@ public class TeleOPMyName extends LinearOpMode {
 
 
             if (gamepad2.dpad_right) {
-                wrist.setPosition(0);
+                wrist.setPosition(1);
             }
             if (gamepad2.dpad_left) {
                 wrist.setDirection(Servo.Direction.REVERSE);
-                wrist.setPosition(0.8);
+                wrist.setPosition(0.5);
 
             }
 
