@@ -96,12 +96,6 @@ public class LG2AutoOBSV extends LinearOpMode {
                 )
                 .build();
 
-//        TrajectorySequence Rotate1 = drive.trajectorySequenceBuilder(trajectory4.end()) // .plus(new Pose2d(0, 0, Math.toRadians(180))
-//                .lineToLinearHeading(new Pose2d(40, 40, Math.toRadians(180)))
-//                .build();
-
-                        // important
-
 
 
 
@@ -129,6 +123,8 @@ public class LG2AutoOBSV extends LinearOpMode {
         // add claw + elevator
         drive.followTrajectorySequence(trajectory1);
         claw.setPosition(0.7);
+        drive.followTrajectorySequence(BackALittle);
+        claw.setPosition(1);
         sleep(1000);
 
 
@@ -136,14 +132,15 @@ public class LG2AutoOBSV extends LinearOpMode {
         // 1 is close
         for (int i = 0; i < 2; i++) {
           //  drive.turn(Math.toRadians(180)); // maybe change
-            claw.setPosition(1);
-            sleep(1000); // originally 2000
+          //  claw.setPosition(1);
+        //    sleep(1000); // originally 2000
 
 
          //   elevator.setTargetPosition(1900);
          //   elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION);
          //   elevator.setPower(0.6);
             drive.followTrajectorySequence(trajectory3);
+//
 //            elevator.setTargetPosition(1500);
 //            elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 //            elevator.setPower(0.9);
@@ -156,8 +153,9 @@ public class LG2AutoOBSV extends LinearOpMode {
 //            elevator.setPower(0.9);
 
             drive.followTrajectorySequence(trajectory4);
-
-             claw.setPosition(0.7);   // 143 - 146 lines need change
+            claw.setPosition(0.7);   // 143 - 146 lines need change
+            drive.followTrajectorySequence(BackALittle);
+            claw.setPosition(1);
         //    drive.turn(Math.toRadians(180));
          //   drive.followTrajectorySequence(BackALittle);
 
