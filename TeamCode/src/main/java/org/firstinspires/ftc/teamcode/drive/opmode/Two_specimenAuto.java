@@ -96,7 +96,7 @@ public class Two_specimenAuto extends LinearOpMode {
 
         sleep(1000);
         drive.followTrajectorySequence(trajectory1);
-        drive.turn(Math.toRadians(180));
+        drive.turn(Math.toRadians(185));
 
         claw.setPosition(1);
 

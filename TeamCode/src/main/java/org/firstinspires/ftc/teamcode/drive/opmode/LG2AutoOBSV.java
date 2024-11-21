@@ -123,7 +123,7 @@ public class LG2AutoOBSV extends LinearOpMode {
         // add claw + elevator
         drive.followTrajectorySequence(trajectory1);
         claw.setPosition(0.7);
-        drive.followTrajectorySequence(BackALittle);
+    //    drive.followTrajectorySequence(BackALittle);
         claw.setPosition(1);
         sleep(1000);
 
@@ -154,7 +154,7 @@ public class LG2AutoOBSV extends LinearOpMode {
 
             drive.followTrajectorySequence(trajectory4);
             claw.setPosition(0.7);   // 143 - 146 lines need change
-            drive.followTrajectorySequence(BackALittle);
+        //    drive.followTrajectorySequence(BackALittle);
             claw.setPosition(1);
         //    drive.turn(Math.toRadians(180));
          //   drive.followTrajectorySequence(BackALittle);
