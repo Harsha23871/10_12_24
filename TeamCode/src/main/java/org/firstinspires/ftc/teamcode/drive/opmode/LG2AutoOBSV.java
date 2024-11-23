@@ -16,7 +16,7 @@ import org.firstinspires.ftc.teamcode.drive.DriveConstants;
 import org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive;
 import org.firstinspires.ftc.teamcode.trajectorysequence.TrajectorySequence;
 
-@Autonomous(group = "a", name="Test2 Cycle")
+@Autonomous(group = "a", name="Test1 Cycle")
 public class LG2AutoOBSV extends LinearOpMode {
     public DcMotor elevator = null;
     public Servo claw = null;
