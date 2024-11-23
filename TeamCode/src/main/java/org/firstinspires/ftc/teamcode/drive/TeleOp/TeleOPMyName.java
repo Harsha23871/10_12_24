@@ -29,6 +29,9 @@
 
 package org.firstinspires.ftc.teamcode.drive.TeleOp;
 
+import static com.qualcomm.robotcore.hardware.DcMotorSimple.Direction.FORWARD;
+import static com.qualcomm.robotcore.hardware.DcMotorSimple.Direction.REVERSE;
+
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.CRServo;
@@ -114,17 +117,19 @@ public class TeleOPMyName extends LinearOpMode {
         //drive
         leftFrontDrive.setDirection(DcMotor.Direction.REVERSE);
         leftBackDrive.setDirection(DcMotor.Direction.REVERSE);
-        rightFrontDrive.setDirection(DcMotor.Direction.FORWARD);
+        rightFrontDrive.setDirection(FORWARD);
         rightBackDrive.setDirection(DcMotor.Direction.REVERSE);
 
 
 
         armMotor.setDirection(DcMotorSimple.Direction.REVERSE);
-        elevator.setDirection(DcMotor.Direction.FORWARD);
+        armMotor.setDirection(FORWARD);
+        armMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        elevator.setDirection(FORWARD);
         elevator.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         elevator.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        armMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER); // Reset encoder to zero*/
-        armMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+//        armMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER); // Reset encoder to zero*/
+//        armMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
 
 
@@ -164,14 +169,14 @@ public class TeleOPMyName extends LinearOpMode {
 
 //elevator
             /*if (gamepad2.a) { *//* elevator down *//* // might require boolean controller
-                elevator.setTargetPosition(elevator_resting_pos);
+                //elevator.setTargetPosition(elevator_resting_pos);
                 elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                 elevator.setPower(0.8);
-                while (elevator.isBusy()) {}
+                //while (elevator.isBusy()) {}
             }
 
             if (gamepad2.y) { *//* elevator up *//*
-                elevator.setTargetPosition(elevator_scoring_pos);
+               // elevator.setTargetPosition(elevator_scoring_pos);
                 elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                 elevator.setPower(-0.8);
             }*/
@@ -249,21 +254,28 @@ public class TeleOPMyName extends LinearOpMode {
             int TargetPosition = 25;
 
 
-            if(gamepad2.dpad_up){ // lift arm linkage to 90Deg from chasise
-                armMotor.setPower(0.8);
+            if (gamepad2.dpad_up){// lift arm linkage to 90Deg from chasise
+                armMotor.setDirection(FORWARD);
+                armMotor.setPower(0.5);
 
-            }else {
-                armMotor.setPower(0);
             }
-
+            else {
+                armMotor.setPower(0.0);
+                break;
+            }
 
             if (gamepad2.dpad_down) { /// move arm to 180 deg from chassie ie == straigm out
   /*              armMotor.setTargetPosition(armintakepos);
                 armMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);*/
-                armMotor.setPower(-0.8);
-            } else {
-                armMotor.setPower(0);
+                armMotor.setDirection(REVERSE);
+                armMotor.setPower(0.3);
             }
+            else {
+                armMotor.setPower(0.0);
+                break;
+            }
+
+
 
 
             if (gamepad2.dpad_right) {

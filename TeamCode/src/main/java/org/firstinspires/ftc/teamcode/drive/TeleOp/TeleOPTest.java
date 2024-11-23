@@ -29,6 +29,9 @@
 
 package org.firstinspires.ftc.teamcode.drive.TeleOp;
 
+import static com.qualcomm.robotcore.hardware.DcMotorSimple.Direction.FORWARD;
+import static com.qualcomm.robotcore.hardware.DcMotorSimple.Direction.REVERSE;
+
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.CRServo;
@@ -67,7 +70,7 @@ import org.firstinspires.ftc.teamcode.util.Encoder;
  * Remove or comment out the @Disabled line to add this OpMode to the Driver Station OpMode list
  */
 
-@TeleOp(name="LG1Teleop Test"  + "")
+@TeleOp(name="LG1 test"  + "")
 //@Disabled
 
 // the current teleop
@@ -75,9 +78,7 @@ public class TeleOPTest extends LinearOpMode {
     int currentPos_arm_motor = 0;
     int newTargetPos = 0;
     private ElapsedTime runtime = new ElapsedTime();
-    //    private Team6976HWMap2023 hwMap2023 = new Team6976HWMap2023();
     private DcMotor leftFrontDrive, leftBackDrive, rightFrontDrive, rightBackDrive, armMotor, elevator = null;
-    //    private Encoder leftODO, rightODO = null;
     private Servo claw, bucket, wrist = null;
     public CRServo intake = null;
     private ElapsedTime armTimer = new ElapsedTime();
@@ -89,8 +90,8 @@ public class TeleOPTest extends LinearOpMode {
     private double finger_score = 0.75;
     private int arm_resting_pos = 100;
     private int arm_scoring_pos = 500;
-    private int elevator_scoring_pos = 1800;
-    private int elevator_resting_pos = 50;
+    public int elevator_scoring_pos = 700; // value needs to be tweaked
+    private int elevator_resting_pos = 0;
 
 
     @Override
@@ -116,15 +117,20 @@ public class TeleOPTest extends LinearOpMode {
         //drive
         leftFrontDrive.setDirection(DcMotor.Direction.REVERSE);
         leftBackDrive.setDirection(DcMotor.Direction.REVERSE);
-        rightFrontDrive.setDirection(DcMotor.Direction.FORWARD);
+        rightFrontDrive.setDirection(FORWARD);
         rightBackDrive.setDirection(DcMotor.Direction.REVERSE);
 
 
 
         armMotor.setDirection(DcMotorSimple.Direction.REVERSE);
-        elevator.setDirection(DcMotor.Direction.REVERSE);
-        armMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER); // Reset encoder to zero*/
-        armMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        armMotor.setDirection(FORWARD);
+        armMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        elevator.setDirection(FORWARD);
+        elevator.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        elevator.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+//        armMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER); // Reset encoder to zero*/
+//        armMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
 
 
 
@@ -154,25 +160,61 @@ public class TeleOPTest extends LinearOpMode {
 
 
 
-
-            if (gamepad2.a) { /* elevator down */ // might require boolean controller // og is an if statement
+           /* public void elevatorThing {
+                elevator.setTargetPosition(elevator_scoring_pos);
+                elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                 elevator.setPower(0.8);
+                while (elevator.isBusy()) {}
+*/
+
+//elevator
+            /*if (gamepad2.a) { *//* elevator down *//* // might require boolean controller
+                //elevator.setTargetPosition(elevator_resting_pos);
+                elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+                elevator.setPower(0.8);
+                //while (elevator.isBusy()) {}
             }
 
-            if (gamepad2.y) { /* elevator up */
-
-
-                elevator.setTargetPosition(1900);
+            if (gamepad2.y) { *//* elevator up *//*
+               // elevator.setTargetPosition(elevator_scoring_pos);
                 elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                 elevator.setPower(-0.8);
+            }*/
+            if (gamepad2.y){
 
-            } else {
-
-                elevator.setPower(0);
+                elevator.setTargetPosition(2100);
+                elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+                elevator.setPower(0.8);
 
             }
 
+            if (gamepad2.a){
 
+                elevator.setTargetPosition(1400);
+                elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+                elevator.setPower(0.8);
+                sleep(1000);
+                claw.setPosition(0.7);
+                elevator.setTargetPosition(0);
+                elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+                elevator.setPower(0.8);
+
+            }
+
+            /*if (gamepad1.dpad_down){
+
+            // Loop until the encoder position is 700 or greater
+            while (opModeIsActive() && elevator.getCurrentPosition() < 700) {
+                elevator.setTargetPosition(750);
+                elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+                elevator.setPower(0.6);
+
+//                telemetry.addData("Encoder Position", elevator.getCurrentPosition());
+//                telemetry.update();
+
+            }
+
+}*/
 //   if (gamepad2.left_bumper) {
 //       // Move arm to scoring position
 //               armMotor.setTargetPosition(arm_scoring_pos);
@@ -212,21 +254,28 @@ public class TeleOPTest extends LinearOpMode {
             int TargetPosition = 25;
 
 
-            if(gamepad2.dpad_up){ // lift arm linkage to 90Deg from chasise
-                armMotor.setPower(0.8);
+            if (gamepad2.dpad_up){// lift arm linkage to 90Deg from chasise
+                armMotor.setDirection(FORWARD);
+                armMotor.setPower(0.5);
 
-            }else {
-                armMotor.setPower(0);
             }
-
+            else {
+                armMotor.setPower(0.0);
+                break;
+            }
 
             if (gamepad2.dpad_down) { /// move arm to 180 deg from chassie ie == straigm out
   /*              armMotor.setTargetPosition(armintakepos);
                 armMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);*/
-                armMotor.setPower(-0.8);
-            } else {
-                armMotor.setPower(0);
+                armMotor.setDirection(REVERSE);
+                armMotor.setPower(0.3);
             }
+            else {
+                armMotor.setPower(0.0);
+                break;
+            }
+
+
 
 
             if (gamepad2.dpad_right) {
@@ -234,7 +283,7 @@ public class TeleOPTest extends LinearOpMode {
             }
             if (gamepad2.dpad_left) {
                 wrist.setDirection(Servo.Direction.REVERSE);
-                wrist.setPosition(0.8);
+                wrist.setPosition(1);
 
             }
 
