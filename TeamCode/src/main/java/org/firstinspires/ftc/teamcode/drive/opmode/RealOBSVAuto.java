@@ -17,7 +17,7 @@ import org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive;
 import org.firstinspires.ftc.teamcode.trajectorysequence.TrajectorySequence;
 
 @Autonomous(group = "a", name="Test2 Cycle")
-public class LG2AutoOBSV extends LinearOpMode {
+public class RealOBSVAuto extends LinearOpMode {
     public DcMotor elevator = null;
     public Servo claw = null;
 
@@ -53,58 +53,42 @@ public class LG2AutoOBSV extends LinearOpMode {
         TrajectorySequence trajectory0 = drive.trajectorySequenceBuilder(new Pose2d(12, -62, Math.toRadians(270)))
                 .splineToConstantHeading(new Vector2d(0, -33), Math.toRadians(34.39),
 
-                 SampleMecanumDrive.getVelocityConstraint(30, DriveConstants.MAX_ANG_VEL, DriveConstants.TRACK_WIDTH),
-                SampleMecanumDrive.getAccelerationConstraint(DriveConstants.MAX_ACCEL)
+                        SampleMecanumDrive.getVelocityConstraint(30, DriveConstants.MAX_ANG_VEL, DriveConstants.TRACK_WIDTH),
+                        SampleMecanumDrive.getAccelerationConstraint(DriveConstants.MAX_ACCEL)
                 ) // important
                 .build();
 
 
         TrajectorySequence trajectory1 = drive.trajectorySequenceBuilder(trajectory0.end()) // .plus(new Pose2d(0, 0, Math.toRadians(180)))
-              //  .splineToConstantHeading(new Vector2d(47, -64), Math.toRadians(34.39),
-                .lineToSplineHeading(new Pose2d(47, -54, Math.toRadians(91))) // 180 or 190 90
-            //     SampleMecanumDrive.getVelocityConstraint(20, DriveConstants.MAX_ANG_VEL, DriveConstants.TRACK_WIDTH),
-             //   SampleMecanumDrive.getAccelerationConstraint(DriveConstants.MAX_ACCEL)
+                //  .splineToConstantHeading(new Vector2d(47, -64), Math.toRadians(34.39),
+                .lineToSplineHeading(
+                        new Pose2d(47, -61, Math.toRadians(90.5)),
+                        SampleMecanumDrive.getVelocityConstraint(15, DriveConstants.MAX_ANG_VEL, DriveConstants.TRACK_WIDTH), // Slower velocity
+                        SampleMecanumDrive.getAccelerationConstraint(DriveConstants.MAX_ACCEL / 2) // Slower acceleration
+                )
 
-             //   )
+                //   )
                 .build();
 //  .splineToLinearHeading(new Pose2d(40, 40, Math.toRadians(90)), Math.toRadians(0))
 
-        TrajectorySequence trajectory3 = drive.trajectorySequenceBuilder(new Pose2d(47, -64, Math.toRadians(270))) //90 270
+        TrajectorySequence trajectory3 = drive.trajectorySequenceBuilder(new Pose2d(47, -61, Math.toRadians(270))) //90 270
                 .splineToConstantHeading(new Vector2d(0, -33), Math.toRadians(34.39), // -62 55.61 124.39
 
-               SampleMecanumDrive.getVelocityConstraint(30, DriveConstants.MAX_ANG_VEL, DriveConstants.TRACK_WIDTH),
-                SampleMecanumDrive.getAccelerationConstraint(DriveConstants.MAX_ACCEL)
-            )
+                        SampleMecanumDrive.getVelocityConstraint(30, DriveConstants.MAX_ANG_VEL, DriveConstants.TRACK_WIDTH),
+                        SampleMecanumDrive.getAccelerationConstraint(DriveConstants.MAX_ACCEL)
+                )
                 .build();
 
         TrajectorySequence trajectory4 = drive.trajectorySequenceBuilder(trajectory3.end()) // .plus(new Pose2d(0, 0, Math.toRadians(90)))
-             //   .splineToConstantHeading(new Vector2d(47, -64), Math.toRadians(34.39), // -62
-                .lineToSplineHeading(new Pose2d(47, -54, Math.toRadians(91))) // 180 190 90
-//                        SampleMecanumDrive.getVelocityConstraint(20, DriveConstants.MAX_ANG_VEL, DriveConstants.TRACK_WIDTH),
-//                        SampleMecanumDrive.getAccelerationConstraint(DriveConstants.MAX_ACCEL)
-
-
-              //  )
+                //   .splineToConstantHeading(new Vector2d(47, -64), Math.toRadians(34.39), // -62
+                .lineToSplineHeading(
+                        new Pose2d(47, -61, Math.toRadians(90.5)),
+                        SampleMecanumDrive.getVelocityConstraint(15, DriveConstants.MAX_ANG_VEL, DriveConstants.TRACK_WIDTH), // Slower velocity
+                        SampleMecanumDrive.getAccelerationConstraint(DriveConstants.MAX_ACCEL / 2) // Slower acceleration
+                )
                 .build();
 
 
-//        TrajectorySequence FrontALittle = drive.trajectorySequenceBuilder(trajectory1.end()) // .plus(new Pose2d(0, 0, Math.toRadians(180))
-//                .splineToConstantHeading(new Vector2d(47, -62), Math.toRadians(91), // -62
-//
-//                        SampleMecanumDrive.getVelocityConstraint(10, DriveConstants.MAX_ANG_VEL, DriveConstants.TRACK_WIDTH),
-//                        SampleMecanumDrive.getAccelerationConstraint(DriveConstants.MAX_ACCEL)
-//                        // important
-//                )
-//                .build();
-
-//        TrajectorySequence BackALittle = drive.trajectorySequenceBuilder(FrontALittle.end()) // .plus(new Pose2d(0, 0, Math.toRadians(180))
-//                .splineToConstantHeading(new Vector2d(47, -54), Math.toRadians(91), // -62
-//
-//                        SampleMecanumDrive.getVelocityConstraint(10, DriveConstants.MAX_ANG_VEL, DriveConstants.TRACK_WIDTH),
-//                        SampleMecanumDrive.getAccelerationConstraint(DriveConstants.MAX_ACCEL)
-//                        // important
-//                )
-//                .build();
 
 
 
@@ -116,33 +100,33 @@ public class LG2AutoOBSV extends LinearOpMode {
 
 
         // add claw + elevator
-           elevator.setTargetPosition(1900);
-           elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-           elevator.setPower(0.6);
+        elevator.setTargetPosition(1900);
+        elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        elevator.setPower(0.6);
 
 
         drive.followTrajectorySequence(trajectory0);
-            elevator.setTargetPosition(0); //  1500
-            elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-            elevator.setPower(0.8);
-
+        elevator.setTargetPosition(0); //  1500
+        elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        elevator.setPower(0.8);
+        claw.setPosition(0.7);
 
 
         // add claw + elevator
         drive.followTrajectorySequence(trajectory1);
         claw.setPosition(0.7);
-      //  drive.followTrajectorySequence(FrontALittle);
-      //  drive.followTrajectorySequence(BackALittle);
+        //  drive.followTrajectorySequence(FrontALittle);
+        //  drive.followTrajectorySequence(BackALittle);
 
         claw.setPosition(1);
-    //    sleep(1000);
+        //    sleep(1000);
 
 
         // 0.7 open
         // 1 is close
         for (int i = 0; i < 1; i++) {
-          //  drive.turn(Math.toRadians(180)); // maybe change
-          //  claw.setPosition(1);
+            //  drive.turn(Math.toRadians(180)); // maybe change
+            //  claw.setPosition(1);
             sleep(1000); // originally 2000
 
 
@@ -152,7 +136,7 @@ public class LG2AutoOBSV extends LinearOpMode {
             drive.followTrajectorySequence(trajectory3);
 //
             elevator.setTargetPosition(1500);
-           elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION);
             elevator.setPower(0.9);
 
             sleep(1000);
@@ -164,17 +148,55 @@ public class LG2AutoOBSV extends LinearOpMode {
 
             drive.followTrajectorySequence(trajectory4);
             claw.setPosition(0.7);   // 143 - 146 lines need change
-        //    drive.followTrajectorySequence(BackALittle);
+            //    drive.followTrajectorySequence(BackALittle);
             claw.setPosition(1);
-        //    drive.turn(Math.toRadians(180));
-         //   drive.followTrajectorySequence(BackALittle);
+            //    drive.turn(Math.toRadians(180));
+            //   drive.followTrajectorySequence(BackALittle);
 
 
         }
 
-    //    drive.followTrajectorySequence(trajectory2);
+        for (int i = 0; i < 3; i++) {
+            // NOT FINAL PROBABLY WONT WORK JUST FOR TESTING ADD IF STATEMENTS
+            TrajectorySequence PushTraj1 = drive.trajectorySequenceBuilder(new Pose2d(47, -61, Math.toRadians(270))) //90 270
 
 
+                    // MAKE SURE TO ADD A DIFFERENT S0PLINE LIKE SPLINE ENDTANGENT
+
+
+
+                    .splineToConstantHeading(new Vector2d(49, -12), Math.toRadians(34.39), // -62 55.61 124.39
+
+
+                            // if i = 1 then
+                            // add 10 to the x
+
+
+                            SampleMecanumDrive.getVelocityConstraint(20, DriveConstants.MAX_ANG_VEL, DriveConstants.TRACK_WIDTH),
+                            SampleMecanumDrive.getAccelerationConstraint(DriveConstants.MAX_ACCEL)
+                    )
+                    .build();
+
+            TrajectorySequence PushTraj2 = drive.trajectorySequenceBuilder(PushTraj1.end()) // .plus(new Pose2d(0, 0, Math.toRadians(90)))
+                    //   .splineToConstantHeading(new Vector2d(47, -64), Math.toRadians(34.39), // -62
+                    .lineToSplineHeading(
+
+                           // if i = 1 then add 10 to x
+                            new Pose2d(47, -61, Math.toRadians(90.5)),
+                            SampleMecanumDrive.getVelocityConstraint(15, DriveConstants.MAX_ANG_VEL, DriveConstants.TRACK_WIDTH), // Slower velocity
+                            SampleMecanumDrive.getAccelerationConstraint(DriveConstants.MAX_ACCEL / 2) // Slower acceleration
+
+
+                    // MAKE SURE TO ADD A DIFFERENT S0PLINE LIKE SPLINE ENDTANGENT
+
+
+                    )
+                    .build();
+
+        }
+
+
+        // ANOTHER FOR LOOP TO GET 3 SPECIMENS SCORE
         // 35.81,-37.15 start pos
         if (isStopRequested()) return;
         //robot.hwMap();
@@ -256,6 +278,7 @@ public class LG2AutoOBSV extends LinearOpMode {
 
 
     }   }
+
 
 
 
