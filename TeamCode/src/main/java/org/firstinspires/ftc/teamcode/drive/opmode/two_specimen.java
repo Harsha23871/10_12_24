@@ -45,6 +45,7 @@ public class two_specimen extends LinearOpMode {
         SampleMecanumDrive drive = new SampleMecanumDrive(hardwareMap);
         Pose2d startPose = new Pose2d(11,  -61, Math.toRadians(270));
         drive.setPoseEstimate(startPose);
+        // to the submersible
         TrajectorySequence trajectory0 = drive.trajectorySequenceBuilder(new Pose2d(11, -61, Math.toRadians(270.00)))
                 .splineToConstantHeading(new Vector2d(0, -31.5), Math.toRadians(34.39),
 
@@ -53,6 +54,7 @@ public class two_specimen extends LinearOpMode {
 
                 )
                 .build();
+        //to the parking zone
         TrajectorySequence trajectory1 = drive.trajectorySequenceBuilder(new Pose2d(-1.41, -34.18, Math.toRadians(90.00)))
                 .lineTo(new Vector2d(45.90, -55))
                 .setVelConstraint(SampleMecanumDrive.getVelocityConstraint(5, DriveConstants.MAX_ANG_VEL, DriveConstants.TRACK_WIDTH))  // Velocity constraint
@@ -60,7 +62,7 @@ public class two_specimen extends LinearOpMode {
                 .build();
 
 
-
+// back to submerisible
         TrajectorySequence trajectory2 = drive.trajectorySequenceBuilder(new Pose2d(45.90, -50, Math.toRadians(270.00)))
                 .lineTo(new Vector2d(0.37, -33.59))  // Move to the new point
                 .setVelConstraint(SampleMecanumDrive.getVelocityConstraint(5, DriveConstants.MAX_ANG_VEL, DriveConstants.TRACK_WIDTH))  // Slower velocity
@@ -68,17 +70,17 @@ public class two_specimen extends LinearOpMode {
                 .build();
 
 
-
+          // back a little after 1
         TrajectorySequence backalittle = drive.trajectorySequenceBuilder(trajectory1.end())
-                .back(10)
+                .back(7)
                 .setVelConstraint(SampleMecanumDrive.getVelocityConstraint(5, DriveConstants.MAX_ANG_VEL, DriveConstants.TRACK_WIDTH))  // Slower velocity
                 .setAccelConstraint(SampleMecanumDrive.getAccelerationConstraint(DriveConstants.MAX_ACCEL / 2))  // Reduced acceleration
                 .build();
 
 
-
+      //back a little after 2
         TrajectorySequence backalittle2 = drive.trajectorySequenceBuilder(trajectory2.end())
-                .back(10)
+                .back(7)
         .setVelConstraint(SampleMecanumDrive.getVelocityConstraint(5, DriveConstants.MAX_ANG_VEL, DriveConstants.TRACK_WIDTH))  // Slower velocity
                 .setAccelConstraint(SampleMecanumDrive.getAccelerationConstraint(DriveConstants.MAX_ACCEL / 2))  // Reduced acceleration
                 .build();
