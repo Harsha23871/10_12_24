@@ -14,8 +14,8 @@ import org.firstinspires.ftc.teamcode.drive.DriveConstants;
 import org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive;
 import org.firstinspires.ftc.teamcode.trajectorysequence.TrajectorySequence;
 
-@Autonomous(group = "a", name="2 Specimen")
-public class Two_Specimen_Auto extends LinearOpMode {
+@Autonomous(group = "a", name="2 Specimen Test ")
+public class Two_Specimen_Auto_Test extends LinearOpMode {
     public DcMotor elevator = null;
     public Servo claw = null;
 
@@ -88,7 +88,7 @@ public class Two_Specimen_Auto extends LinearOpMode {
         //back a little after trajectory 2
         TrajectorySequence backalittle2 = drive.trajectorySequenceBuilder(trajectory3.end())
                 .back(5)
-                .setVelConstraint(SampleMecanumDrive.getVelocityConstraint(20, DriveConstants.MAX_ANG_VEL, DriveConstants.TRACK_WIDTH))  // Slower velocity
+        .setVelConstraint(SampleMecanumDrive.getVelocityConstraint(20, DriveConstants.MAX_ANG_VEL, DriveConstants.TRACK_WIDTH))  // Slower velocity
                 .setAccelConstraint(SampleMecanumDrive.getAccelerationConstraint(DriveConstants.MAX_ACCEL / 8))  // Reduced acceleration
                 .build();
 
@@ -120,7 +120,7 @@ public class Two_Specimen_Auto extends LinearOpMode {
         claw.setPosition(1);
         sleep(500);
 
-        elevator.setTargetPosition(2600);                 //BACK TO SUBMERSIBLE
+         elevator.setTargetPosition(2600);                 //BACK TO SUBMERSIBLE
         elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION); //2nd SPECIMEN SCORED
         elevator.setPower(0.6);
         sleep(500);
