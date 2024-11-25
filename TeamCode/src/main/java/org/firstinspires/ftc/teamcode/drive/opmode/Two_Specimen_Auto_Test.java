@@ -66,12 +66,6 @@ public class Two_Specimen_Auto_Test extends LinearOpMode {
                 .build();
 
 
-
-
-
-
-
-
         // back a little after trajectory 1
         TrajectorySequence backalittle = drive.trajectorySequenceBuilder(trajectory1.end())
                 .back(7 )
@@ -91,6 +85,22 @@ public class Two_Specimen_Auto_Test extends LinearOpMode {
         .setVelConstraint(SampleMecanumDrive.getVelocityConstraint(20, DriveConstants.MAX_ANG_VEL, DriveConstants.TRACK_WIDTH))  // Slower velocity
                 .setAccelConstraint(SampleMecanumDrive.getAccelerationConstraint(DriveConstants.MAX_ACCEL / 8))  // Reduced acceleration
                 .build();
+
+        TrajectorySequence FirstPush =  drive.trajectorySequenceBuilder(backalittle.end())
+
+                        .strafeLeft(12)
+                                .forward(50)
+                .strafeRight(10)
+                .back(50)
+                .forward(15)
+                                        .build();
+
+        TrajectorySequence backalittle3 = drive.trajectorySequenceBuilder(trajectory3.end())
+                .back(15)
+                .setVelConstraint(SampleMecanumDrive.getVelocityConstraint(20, DriveConstants.MAX_ANG_VEL, DriveConstants.TRACK_WIDTH))  // Slower velocity
+                .setAccelConstraint(SampleMecanumDrive.getAccelerationConstraint(DriveConstants.MAX_ACCEL / 8))  // Reduced acceleration
+                .build();
+
 
 
 
@@ -116,11 +126,13 @@ public class Two_Specimen_Auto_Test extends LinearOpMode {
 
 
         drive.followTrajectorySequence(trajectory1uhoh); //RETURN TO WALL AND INTAKE
-        drive.followTrajectorySequence(backalittle);
-        claw.setPosition(1);
+        drive.followTrajectorySequence(FirstPush);
         sleep(500);
-
-         elevator.setTargetPosition(2600);                 //BACK TO SUBMERSIBLE
+        drive.followTrajectorySequence(backalittle3);
+      claw.setPosition(1);
+        sleep(500);
+/*
+         elevator.setTargetPosition(2400);                 //BACK TO SUBMERSIBLE
         elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION); //2nd SPECIMEN SCORED
         elevator.setPower(0.6);
         sleep(500);
@@ -139,7 +151,26 @@ public class Two_Specimen_Auto_Test extends LinearOpMode {
 
         drive.followTrajectorySequence(trajectory1uhoh);//park
         drive.followTrajectorySequence(backalittle);
+        claw.setPosition(1);
+        sleep(500);
 
+        elevator.setTargetPosition(2400);                 //BACK TO SUBMERSIBLE
+        elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION); //2nd SPECIMEN SCORED
+        elevator.setPower(0.6);
+        sleep(500);
+        drive.followTrajectorySequence(trajectory3);
+        drive.followTrajectorySequence(backalittle2);
+        sleep(500);
+        elevator.setTargetPosition(1500);
+        elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        elevator.setPower(0.9);
+        sleep(500);
+        claw.setPosition(0.7);
+        elevator.setTargetPosition(0);
+        elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        elevator.setPower(0.9);
+        drive.followTrajectorySequence(FirstPush);
+                     */
 
 
 
