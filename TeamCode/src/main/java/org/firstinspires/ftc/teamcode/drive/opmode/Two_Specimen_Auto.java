@@ -120,7 +120,7 @@ public class Two_Specimen_Auto extends LinearOpMode {
         claw.setPosition(1);
         sleep(500);
 
-        elevator.setTargetPosition(2600);                 //BACK TO SUBMERSIBLE
+        elevator.setTargetPosition(2200);                 //BACK TO SUBMERSIBLE
         elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION); //2nd SPECIMEN SCORED
         elevator.setPower(0.6);
         sleep(500);

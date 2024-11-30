@@ -46,54 +46,71 @@ public class Two_Specimen_Auto_Test extends LinearOpMode {
         // to the submersible
         TrajectorySequence trajectory0 = drive.trajectorySequenceBuilder(new Pose2d(11, -61, Math.toRadians(270.00)))
                 .splineToConstantHeading(new Vector2d(0, -31.5), Math.toRadians(34.39),
-
-                        SampleMecanumDrive.getVelocityConstraint(20, DriveConstants.MAX_ANG_VEL, DriveConstants.TRACK_WIDTH),
-                        SampleMecanumDrive.getAccelerationConstraint(DriveConstants.MAX_ACCEL)
-
+                    SampleMecanumDrive.getVelocityConstraint(30, DriveConstants.MAX_ANG_VEL, DriveConstants.TRACK_WIDTH),
+                     SampleMecanumDrive.getAccelerationConstraint(DriveConstants.MAX_ACCEL)
                 )
                 .build();
         //to the parking zone
+
         TrajectorySequence trajectory1 = drive.trajectorySequenceBuilder(new Pose2d(0, -31.5, Math.toRadians(90.00)))
                 .lineTo(new Vector2d(46, -55))
                 .setVelConstraint(SampleMecanumDrive.getVelocityConstraint(5, DriveConstants.MAX_ANG_VEL, DriveConstants.TRACK_WIDTH))  // Velocity constraint
                 .setAccelConstraint(SampleMecanumDrive.getAccelerationConstraint(DriveConstants.MAX_ACCEL))  // Acceleration constraint
                 .build();
 
+
         TrajectorySequence trajectory1uhoh = drive.trajectorySequenceBuilder(new Pose2d(-0.07, -33.74, Math.toRadians(270)))
                 .lineToLinearHeading(new Pose2d(46, -55, Math.toRadians(90)))
-                .setVelConstraint(SampleMecanumDrive.getVelocityConstraint(5, DriveConstants.MAX_ANG_VEL, DriveConstants.TRACK_WIDTH))  // Velocity constraint
-                .setAccelConstraint(SampleMecanumDrive.getAccelerationConstraint(DriveConstants.MAX_ACCEL))  // Acceleration constraint
                 .build();
 
 
         // back a little after trajectory 1
         TrajectorySequence backalittle = drive.trajectorySequenceBuilder(trajectory1.end())
-                .back(7 )
+                .back(15 )
                 .setVelConstraint(SampleMecanumDrive.getVelocityConstraint(10, DriveConstants.MAX_ANG_VEL, DriveConstants.TRACK_WIDTH))  // Slower velocity
                 .setAccelConstraint(SampleMecanumDrive.getAccelerationConstraint(DriveConstants.MAX_ACCEL / 8))  // Reduced acceleration
                 .build();
+
 
         TrajectorySequence trajectory3 = drive.trajectorySequenceBuilder(backalittle.end())
                 .lineToLinearHeading(new Pose2d(0, -38, Math.toRadians(270.00)))
-                .setVelConstraint(SampleMecanumDrive.getVelocityConstraint(10, DriveConstants.MAX_ANG_VEL, DriveConstants.TRACK_WIDTH))  // Slower velocity
-                .setAccelConstraint(SampleMecanumDrive.getAccelerationConstraint(DriveConstants.MAX_ACCEL / 8))  // Reduced acceleration
                 .build();
 
         //back a little after trajectory 2
+
         TrajectorySequence backalittle2 = drive.trajectorySequenceBuilder(trajectory3.end())
                 .back(5)
         .setVelConstraint(SampleMecanumDrive.getVelocityConstraint(20, DriveConstants.MAX_ANG_VEL, DriveConstants.TRACK_WIDTH))  // Slower velocity
                 .setAccelConstraint(SampleMecanumDrive.getAccelerationConstraint(DriveConstants.MAX_ACCEL / 8))  // Reduced acceleration
                 .build();
+                                                                                            // -33.74
 
-        TrajectorySequence FirstPush =  drive.trajectorySequenceBuilder(backalittle.end())
 
-                        .strafeLeft(12)
-                                .forward(50)
-                .strafeRight(10)
-                .back(50)
-                .forward(15)
-                                        .build();
+
+
+       TrajectorySequence FirstPush = drive.trajectorySequenceBuilder(new Pose2d(-0.07, -33.74, Math.toRadians(90.00)))
+
+      //        .lineTo(new Vector2d(33, -40))
+            //  .splineTo(new Vector2d(47.68, -8.68), Math.toRadians(90))    // 35.67, -8.53
+       //       .lineToLinearHeading(new Pose2d(47.68, -8.68, Math.toRadians(90)))
+        //      .splineToLinearHeading(new Pose2d(47.68, -8.68, Math.toRadians(90)), Math.toRadians(0))
+             //  .lineTo(new Vector2d(47.68, -8.68))
+          //    .lineTo(new Vector2d(47.83, -51.39))
+
+           //   .build();
+                .lineTo(new Vector2d(34, -43))
+                .lineTo(new Vector2d(34, -2))
+                .lineTo(new Vector2d(45, -2))
+                .lineTo(new Vector2d(47.98, -60))
+                .lineTo(new Vector2d(47.98, -55))
+                .build();
+
+
+
+
+
+
+
 
         TrajectorySequence backalittle3 = drive.trajectorySequenceBuilder(trajectory3.end())
                 .back(15)
@@ -101,17 +118,17 @@ public class Two_Specimen_Auto_Test extends LinearOpMode {
                 .setAccelConstraint(SampleMecanumDrive.getAccelerationConstraint(DriveConstants.MAX_ACCEL / 8))  // Reduced acceleration
                 .build();
 
+        TrajectorySequence SecondPush =  drive.trajectorySequenceBuilder(new Pose2d(47.98, -55, Math.toRadians(270)))
+
+                .lineTo(new Vector2d(33, -40))
+                .lineTo(new Vector2d(33, -9.57))
+                .lineTo(new Vector2d(45.68, -9.27))
+                .lineTo(new Vector2d(47.98, -60))
+                .build();
 
 
 
-
-
-
-
-
-
-
-        elevator.setTargetPosition(2000);                  //FIRST SPECIMEN
+        elevator.setTargetPosition(2400);                  //FIRST SPECIMEN
         elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         elevator.setPower(0.6);
         drive.followTrajectorySequence(trajectory0);
@@ -124,14 +141,52 @@ public class Two_Specimen_Auto_Test extends LinearOpMode {
         elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         elevator.setPower(0.9);
 
+//     claw position 1 is close
+        //0.7 is open
+        //RETURN TO WALL AND INTAKE
+       drive.followTrajectorySequence(FirstPush);
+        sleep(500);
+       drive.followTrajectorySequence(backalittle);
+        claw.setPosition(1);
+        sleep(500);
+        elevator.setTargetPosition(2400);                 //BACK TO SUBMERSIBLE
+        elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION); //2nd SPECIMEN SCORED
+        elevator.setPower(0.6);
+        sleep(500);
+        drive.followTrajectorySequence(trajectory3);
+        drive.followTrajectorySequence(backalittle2);
+        elevator.setTargetPosition(1500);
+        elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        elevator.setPower(0.9);
+        claw.setPosition(0.7);
+        elevator.setTargetPosition(0);
+        elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        elevator.setPower(0.9);
+        sleep(200);
+        drive.followTrajectorySequence(trajectory1uhoh);
+        drive.followTrajectorySequence(backalittle);
+        claw.setPosition(1);
+        sleep(500);
 
-        drive.followTrajectorySequence(trajectory1uhoh); //RETURN TO WALL AND INTAKE
-        drive.followTrajectorySequence(FirstPush);
+        elevator.setTargetPosition(2400);
+        elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        elevator.setPower(0.6);
         sleep(500);
-        drive.followTrajectorySequence(backalittle3);
-      claw.setPosition(1);
+        drive.followTrajectorySequence(trajectory3);
+        drive.followTrajectorySequence(backalittle2);
         sleep(500);
-/*
+        elevator.setTargetPosition(1500);
+        elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        elevator.setPower(0.9);
+        sleep(500);
+        claw.setPosition(0.7);
+        elevator.setTargetPosition(0);
+        elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        elevator.setPower(0.9);
+
+
+
+        /*
          elevator.setTargetPosition(2400);                 //BACK TO SUBMERSIBLE
         elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION); //2nd SPECIMEN SCORED
         elevator.setPower(0.6);
@@ -171,6 +226,17 @@ public class Two_Specimen_Auto_Test extends LinearOpMode {
         elevator.setPower(0.9);
         drive.followTrajectorySequence(FirstPush);
                      */
+
+
+
+
+
+
+
+
+
+
+
 
 
 
