@@ -103,6 +103,7 @@ public class Two_Specimen_Auto_Test extends LinearOpMode {
                 .lineTo(new Vector2d(45, -2))
                 .lineTo(new Vector2d(47.98, -60))
                 .lineTo(new Vector2d(47.98, -55))
+               .strafeLeft(10)
                 .build();
 
 
