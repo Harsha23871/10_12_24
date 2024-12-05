@@ -45,6 +45,7 @@ public class BucketSpecimen extends LinearOpMode {
         SampleMecanumDrive drive = new SampleMecanumDrive(hardwareMap);
         Pose2d startPose = new Pose2d(-37,  -61, Math.toRadians(270));
         drive.setPoseEstimate(startPose);
+
         TrajectorySequence trajectory0 = drive.trajectorySequenceBuilder(new Pose2d(-37, -61, Math.toRadians(270.00)))
                 .splineToConstantHeading(new Vector2d(0, -31.5), Math.toRadians(34.39),
 

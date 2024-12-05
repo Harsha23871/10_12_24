@@ -90,30 +90,30 @@ public class Two_Specimen_Auto_Test extends LinearOpMode {
 
        TrajectorySequence FirstPush = drive.trajectorySequenceBuilder(new Pose2d(-0.07, -33.74, Math.toRadians(90.00)))
 
-      //        .lineTo(new Vector2d(33, -40))
-            //  .splineTo(new Vector2d(47.68, -8.68), Math.toRadians(90))    // 35.67, -8.53
-       //       .lineToLinearHeading(new Pose2d(47.68, -8.68, Math.toRadians(90)))
-        //      .splineToLinearHeading(new Pose2d(47.68, -8.68, Math.toRadians(90)), Math.toRadians(0))
-             //  .lineTo(new Vector2d(47.68, -8.68))
-          //    .lineTo(new Vector2d(47.83, -51.39))
+               .splineToLinearHeading(new Pose2d(37.00, -41.45, Math.toRadians(270.00)), Math.toRadians(-11.99))
+               .lineTo(new Vector2d(36.41, -12.00))
+               .lineTo(new Vector2d(47.47, -12.00))
+               .lineTo(new Vector2d(46.98, -58.65))
+               .build();
 
-           //   .build();
-                .lineTo(new Vector2d(34, -43))
-                .lineTo(new Vector2d(34, -2))
-                .lineTo(new Vector2d(45, -2))
-                .lineTo(new Vector2d(47.98, -60))
-                .lineTo(new Vector2d(47.98, -55))
-               .strafeLeft(10)
-                .build();
+
+           // slow down first one because inertia
 
 
 
+//               .lineToLinearHeading(new Pose2d(37.00, -41.45, Math.toRadians(270.00)))
+//               .splineTo(new Vector2d(36.41, -12), Math.toRadians(90.94))
+//                .lineTo(new Vector2d(48.57, -12))
+//                .lineTo(new Vector2d(47.98, -58.65))
+
+//               .lineTo(new Vector2d(36.11, -45.31))
+//               .lineTo(new Vector2d(37.45, -8.23))
+//               .lineTo(new Vector2d(47.68, -4.82))
+//               .lineTo(new Vector2d(48.42, -55.98))
 
 
 
-
-
-        TrajectorySequence backalittle3 = drive.trajectorySequenceBuilder(trajectory3.end())
+            TrajectorySequence backalittle3 = drive.trajectorySequenceBuilder(trajectory3.end())
                 .back(15)
                 .setVelConstraint(SampleMecanumDrive.getVelocityConstraint(20, DriveConstants.MAX_ANG_VEL, DriveConstants.TRACK_WIDTH))  // Slower velocity
                 .setAccelConstraint(SampleMecanumDrive.getAccelerationConstraint(DriveConstants.MAX_ACCEL / 8))  // Reduced acceleration

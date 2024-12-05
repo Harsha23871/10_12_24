@@ -107,10 +107,11 @@ public class TeleOPMyName extends LinearOpMode {
 
         armMotor = hardwareMap.get(DcMotor.class, "arm_motor");
         elevator = hardwareMap.get(DcMotor.class, "elevator_motor");
-        claw =  hardwareMap.get(Servo.class, "claw");
-        bucket = hardwareMap.get(Servo.class,"bucket");
+        claw = hardwareMap.get(Servo.class, "claw");
+        bucket = hardwareMap.get(Servo.class, "bucket");
         intake = hardwareMap.get(CRServo.class, "intake");
         wrist = hardwareMap.get(Servo.class, "wrist");
+        //elevatorHang = hardwareMap.get(DcMotor.class, "elevator_hang");
 
 
 ////////////////////////////////////////////////////////////////////////////////////
@@ -121,17 +122,20 @@ public class TeleOPMyName extends LinearOpMode {
         rightBackDrive.setDirection(DcMotor.Direction.REVERSE);
 
 
-
-        armMotor.setDirection(DcMotorSimple.Direction.REVERSE);
-        armMotor.setDirection(FORWARD);
+//        armMotor.setDirection(DcMotorSimple.Direction.REVERSE);
+        armMotor.setDirection(REVERSE);
+        armMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        armMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         armMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         elevator.setDirection(FORWARD);
         elevator.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         elevator.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+//        elevatorHang.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+//        elevatorHang.setDirection(FORWARD);
+//        elevatorHang.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+
 //        armMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER); // Reset encoder to zero*/
 //        armMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-
-
 
 
         // telemetry.addData("Front left/Right shoulder pos before start", "%4.2f, %4.2f",elevator.getCurrentPosition(), right_Shoulder_Motor.getCurrentPosition());
@@ -180,7 +184,7 @@ public class TeleOPMyName extends LinearOpMode {
                 elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                 elevator.setPower(-0.8);
             }*/
-            if (gamepad2.y){
+            if (gamepad2.y) {
 
                 elevator.setTargetPosition(2100);
                 elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION);
@@ -188,17 +192,26 @@ public class TeleOPMyName extends LinearOpMode {
 
             }
 
-            if (gamepad2.a){
+            if (gamepad2.a) {
 
                 elevator.setTargetPosition(1400);
                 elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                 elevator.setPower(0.8);
-             sleep(1000);
+                sleep(1000);
                 claw.setPosition(0.7);
                 elevator.setTargetPosition(0);
                 elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                 elevator.setPower(0.8);
 
+            }
+
+            if (gamepad1.left_bumper) {
+                elevator.setTargetPosition(2100);
+                elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+                elevator.setPower(0.8);
+//                elevatorHang.setTargetPosition(2100);
+//                elevatorHang.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+//                elevatorHang.setPower(0.8);
             }
 
             /*if (gamepad1.dpad_down){
@@ -245,8 +258,7 @@ public class TeleOPMyName extends LinearOpMode {
             }
             if (gamepad2.right_bumper) {
                 intake.setPower(-1);  // Stop intake when the button is released
-            }
-            else {
+            } else {
                 intake.setPower(0);
             }
             int minPosition = 0;  // Minimum position
@@ -254,28 +266,28 @@ public class TeleOPMyName extends LinearOpMode {
             int TargetPosition = 25;
 
 
-            if (gamepad2.dpad_up){// lift arm linkage to 90Deg from chasise
-                armMotor.setDirection(FORWARD);
-                armMotor.setPower(0.5);
+            if (gamepad2.dpad_up) {// lift arm linkage to 90Deg from chasise
+                armMotor.setTargetPosition(1000);
+                armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+                armMotor.setPower(0.8);
 
             }
-            else {
-                armMotor.setPower(0.0);
-                break;
+            if (gamepad1.dpad_down) {// lift arm linkage to 90Deg from chasise
+                armMotor.setTargetPosition(0);
+                armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+                armMotor.setPower(-0.8);
+
             }
 
-            if (gamepad2.dpad_down) { /// move arm to 180 deg from chassie ie == straigm out
-  /*              armMotor.setTargetPosition(armintakepos);
-                armMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);*/
+/*            if (gamepad2.dpad_down) { /// move arm to 180 deg from chassie ie == straigm out
+                armMotor.setTargetPosition(armintakepos);
+                armMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
                 armMotor.setDirection(REVERSE);
                 armMotor.setPower(0.3);
-            }
-            else {
+            } else {
                 armMotor.setPower(0.0);
-                break;
-            }
-
-
+                break;*/
+          //  }
 
 
             if (gamepad2.dpad_right) {
@@ -288,11 +300,9 @@ public class TeleOPMyName extends LinearOpMode {
             }
 
 
-
-
-                // Telemetry to monitor encoder position
-                telemetry.addData("Arm Motor Position", armMotor.getCurrentPosition());
-                telemetry.update();
+            // Telemetry to monitor encoder position
+            telemetry.addData("Arm Motor Position", armMotor.getCurrentPosition());
+            telemetry.update();
 
 //          if (armTimer.seconds() >= 3) {
 //             armMotor.setTargetPosition(arm_resting_pos);
@@ -302,24 +312,25 @@ public class TeleOPMyName extends LinearOpMode {
 //              telemetry.update();
 //         }
 
-                max = Math.max(Math.abs(leftFrontPower), Math.abs(rightFrontPower));
-                max = Math.max(max, Math.abs(leftBackPower));
-                max = Math.max(max, Math.abs(rightBackPower));
+            max = Math.max(Math.abs(leftFrontPower), Math.abs(rightFrontPower));
+            max = Math.max(max, Math.abs(leftBackPower));
+            max = Math.max(max, Math.abs(rightBackPower));
 
 
-                if (max > 1.0) {
-                    leftFrontPower /= max;
-                    rightFrontPower /= max;
-                    leftBackPower /= max;
-                    rightBackPower /= max;
-                }
-                leftFrontDrive.setPower(leftFrontPower);
-                rightFrontDrive.setPower(rightFrontPower);
-                leftBackDrive.setPower(leftBackPower);
-                rightBackDrive.setPower(rightBackPower);
+            if (max > 1.0) {
+                leftFrontPower /= max;
+                rightFrontPower /= max;
+                leftBackPower /= max;
+                rightBackPower /= max;
+            }
+            leftFrontDrive.setPower(leftFrontPower);
+            rightFrontDrive.setPower(rightFrontPower);
+            leftBackDrive.setPower(leftBackPower);
+            rightBackDrive.setPower(rightBackPower);
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            }
+        }
 
-        }}
+
+       }}
