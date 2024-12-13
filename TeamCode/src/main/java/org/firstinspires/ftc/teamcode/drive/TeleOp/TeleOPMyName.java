@@ -126,8 +126,8 @@ public class TeleOPMyName extends LinearOpMode {
 //        armMotor.setDirection(DcMotorSimple.Direction.REVERSE);
         armMotor.setDirection(REVERSE);
         elevator.setDirection(FORWARD);
-      /*  elevator.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        elevator.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);*/
+      elevator.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        elevator.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 //        elevatorHang.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 //        elevatorHang.setDirection(FORWARD);
 //        elevatorHang.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -140,6 +140,7 @@ public class TeleOPMyName extends LinearOpMode {
         armMotor.getCurrentPosition();
         waitForStart();
         runtime.reset();
+        wrist.setPosition(0.4);
 
         // run until the end of the match (driver presses STOP)
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -174,19 +175,19 @@ public class TeleOPMyName extends LinearOpMode {
 */
 
 //elevator
-            if (gamepad2.a)  /* elevator down */ // might require boolean controller
-                elevator.setPower(-0.8);
+//            if (gamepad2.a)  /* elevator down */ // might require boolean controller
+//                elevator.setPower(-0.8);
+//
+//            else if(gamepad2.y) /* elevator up */
+//                elevator.setPower(0.8);
+//
+//            else
+//                elevator.setPower(0);
 
-            else if(gamepad2.y) /* elevator up */
-                elevator.setPower(0.8);
 
-            else
-                elevator.setPower(0);
+           if (gamepad2.y) {
 
-
-        /*    if (gamepad2.y) {
-
-                elevator.setTargetPosition(2400);
+                elevator.setTargetPosition(2000);
                 elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                 elevator.setPower(0.8);
 
@@ -197,13 +198,16 @@ public class TeleOPMyName extends LinearOpMode {
                 elevator.setTargetPosition(1400);
                 elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                 elevator.setPower(0.8);
-                sleep(1000);
+                sleep(500);
                 claw.setPosition(0.7);
                 elevator.setTargetPosition(0);
                 elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                 elevator.setPower(0.8);
 
-            }*/
+            }
+            if (gamepad2.back)
+                elevator.setTargetPosition(3400);
+
              if (gamepad2.right_bumper)
                  intake_extension.setPosition(1);
 
@@ -293,35 +297,36 @@ public class TeleOPMyName extends LinearOpMode {
                 elevator.setPower(0);
             }
            while(left)*/
-            while(gamepad2.back) {/*works reliably with bool buttons */
-                if (gamepad2.y) {/*drone launch __0__*/
-                    elevator.setTargetPosition(4000);
-                    elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-                    elevator.setPower(-0.8);
-                }
-            }
-            while(gamepad2.back) {/*works reliably with bool buttons */
-                if (gamepad2.x) {
-                    bucket.setDirection(Servo.Direction.FORWARD);
-                    bucket.setPosition(1);
-                } else {
-                    bucket.setPosition(0.2);}}
+//            while(gamepad2.back) {/*works reliably with bool buttons */
+//                if (gamepad2.y) {/*drone launch __0__*/
+//                    elevator.setTargetPosition(4000);
+//                    elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+//                    elevator.setPower(-0.8);
+//                }
+//            }
 
-            while(gamepad2.back) {
-                if (gamepad2.b) {
-                    elevator.setTargetPosition(4000);
-                    elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-                    elevator.setPower(-0.8);
-                    sleep(500);
-                    bucket.setDirection(Servo.Direction.FORWARD);
-                    bucket.setPosition(1);
-                    sleep(1000);
-                    bucket.setDirection(Servo.Direction.FORWARD);
-                    bucket.setPosition(0.2);
+//            while(gamepad2.back) {/*works reliably with bool buttons */
+//                if (gamepad2.x) {
+//                    bucket.setDirection(Servo.Direction.FORWARD);
+//                    bucket.setPosition(1);
+//                } else {
+//                    bucket.setPosition(0.2);}}
+
+//            while(gamepad2.back) {
+//                if (gamepad2.b) {
+//                    elevator.setTargetPosition(4000);
+//                    elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+//                    elevator.setPower(-0.8);
+//                    sleep(500);
+//                    bucket.setDirection(Servo.Direction.FORWARD);
+//                    bucket.setPosition(1);
+//                    sleep(1000);
+//                    bucket.setDirection(Servo.Direction.FORWARD);
+//                    bucket.setPosition(0.2);
 
 
-                }
-            }
+//                }
+//            }
             // Telemetry to monitor encoder position
             telemetry.addData("Arm Motor Position", armMotor.getCurrentPosition());
             telemetry.update();
