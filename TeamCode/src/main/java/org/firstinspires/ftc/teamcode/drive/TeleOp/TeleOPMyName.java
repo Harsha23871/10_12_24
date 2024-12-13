@@ -307,6 +307,21 @@ public class TeleOPMyName extends LinearOpMode {
                 } else {
                     bucket.setPosition(0.2);}}
 
+            while(gamepad2.back) {
+                if (gamepad2.b) {
+                    elevator.setTargetPosition(4000);
+                    elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+                    elevator.setPower(-0.8);
+                    sleep(500);
+                    bucket.setDirection(Servo.Direction.FORWARD);
+                    bucket.setPosition(1);
+                    sleep(1000);
+                    bucket.setDirection(Servo.Direction.FORWARD);
+                    bucket.setPosition(0.2);
+
+
+                }
+            }
             // Telemetry to monitor encoder position
             telemetry.addData("Arm Motor Position", armMotor.getCurrentPosition());
             telemetry.update();
