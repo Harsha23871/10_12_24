@@ -129,8 +129,8 @@ public class TeleOPMyName extends LinearOpMode {
 //        armMotor.setDirection(DcMotorSimple.Direction.REVERSE);
         armMotor.setDirection(REVERSE);
         elevator.setDirection(FORWARD);
-      elevator.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        elevator.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+//      elevator.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+//        elevator.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 //        elevatorHang.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 //        elevatorHang.setDirection(FORWARD);
 //        elevatorHang.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -155,19 +155,23 @@ public class TeleOPMyName extends LinearOpMode {
             double axial = -gamepad1.left_stick_y;  // Note: pushing stick forward gives negative value
             double lateral = gamepad1.left_stick_x;
             double yaw = gamepad1.right_stick_x;
-            double sigma = gamepad2.right_stick_y;
-            double alpha = -gamepad2.right_stick_y;
+//            double sigma = gamepad2.right_stick_y;
+//            double alpha = -gamepad2.right_stick_y;
 
             //drive G1
             double leftFrontPower = axial + lateral + yaw;
             double rightFrontPower = axial - lateral - yaw;
             double leftBackPower = axial - lateral + yaw;
             double rightBackPower = axial + lateral - yaw;
-            //double elevatorPower = alpha + sigma;
+//            double elevatorUp = sigma;
+//            double elevatorDown = alpha;
 
+//            float x = gamepad2.right_stick_y;
+//            if (gamepad2.right_stick_y > 0) {
+//                elevator.setPower(x);
+//            }
+//            elevator.setPower(0);
 
-
-          //  elevator.setPower(0);
 
 
            /* public void elevatorThing {
@@ -177,39 +181,30 @@ public class TeleOPMyName extends LinearOpMode {
                 while (elevator.isBusy()) {}
 */
 
-//elevator
-//            if (gamepad2.a)  /* elevator down */ // might require boolean controller
-//                elevator.setPower(-0.8);
+
+
+//           if (gamepad2.y) {
 //
-//            else if(gamepad2.y) /* elevator up */
+//                elevator.setTargetPosition(2000);
+//                elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 //                elevator.setPower(0.8);
 //
-//            else
-//                elevator.setPower(0);
-
-
-           if (gamepad2.y) {
-
-                elevator.setTargetPosition(2000);
-                elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-                elevator.setPower(0.8);
-
-            }
-
-            if (gamepad2.a) {
-
-                elevator.setTargetPosition(1400);
-                elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-                elevator.setPower(0.8);
-                sleep(500);
-                claw.setPosition(0.7);
-                elevator.setTargetPosition(0);
-                elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-                elevator.setPower(0.8);
-
-            }
-            if (gamepad2.back)
-                elevator.setTargetPosition(3400);
+//            }
+//
+//            if (gamepad2.a) {
+//
+//                elevator.setTargetPosition(1400);
+//                elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+//                elevator.setPower(0.8);
+//                sleep(500);
+//                claw.setPosition(0.7);
+//                elevator.setTargetPosition(0);
+//                elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+//                elevator.setPower(0.8);
+//
+//            }
+//            if (gamepad2.back)
+//                elevator.setTargetPosition(3400);
 
              if (gamepad2.right_bumper)
                  intake_extension.setPosition(1);
@@ -231,14 +226,24 @@ public class TeleOPMyName extends LinearOpMode {
 
             }
 
-}*/
-            if (gamepad2.dpad_up)
+}*/                 //UNCOMMENTTTTT MANUAL ELEVATOR
+            if (gamepad2.a) {  /* elevator down */ // might require boolean controller
+                elevator.setPower(-0.8);
+
+            }else if(gamepad2.y) { /* elevator up */
+                elevator.setPower(0.8);
+
+            }else{
+                elevator.setPower(0);}
+                elevator.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+
+            if (gamepad2.dpad_up) {
                 armMotor.setPower(-0.7);
-            else if (gamepad2.dpad_down)
+            }else if (gamepad2.dpad_down)
                 armMotor.setPower(0.7);
-            else
+            else{
                 armMotor.setPower(0);
-                armMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+                armMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);}
 /*elevator.setPower();*/
 
 
@@ -300,11 +305,7 @@ public class TeleOPMyName extends LinearOpMode {
                 elevator.setPower(0);
             }
            while(left)*/
-//            while(gamepad2.back) {/*works reliably with bool buttons */
-//                if (gamepad2.y) {/*drone launch __0__*/
-//                    elevator.setTargetPosition(4000);
-//                    elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-//                    elevator.setPower(-0.8);
+//
 //                }
 //            }
 
@@ -345,6 +346,7 @@ public class TeleOPMyName extends LinearOpMode {
             max = Math.max(Math.abs(leftFrontPower), Math.abs(rightFrontPower));
             max = Math.max(max, Math.abs(leftBackPower));
             max = Math.max(max, Math.abs(rightBackPower));
+//
 
 
             if (max > 1.0) {
@@ -352,13 +354,16 @@ public class TeleOPMyName extends LinearOpMode {
                 rightFrontPower /= max;
                 leftBackPower /= max;
                 rightBackPower /= max;
+                rightBackPower /= max;
+//                elevatorUp /= max;
+//                elevatorDown /= max;
             }
             leftFrontDrive.setPower(leftFrontPower);
             rightFrontDrive.setPower(rightFrontPower);
             leftBackDrive.setPower(leftBackPower);
             rightBackDrive.setPower(rightBackPower);
-            //elevator.setPower(elevatorPower);
-
+//            elevator.setPower(elevatorUp);
+//            elevator.setPower(elevatorDown);
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         }
