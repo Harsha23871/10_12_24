@@ -84,6 +84,7 @@ public class TeleOPMyName extends LinearOpMode {
     double ticks = 2786.2;
 
 
+
     // private int pos = 0;
 
 
@@ -94,8 +95,10 @@ public class TeleOPMyName extends LinearOpMode {
     private int elevator_resting_pos = 0;
 
 
+
     @Override
     public void runOpMode() {
+
 
         //.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 /////////////////////////////////////////////////////////////////////////////////////////////////////////

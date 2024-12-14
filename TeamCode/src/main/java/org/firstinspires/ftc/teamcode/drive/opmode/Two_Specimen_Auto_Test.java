@@ -34,7 +34,6 @@ public class Two_Specimen_Auto_Test extends LinearOpMode {
         //elevator = hardwareMap.get(DcMotor.class,"elevator_motor");
         claw.setDirection(Servo.Direction.FORWARD);
         claw.setPosition(1);
-        wrist.setPosition(0);
 
         waitForStart();
 
@@ -48,14 +47,14 @@ public class Two_Specimen_Auto_Test extends LinearOpMode {
         drive.setPoseEstimate(startPose);
         // to the submersible
         TrajectorySequence trajectory0 = drive.trajectorySequenceBuilder(new Pose2d(11, -61, Math.toRadians(270.00)))
-                .splineToConstantHeading(new Vector2d(0, -31.5), Math.toRadians(34.39),
+                .splineToConstantHeading(new Vector2d(0, -29), Math.toRadians(34.39),
                     SampleMecanumDrive.getVelocityConstraint(30, DriveConstants.MAX_ANG_VEL, DriveConstants.TRACK_WIDTH),
                      SampleMecanumDrive.getAccelerationConstraint(DriveConstants.MAX_ACCEL)
                 )
                 .build();
         //to the parking zone
 
-        TrajectorySequence trajectory1 = drive.trajectorySequenceBuilder(new Pose2d(0, -31.5, Math.toRadians(90.00)))
+        TrajectorySequence trajectory1 = drive.trajectorySequenceBuilder(new Pose2d(0, -29, Math.toRadians(90.00)))
                 .lineTo(new Vector2d(46, -55))
                 .setVelConstraint(SampleMecanumDrive.getVelocityConstraint(5, DriveConstants.MAX_ANG_VEL, DriveConstants.TRACK_WIDTH))  // Velocity constraint
                 .setAccelConstraint(SampleMecanumDrive.getAccelerationConstraint(DriveConstants.MAX_ACCEL))  // Acceleration constraint
@@ -74,11 +73,11 @@ public class Two_Specimen_Auto_Test extends LinearOpMode {
 
 
         TrajectorySequence trajectory3 = drive.trajectorySequenceBuilder(trajectory1uhoh.end())
-                .lineToLinearHeading(new Pose2d(0, -31.5, Math.toRadians(270.00)))
+                .lineToLinearHeading(new Pose2d(0, -29, Math.toRadians(270.00)))
                 .build();
 
         TrajectorySequence trajectory4 = drive.trajectorySequenceBuilder(backalittle.end())
-                .lineToLinearHeading(new Pose2d(-3, -38, Math.toRadians(270.00)))
+                .lineToLinearHeading(new Pose2d(-3, -29, Math.toRadians(270.00)))
                 .build();
 
         //back a little after trajectory 2
@@ -129,7 +128,7 @@ public class Two_Specimen_Auto_Test extends LinearOpMode {
                 .lineTo(new Vector2d(49, -62))
                 .build();
 
-
+        wrist.setPosition(0);
         elevator.setTargetPosition(2000);                  //FIRST SPECIMEN
         elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         elevator.setPower(0.6);
