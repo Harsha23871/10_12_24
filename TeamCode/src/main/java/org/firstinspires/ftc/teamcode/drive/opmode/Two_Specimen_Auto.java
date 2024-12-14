@@ -45,7 +45,7 @@ public class Two_Specimen_Auto extends LinearOpMode {
         drive.setPoseEstimate(startPose);
         // to the submersible
         TrajectorySequence trajectory0 = drive.trajectorySequenceBuilder(new Pose2d(11, -61, Math.toRadians(270.00)))
-                .splineToConstantHeading(new Vector2d(0, -31.5), Math.toRadians(34.39),
+                .splineToConstantHeading(new Vector2d(0, -29), Math.toRadians(34.39),
 
                         SampleMecanumDrive.getVelocityConstraint(20, DriveConstants.MAX_ANG_VEL, DriveConstants.TRACK_WIDTH),
                         SampleMecanumDrive.getAccelerationConstraint(DriveConstants.MAX_ACCEL)
@@ -53,7 +53,7 @@ public class Two_Specimen_Auto extends LinearOpMode {
                 )
                 .build();
         //to the parking zone
-        TrajectorySequence trajectory1 = drive.trajectorySequenceBuilder(new Pose2d(0, -31.5, Math.toRadians(90.00)))
+        TrajectorySequence trajectory1 = drive.trajectorySequenceBuilder(new Pose2d(0, -29, Math.toRadians(90.00)))
                 .lineTo(new Vector2d(46, -55))
                 .setVelConstraint(SampleMecanumDrive.getVelocityConstraint(5, DriveConstants.MAX_ANG_VEL, DriveConstants.TRACK_WIDTH))  // Velocity constraint
                 .setAccelConstraint(SampleMecanumDrive.getAccelerationConstraint(DriveConstants.MAX_ACCEL))  // Acceleration constraint
@@ -80,7 +80,7 @@ public class Two_Specimen_Auto extends LinearOpMode {
                 .build();
 
         TrajectorySequence trajectory3 = drive.trajectorySequenceBuilder(backalittle.end())
-                .lineToLinearHeading(new Pose2d(0, -38, Math.toRadians(270.00)))
+                .lineToLinearHeading(new Pose2d(-4, -31, Math.toRadians(270.00)))
                 .setVelConstraint(SampleMecanumDrive.getVelocityConstraint(10, DriveConstants.MAX_ANG_VEL, DriveConstants.TRACK_WIDTH))  // Slower velocity
                 .setAccelConstraint(SampleMecanumDrive.getAccelerationConstraint(DriveConstants.MAX_ACCEL / 8))  // Reduced acceleration
                 .build();
@@ -120,7 +120,7 @@ public class Two_Specimen_Auto extends LinearOpMode {
         claw.setPosition(1);
         sleep(500);
 
-        elevator.setTargetPosition(2200);                 //BACK TO SUBMERSIBLE
+        elevator.setTargetPosition(2000);                 //BACK TO SUBMERSIBLE
         elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION); //2nd SPECIMEN SCORED
         elevator.setPower(0.6);
         sleep(500);

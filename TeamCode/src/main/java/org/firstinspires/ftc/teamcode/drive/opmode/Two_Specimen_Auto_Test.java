@@ -92,9 +92,12 @@ public class Two_Specimen_Auto_Test extends LinearOpMode {
 
        TrajectorySequence FirstPush = drive.trajectorySequenceBuilder(trajectory0.end())
                 .lineToLinearHeading(new Pose2d(33.59, -47.38, Math.toRadians(90)))
-                .lineToConstantHeading(new Vector2d(38, -4.37))
-                .lineTo(new Vector2d(49, -64))
+                .lineToConstantHeading(new Vector2d(40, -4.37))//x=40
+                .lineTo(new Vector2d(49, -58))//y = - 64
                 .build();
+
+
+
 
 
 
