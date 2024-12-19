@@ -14,7 +14,7 @@ import org.firstinspires.ftc.teamcode.drive.DriveConstants;
 import org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive;
 import org.firstinspires.ftc.teamcode.trajectorysequence.TrajectorySequence;
 
-@Autonomous(group = "a", name="5 test ")
+@Autonomous(group = "a", name="wont work 4 test ")
 public class FiveCycle1 extends LinearOpMode {
     public DcMotor elevator = null;
     public Servo claw,wrist = null;
@@ -53,7 +53,7 @@ public class FiveCycle1 extends LinearOpMode {
         drive.setPoseEstimate(startPose);
         // to the submersible
         TrajectorySequence Trajectory0 = drive.trajectorySequenceBuilder(new Pose2d(11, -61, Math.toRadians(270.00)))
-                .splineToConstantHeading(new Vector2d(0, -29), Math.toRadians(34.39),
+                        .splineToConstantHeading(new Vector2d(0, -29), Math.toRadians(34.39),
                         SampleMecanumDrive.getVelocityConstraint(30, DriveConstants.MAX_ANG_VEL, DriveConstants.TRACK_WIDTH),
                         SampleMecanumDrive.getAccelerationConstraint(DriveConstants.MAX_ACCEL)
                 )
@@ -66,9 +66,34 @@ public class FiveCycle1 extends LinearOpMode {
                 .lineToConstantHeading(new Vector2d(47.23, -60))
                 .build();
             // Goes back and forth! Yay! 8>>>>>>>>>)  --------
-        TrajectorySequence ReusablePush = drive.trajectorySequenceBuilder(new Pose2d(47.23, -60, Math.toRadians(90.00)))
+        TrajectorySequence ReusableUp = drive.trajectorySequenceBuilder(new Pose2d(47.23, -60, Math.toRadians(90.00)))
                 .lineToConstantHeading(new Vector2d(47.23, -3.04))
-                .build();
+               .build();
+//
+//        TrajectorySequence ReusableDown = drive.trajectorySequenceBuilder(new Pose2d(47.23, -3.04, Math.toRadians(90.00)))
+//                .lineToConstantHeading(new Vector2d(47.23, -60))
+//                .build();
+
+
+// push all then score all
+
+
+
+
+
+        // pushes both samples
+     //   TrajectorySequence BothPush = drive.trajectorySequenceBuilder(new Pose2d(0, -29, Math.toRadians(270.00)))
+          //      .splineToLinearHeading(new Pose2d(36.85, -35.67, Math.toRadians(270.00)), Math.toRadians(-5.99))
+          //      .lineTo(new Vector2d(37.00, -14.31))
+          //      .lineTo(new Vector2d(49.01, -14.31))
+           //     .lineTo(new Vector2d(48.57, -60.88))
+//                .lineTo(new Vector2d(49.31, -14.61))
+//                .lineTo(new Vector2d(57.91, -13.72))
+//                .lineTo(new Vector2d(57.32, -59.84))
+//                .lineToConstantHeading(new Vector2d(48.57, -61.77))
+//                .build();
+
+
 
 
 
