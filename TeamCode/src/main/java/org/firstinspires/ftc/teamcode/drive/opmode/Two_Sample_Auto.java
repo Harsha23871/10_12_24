@@ -18,7 +18,7 @@ import org.firstinspires.ftc.teamcode.trajectorysequence.TrajectorySequence;
 @Autonomous(group = "a", name="2 Sample Test")
 public class Two_Sample_Auto extends LinearOpMode {
     public DcMotor elevator, armMotor = null;
-    public Servo claw, wrist, bucket , intakeClaw= null;
+    public Servo claw, wrist, bucket , intakeClaw, intake_extension= null;
 
 
 
@@ -29,6 +29,7 @@ public class Two_Sample_Auto extends LinearOpMode {
         wrist = hardwareMap.get(Servo.class, "wrist");
         armMotor = hardwareMap.get(DcMotor.class, "arm_motor");
         intakeClaw = hardwareMap.get(Servo.class, "intake_claw");
+        intake_extension = hardwareMap.get(Servo.class, "intake_extension");
         armMotor.setDirection(DcMotorSimple.Direction.REVERSE);
         elevator.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         elevator.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
@@ -55,12 +56,34 @@ public class Two_Sample_Auto extends LinearOpMode {
         drive.setPoseEstimate(startPose);
 
         TrajectorySequence trajectory0 = drive.trajectorySequenceBuilder(new Pose2d(-36.00, -64.00, Math.toRadians(90.00)))
-                .lineToLinearHeading(new Pose2d(-56, -59, Math.toRadians(45.00)))
+                .lineToLinearHeading(new Pose2d(-57, -59, Math.toRadians(45.00)))
                 .build();
 
-        TrajectorySequence FirstGrab = drive.trajectorySequenceBuilder(new Pose2d(-58.65, -59.00, Math.toRadians(45.00)))
-                .lineToLinearHeading(new Pose2d(-51, -48, Math.toRadians(90.00)))
+        TrajectorySequence FirstGrab = drive.trajectorySequenceBuilder(trajectory0.end())
+                .lineToLinearHeading(new Pose2d(-52, -45, Math.toRadians(90.00)))
                 .build();
+
+        TrajectorySequence FirstScore = drive.trajectorySequenceBuilder(FirstGrab.end())
+                .lineToLinearHeading(new Pose2d(-57, -59, Math.toRadians(45)))
+                .build();
+
+        TrajectorySequence SecondGrab = drive.trajectorySequenceBuilder(FirstScore.end())
+                .lineToLinearHeading(new Pose2d(-61, -45, Math.toRadians(90.00)))
+                .build();
+
+        TrajectorySequence SecondScore = drive.trajectorySequenceBuilder(SecondGrab.end())
+                .lineToLinearHeading(new Pose2d(-57, -59, Math.toRadians(45)))
+                .build();
+
+        TrajectorySequence ThirdGrab = drive.trajectorySequenceBuilder(SecondScore.end())
+                .lineToLinearHeading(new Pose2d(-62, -44, Math.toRadians(120)))
+                .build();
+
+        TrajectorySequence ThirdScore = drive.trajectorySequenceBuilder(ThirdGrab.end())
+                .lineToLinearHeading(new Pose2d(-57, -59, Math.toRadians(45)))
+                .build();
+
+
 
 
 // add function similar to a trajectory but for arm and wrist motors like function close()
@@ -71,18 +94,56 @@ public class Two_Sample_Auto extends LinearOpMode {
 
 
 
-
-        wrist.setPosition(0.4); //PICKING UP POSITION
-        armMotor.setTargetPosition(1000);
+        intake_extension.setPosition(0);
+        wrist.setPosition(0.4);
+        armMotor.setTargetPosition(1100);
         armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         armMotor.setPower(0.7);
-        intakeClaw.setPosition(0.7);
+        intakeClaw.setPosition(0.6);
       //  sleep(1000);
 
-        elevator.setTargetPosition(3600);
+        elevator.setTargetPosition(3400);
         elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         elevator.setPower(0.7);
         drive.followTrajectorySequence(trajectory0);
+        sleep(1000);
+        bucket.setDirection(Servo.Direction.FORWARD);
+        bucket.setPosition(1);
+        sleep(1000); //1000
+        bucket.setPosition(0.2);
+        elevator.setTargetPosition(0);
+        elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        elevator.setPower(0.7);
+            // 1 is close 0.7 is open
+
+
+        drive.followTrajectorySequence(FirstGrab);
+        sleep(1000);
+        armMotor.setTargetPosition(1300);
+        armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        armMotor.setPower(0.8);
+        sleep(500);//1000
+        intakeClaw.setPosition(1);
+        sleep(500);
+        wrist.setPosition(1);//releasing position!!!!
+        armMotor.setTargetPosition(0);
+        armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        armMotor.setPower(0.8);
+        sleep(1000);
+        elevator.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        intakeClaw.setPosition(0.6);
+        sleep(500);
+        wrist.setPosition(0.4);
+
+
+        armMotor.setTargetPosition(1100);
+        armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        armMotor.setPower(0.8);
+        elevator.setTargetPosition(3400);
+        elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        elevator.setPower(0.7);
+        drive.followTrajectorySequence(FirstScore);
+        sleep(1000);
         bucket.setDirection(Servo.Direction.FORWARD);
         bucket.setPosition(1);
         sleep(1000);
@@ -90,17 +151,75 @@ public class Two_Sample_Auto extends LinearOpMode {
         elevator.setTargetPosition(0);
         elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         elevator.setPower(0.7);
-            // 1 is close 0.7 is open
-        drive.followTrajectorySequence(FirstGrab);
-        intakeClaw.setPosition(0.7);//close
-        wrist.setPosition(1);//releasing position!!!!
-        sleep(3000);
 
+        drive.followTrajectorySequence(SecondGrab);
+        sleep(1000);
+        armMotor.setTargetPosition(1300);
+        armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        armMotor.setPower(0.8);
+        sleep(500); //1000
+        intakeClaw.setPosition(1);
+        sleep(500);
+        wrist.setPosition(1);//releasing position!!!!
         armMotor.setTargetPosition(0);
         armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        armMotor.setPower(1);
-        intakeClaw.setPosition(1);//open
-        sleep(7000);
+        armMotor.setPower(0.8);
+        elevator.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        sleep(1000);
+        intakeClaw.setPosition(0.6);
+        sleep(500);
+        wrist.setPosition(0.4);
+
+        armMotor.setTargetPosition(1100);
+        armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        armMotor.setPower(0.8);
+        elevator.setTargetPosition(3400);
+        elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        elevator.setPower(0.7);
+        drive.followTrajectorySequence(SecondScore);
+        sleep(1000);
+        bucket.setDirection(Servo.Direction.FORWARD);
+        bucket.setPosition(1);
+        sleep(1000);
+        bucket.setPosition(0.2);
+        elevator.setTargetPosition(0);
+        elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        elevator.setPower(0.7);
+
+        drive.followTrajectorySequence(ThirdGrab);
+        sleep(1000);//1000
+        armMotor.setTargetPosition(1300);
+        armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        armMotor.setPower(0.8);
+        sleep(1000);
+        intakeClaw.setPosition(1);
+        sleep(500);
+        wrist.setPosition(1);//releasing position!!!!
+        armMotor.setTargetPosition(0);
+        armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        armMotor.setPower(0.8);
+        elevator.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        sleep(1000);
+        intakeClaw.setPosition(0.7);
+        sleep(500);
+        wrist.setPosition(0.4);
+
+        elevator.setTargetPosition(3400);
+        elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        elevator.setPower(0.7);
+        drive.followTrajectorySequence(ThirdScore);
+        sleep(1000);
+        bucket.setDirection(Servo.Direction.FORWARD);
+        bucket.setPosition(1);
+        sleep(1000);
+        bucket.setPosition(0.2);
+        elevator.setTargetPosition(0);
+        elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+
+
+
+
 
 
 

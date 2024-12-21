@@ -24,6 +24,7 @@ public class Two_Specimen_Auto extends LinearOpMode {
     public void runOpMode() {
         elevator = hardwareMap.get(DcMotor.class,"elevator_motor");
         claw =  hardwareMap.get(Servo.class, "claw");
+
         elevator.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         elevator.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
