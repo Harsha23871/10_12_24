@@ -164,7 +164,7 @@ public class Three_Specimen_Auto extends LinearOpMode {
 //     claw position 1 is close
         //0.7 is open
         //RETURN TO WALL AND INTAKE
-       drive.followTrajectorySequence(FirstPushTest);
+       drive.followTrajectorySequence(FirstPush);
         sleep(500);
         claw.setPosition(1);
         elevator.setTargetPosition(2000);                 //BACK TO SUBMERSIBLE
