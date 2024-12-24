@@ -14,8 +14,8 @@ import org.firstinspires.ftc.teamcode.drive.DriveConstants;
 import org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive;
 import org.firstinspires.ftc.teamcode.trajectorysequence.TrajectorySequence;
 
-@Autonomous(group = "a", name="3 Specimen Test ")
-public class Three_Specimen_Auto extends LinearOpMode {
+@Autonomous(group = "a", name="4 Specimen Test ")
+public class Four_Specimen extends LinearOpMode {
     public DcMotor elevator = null;
     public Servo claw,wrist = null;
 
@@ -47,9 +47,9 @@ public class Three_Specimen_Auto extends LinearOpMode {
         drive.setPoseEstimate(startPose);
         // to the submersible
         TrajectorySequence trajectory0 = drive.trajectorySequenceBuilder(new Pose2d(11, -61, Math.toRadians(270.00)))
-                .splineToConstantHeading(new Vector2d(0, -29), Math.toRadians(34.39),
-                     SampleMecanumDrive.getVelocityConstraint(30, DriveConstants.MAX_ANG_VEL, DriveConstants.TRACK_WIDTH),
-                     SampleMecanumDrive.getAccelerationConstraint(DriveConstants.MAX_ACCEL)
+                .splineToConstantHeading(new Vector2d(0, -30), Math.toRadians(34.39),
+                        SampleMecanumDrive.getVelocityConstraint(30, DriveConstants.MAX_ANG_VEL, DriveConstants.TRACK_WIDTH),
+                        SampleMecanumDrive.getAccelerationConstraint(DriveConstants.MAX_ACCEL)
                 )
                 .build();
         //to the parking zone
@@ -62,8 +62,9 @@ public class Three_Specimen_Auto extends LinearOpMode {
 
 
         TrajectorySequence trajectory1uhoh = drive.trajectorySequenceBuilder(new Pose2d(-0.07, -33.74, Math.toRadians(270)))
-                .lineToLinearHeading(new Pose2d(40, -64, Math.toRadians(95)))
+                .splineToLinearHeading(new Pose2d(40, -64, Math.toRadians(270.00)), Math.toRadians(-34.34))
                 .build();
+
 
 
         TrajectorySequence park = drive.trajectorySequenceBuilder(new Pose2d(-0.07, -33.74, Math.toRadians(270.00)))
@@ -78,8 +79,9 @@ public class Three_Specimen_Auto extends LinearOpMode {
 
         TrajectorySequence trajectory3 = drive.trajectorySequenceBuilder(trajectory1uhoh.end())
 
-                .lineToLinearHeading(new Pose2d(-5, -31, Math.toRadians(270.00)))
+                .splineToLinearHeading(new Pose2d(-5, -30, Math.toRadians(270.00)), Math.toRadians(145.81))
                 .build();
+
 
         TrajectorySequence trajectory4 = drive.trajectorySequenceBuilder(backalittle.end())
                 .lineToLinearHeading(new Pose2d(-3, -29, Math.toRadians(270.00)))
@@ -90,12 +92,12 @@ public class Three_Specimen_Auto extends LinearOpMode {
         TrajectorySequence backalittle2 = drive.trajectorySequenceBuilder(trajectory3.end())
                 .back(5)
                 .build();
-                                                                                            // -33.74
+        // -33.74
 
 
 
 
-       TrajectorySequence FirstPush = drive.trajectorySequenceBuilder(trajectory0.end())
+        TrajectorySequence FirstPush = drive.trajectorySequenceBuilder(trajectory0.end())
                 .lineToLinearHeading(new Pose2d(33.59, -47.38, Math.toRadians(90)))
                 .lineToConstantHeading(new Vector2d(33.59, -4.37))
                 .lineToConstantHeading(new Vector2d(40, -4.37))
@@ -104,16 +106,22 @@ public class Three_Specimen_Auto extends LinearOpMode {
                 .lineTo(new Vector2d(37, -64))//y = - 64
                 .build();
 
-       //First Push alternative that poushes two
-        TrajectorySequence TwoPush = drive.trajectorySequenceBuilder(new Pose2d(0.22, -28.99, Math.toRadians(90.00)))
-                .lineToConstantHeading(new Vector2d(33.74, -33.89))
-                .lineTo(new Vector2d(36.11, -13.87))
-                .lineTo(new Vector2d(47.98, -8.68))
-                .lineTo(new Vector2d(48.27, -57.47))
-                .lineTo(new Vector2d(47.98, -9.12))
-                .lineTo(new Vector2d(58.95, -7.49))
-                .lineTo(new Vector2d(51.53, -60.28))
+        //First Push alternative that poushes two
+        TrajectorySequence SecondPush =  drive.trajectorySequenceBuilder(trajectory3.end())
+
+                .lineToLinearHeading(new Pose2d(33.59, -40, Math.toRadians(270)))
+                .lineToConstantHeading(new Vector2d(49, -4.37))
+                .lineTo(new Vector2d(49, -62))
                 .build();
+
+        TrajectorySequence shit = drive.trajectorySequenceBuilder(FirstPush.end())
+                .lineTo(new Vector2d(34.63, -39.67))
+                .lineTo(new Vector2d(35.81, -12.98))
+                .lineTo(new Vector2d(48.27, -6.60))
+                .lineTo(new Vector2d(47.38, -58.95))
+                .build();
+
+
 
 
         TrajectorySequence FirstPushTest = drive.trajectorySequenceBuilder(trajectory0.end())
@@ -148,16 +156,11 @@ public class Three_Specimen_Auto extends LinearOpMode {
 
 
 
-            TrajectorySequence backalittle3 = drive.trajectorySequenceBuilder(FirstPushTest.end())
+        TrajectorySequence backalittle3 = drive.trajectorySequenceBuilder(FirstPushTest.end())
                 .back(15)
                 .build();
 
-        TrajectorySequence SecondPush =  drive.trajectorySequenceBuilder(trajectory3.end())
 
-                .lineToLinearHeading(new Pose2d(33.59, -40, Math.toRadians(270)))
-                .lineToConstantHeading(new Vector2d(49, -4.37))
-                .lineTo(new Vector2d(49, -62))
-                .build();
 
         wrist.setPosition(0);
         elevator.setTargetPosition(2000);                  //FIRST SPECIMEN
@@ -176,10 +179,11 @@ public class Three_Specimen_Auto extends LinearOpMode {
 //     claw position 1 is close
         //0.7 is open
         //RETURN TO WALL AND INTAKE
-       drive.followTrajectorySequence(FirstPush);
+        drive.followTrajectorySequence(FirstPush);
+        drive.followTrajectorySequence(shit);
         sleep(500);
         claw.setPosition(1);
-        elevator.setTargetPosition(2000);                 //BACK TO SUBMERSIBLE
+        elevator.setTargetPosition(2000);   //set higher probably               //BACK TO SUBMERSIBLE
         elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION); //2nd SPECIMEN SCORED
         elevator.setPower(0.6);
         sleep(500);
