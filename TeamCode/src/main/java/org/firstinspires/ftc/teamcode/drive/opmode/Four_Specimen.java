@@ -114,12 +114,7 @@ public class Four_Specimen extends LinearOpMode {
                 .lineTo(new Vector2d(49, -62))
                 .build();
 
-        TrajectorySequence shit = drive.trajectorySequenceBuilder(FirstPush.end())
-                .lineTo(new Vector2d(34.63, -39.67))
-                .lineTo(new Vector2d(35.81, -12.98))
-                .lineTo(new Vector2d(48.27, -6.60))
-                .lineTo(new Vector2d(47.38, -58.95))
-                .build();
+
 
 
 
@@ -180,7 +175,7 @@ public class Four_Specimen extends LinearOpMode {
         //0.7 is open
         //RETURN TO WALL AND INTAKE
         drive.followTrajectorySequence(FirstPush);
-        drive.followTrajectorySequence(shit);
+
         sleep(500);
         claw.setPosition(1);
         elevator.setTargetPosition(2000);   //set higher probably               //BACK TO SUBMERSIBLE
