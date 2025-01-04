@@ -30,11 +30,11 @@ public class Two_Sample_Auto extends LinearOpMode {
         armMotor = hardwareMap.get(DcMotor.class, "arm_motor");
         intakeClaw = hardwareMap.get(Servo.class, "intake_claw");
         intake_extension = hardwareMap.get(Servo.class, "intake_extension");
-        armMotor.setDirection(DcMotorSimple.Direction.REVERSE);
         elevator.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         elevator.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         armMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         armMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        armMotor.setDirection(DcMotorSimple.Direction.REVERSE);
 
 
 
