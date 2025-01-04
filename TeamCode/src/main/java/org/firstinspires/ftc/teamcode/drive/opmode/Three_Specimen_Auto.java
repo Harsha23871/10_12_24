@@ -177,9 +177,10 @@ public class Three_Specimen_Auto extends LinearOpMode {
         //0.7 is open
         //RETURN TO WALL AND INTAKE
        drive.followTrajectorySequence(FirstPush);
+        elevator.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         sleep(500);
         claw.setPosition(1);
-        elevator.setTargetPosition(2000);                 //BACK TO SUBMERSIBLE
+        elevator.setTargetPosition(2100);                 //BACK TO SUBMERSIBLE
         elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION); //2nd SPECIMEN SCORED
         elevator.setPower(0.6);
         sleep(500);
@@ -195,10 +196,11 @@ public class Three_Specimen_Auto extends LinearOpMode {
         elevator.setPower(0.6);
         sleep(500);
         drive.followTrajectorySequence(trajectory1uhoh);
+        elevator.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         //drive.followTrajectorySequence(backalittle);
         sleep(500);
         claw.setPosition(1);
-        elevator.setTargetPosition(2000);
+        elevator.setTargetPosition(2100);
         elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         elevator.setPower(0.6);
         sleep(500);
