@@ -99,17 +99,23 @@ public class Two_Sample_Auto extends LinearOpMode {
         armMotor.setTargetPosition(1100);
         armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         armMotor.setPower(0.7);
-        intakeClaw.setPosition(0.6);
+        intakeClaw.setPosition(0.5);
       //  sleep(1000);
 
         elevator.setTargetPosition(3400);
         elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         elevator.setPower(0.7);
         drive.followTrajectorySequence(trajectory0);
-        sleep(1000);
+      ///////////////
+        sleep(1000); // 1000
+      ////////////
         bucket.setDirection(Servo.Direction.FORWARD);
         bucket.setPosition(1);
+
+       //////////////////////
         sleep(1000); //1000
+      /////////////////////
+
         bucket.setPosition(0.2);
         elevator.setTargetPosition(0);
         elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION);
@@ -118,7 +124,11 @@ public class Two_Sample_Auto extends LinearOpMode {
 
 
         drive.followTrajectorySequence(FirstGrab);
-        sleep(1000);
+
+     //////////////////////////////
+        sleep(1000); // 1000
+       /////////////////////////////
+
         armMotor.setTargetPosition(1300);
         armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         armMotor.setPower(0.8);
@@ -129,9 +139,14 @@ public class Two_Sample_Auto extends LinearOpMode {
         armMotor.setTargetPosition(0);
         armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         armMotor.setPower(0.8);
-        sleep(1000);
+
+      //////////////////////////////
+        sleep(1000); // 1000
+      //////////////////////////////
+
+
         elevator.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        intakeClaw.setPosition(0.6);
+        intakeClaw.setPosition(0.5);
         sleep(500);
         wrist.setPosition(0.4);
 
@@ -143,7 +158,11 @@ public class Two_Sample_Auto extends LinearOpMode {
         elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         elevator.setPower(0.7);
         drive.followTrajectorySequence(FirstScore);
-        sleep(1000);
+
+       ////////////////////////////////
+        sleep(1000); // 1000
+     ///////////////////////////////////
+
         bucket.setDirection(Servo.Direction.FORWARD);
         bucket.setPosition(1);
         sleep(1000);
@@ -166,7 +185,7 @@ public class Two_Sample_Auto extends LinearOpMode {
         armMotor.setPower(0.8);
         elevator.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         sleep(1000);
-        intakeClaw.setPosition(0.6);
+        intakeClaw.setPosition(0.5);
         sleep(500);
         wrist.setPosition(0.4);
 
@@ -200,7 +219,7 @@ public class Two_Sample_Auto extends LinearOpMode {
         armMotor.setPower(0.8);
         elevator.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         sleep(1000);
-        intakeClaw.setPosition(0.7);
+        intakeClaw.setPosition(0.5);
         sleep(500);
         wrist.setPosition(0.4);
 

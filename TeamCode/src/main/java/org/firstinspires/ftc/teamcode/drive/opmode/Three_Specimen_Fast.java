@@ -176,23 +176,25 @@ public class Three_Specimen_Fast extends LinearOpMode {
         //0.7 is open
         //RETURN TO WALL AND INTAKE
         drive.followTrajectorySequence(FirstPush);
+       sleep(500);
         elevator.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         sleep(500);
         claw.setPosition(1);
         elevator.setTargetPosition(2000);   //set higher probably               //BACK TO SUBMERSIBLE
         elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION); //2nd SPECIMEN SCORED
-        elevator.setPower(0.6);
+        elevator.setPower(0.8);
         sleep(500);
         drive.followTrajectorySequence(trajectory3);
+        sleep(500);
         //drive.followTrajectorySequence(backalittle2);
         elevator.setTargetPosition(1400);
         elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        elevator.setPower(0.6);
+        elevator.setPower(0.8);
         sleep(500);
         claw.setPosition(0.7);
         elevator.setTargetPosition(0);
         elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        elevator.setPower(0.6);
+        elevator.setPower(0.8);
         sleep(500);
         drive.followTrajectorySequence(trajectory1uhoh);
         elevator.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -201,18 +203,18 @@ public class Three_Specimen_Fast extends LinearOpMode {
         claw.setPosition(1);
         elevator.setTargetPosition(2000);
         elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        elevator.setPower(0.6);
+        elevator.setPower(0.8);
         sleep(500);
         drive.followTrajectorySequence(trajectory3);
         //drive.followTrajectorySequence(backalittle2);
         elevator.setTargetPosition(1400);
         elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        elevator.setPower(0.6);
+        elevator.setPower(0.8);
         sleep(500);
         claw.setPosition(0.7);
         elevator.setTargetPosition(0);
         elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        elevator.setPower(0.6);
+        elevator.setPower(0.8);
         //drive.followTrajectorySequence(SecondPush);
         drive.followTrajectorySequence(park);
 

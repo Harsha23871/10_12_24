@@ -49,16 +49,23 @@ public class Four_Specimen extends LinearOpMode {
       //      // code to be executed
      //   }
 
+
+
+
+
+
+
         Telemetry telemetry = new MultipleTelemetry(this.telemetry, FtcDashboard.getInstance().getTelemetry());
         SampleMecanumDrive drive = new SampleMecanumDrive(hardwareMap);
         Pose2d startPose = new Pose2d(11, -61, Math.toRadians(270));
         drive.setPoseEstimate(startPose);
         // to the submersible
         TrajectorySequence trajectory0 = drive.trajectorySequenceBuilder(new Pose2d(11, -61, Math.toRadians(270.00)))
-                .splineToConstantHeading(new Vector2d(0, -30), Math.toRadians(34.39),
-                        SampleMecanumDrive.getVelocityConstraint(30, DriveConstants.MAX_ANG_VEL, DriveConstants.TRACK_WIDTH),
-                        SampleMecanumDrive.getAccelerationConstraint(DriveConstants.MAX_ACCEL)
-                )
+                .lineTo(new Vector2d(0, -31))
+
+
+
+
                 .build();
 
 
@@ -87,13 +94,23 @@ public class Four_Specimen extends LinearOpMode {
                 .lineTo(new Vector2d(37, -64))//y = - 64
                 .build();
 
-        TrajectorySequence SigmaSigmaBoi = drive.trajectorySequenceBuilder(trajectory0.end())
-                .lineToLinearHeading(new Pose2d(35.5, -41, Math.toRadians(55)))
-                .build();
 
-        TrajectorySequence dropoff = drive.trajectorySequenceBuilder(SigmaSigmaBoi.end())
-                .lineToLinearHeading(new Pose2d(42.34, -45, Math.toRadians(-45)))
-                .build();
+//    TrajectorySequence Spline = drive.trajectorySequenceBuilder(new Pose2d(0.00, -31.00, Math.toRadians(90.00)))
+//   .lineTo(new Vector2d(28.00, -42.00))
+//   .splineTo(new Vector2d(48, -11.79), Math.toRadians(5.00))
+//    .lineTo(new Vector2d(48, -62.36))
+//     .build();
+
+
+
+
+    //    TrajectorySequence SigmaSigmaBoi = drive.trajectorySequenceBuilder(trajectory0.end())
+       //         .lineToLinearHeading(new Pose2d(35.5, -41, Math.toRadians(55)))
+        //        .build();
+
+     //   TrajectorySequence dropoff = drive.trajectorySequenceBuilder(SigmaSigmaBoi.end())
+      //          .lineToLinearHeading(new Pose2d(42.34, -45, Math.toRadians(-45)))
+        //        .build();
 
 
         wrist.setPosition(0.4);
@@ -104,11 +121,14 @@ public class Four_Specimen extends LinearOpMode {
         elevator.setTargetPosition(1400);
         elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         elevator.setPower(0.6);
-        armMotor.setTargetPosition(1100);
-        armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        armMotor.setPower(0.7);
-        intakeClaw.setPosition(0.6);
+
+
+        //        armMotor.setTargetPosition(1100);
+//        armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+//        armMotor.setPower(0.7);
+//        intakeClaw.setPosition(0.6);
         sleep(500);
+
         claw.setPosition(0.7);
         elevator.setTargetPosition(0);
         elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION);
@@ -117,13 +137,17 @@ public class Four_Specimen extends LinearOpMode {
 //     claw position 1 is close
         //0.7 is open
         //RETURN TO WALL AND INTAKE
+  //      drive.followTrajectorySequence(Spline);
 //        drive.followTrajectorySequence(FirstPush);
-        drive.followTrajectorySequence(SigmaSigmaBoi);
-        armMotor.setTargetPosition(1300); // Pickup
-        armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        armMotor.setPower(0.8);
-        sleep(500);//1000
-        intakeClaw.setPosition(1);
+   //     drive.followTrajectorySequence(SigmaSigmaBoi);
+
+      //  armMotor.setTargetPosition(1300); // Pickup
+      //  armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+     //   armMotor.setPower(0.8);
+   //     sleep(500);//1000
+   //     intakeClaw.setPosition(1);
+
+
       //  elevator.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         sleep(1000);
 
@@ -131,7 +155,7 @@ public class Four_Specimen extends LinearOpMode {
         armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         armMotor.setPower(0.8);
         sleep(1000);
-        drive.followTrajectorySequence(dropoff);
+    //    drive.followTrajectorySequence(dropoff);
 
         intakeClaw.setPosition(1);
     //    elevator.setTargetPosition(2000);   //set higher probably               //BACK TO SUBMERSIBLE
@@ -149,7 +173,7 @@ public class Four_Specimen extends LinearOpMode {
 //        elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 //        elevator.setPower(0.6);
         sleep(500);
-        drive.followTrajectorySequence(trajectory1uhoh);
+     //   drive.followTrajectorySequence(trajectory1uhoh);
         elevator.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
         sleep(500);
