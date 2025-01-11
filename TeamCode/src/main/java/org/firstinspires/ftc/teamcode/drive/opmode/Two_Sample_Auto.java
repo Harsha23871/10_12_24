@@ -222,12 +222,17 @@ public class Two_Sample_Auto extends LinearOpMode {
         intakeClaw.setPosition(0.5);
         sleep(500);
         wrist.setPosition(0.4);
+        armMotor.setTargetPosition(1000);
+        armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        armMotor.setPower(0.8);
+
 
         elevator.setTargetPosition(3400);
         elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         elevator.setPower(0.7);
         drive.followTrajectorySequence(ThirdScore);
         sleep(1000);
+
         bucket.setDirection(Servo.Direction.FORWARD);
         bucket.setPosition(1);
         sleep(1000);

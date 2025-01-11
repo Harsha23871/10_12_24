@@ -78,7 +78,7 @@ public class Three_Specimen_Auto extends LinearOpMode {
 
         TrajectorySequence trajectory3 = drive.trajectorySequenceBuilder(trajectory1uhoh.end())
 
-                .lineToLinearHeading(new Pose2d(-5, -31, Math.toRadians(270.00)))
+                .lineToLinearHeading(new Pose2d(0, -31, Math.toRadians(270.00)))
                 .build();
 
         TrajectorySequence trajectory4 = drive.trajectorySequenceBuilder(backalittle.end())
