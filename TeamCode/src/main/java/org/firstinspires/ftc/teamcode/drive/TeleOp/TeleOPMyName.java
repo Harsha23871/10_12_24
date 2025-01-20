@@ -155,7 +155,7 @@ public class TeleOPMyName extends LinearOpMode {
             double axial = -gamepad1.left_stick_y;  // Note: pushing stick forward gives negative value
             double lateral = gamepad1.left_stick_x;
             double yaw = gamepad1.right_stick_x;
-//            double sigma = gamepad2.right_stick_y;
+            double slidePower = -gamepad2.left_stick_y;
 //            double alpha = -gamepad2.right_stick_y;
 
             //drive G1
@@ -227,15 +227,15 @@ public class TeleOPMyName extends LinearOpMode {
             }
 
 }*/                 //UNCOMMENTTTTT MANUAL ELEVATOR
-            if (gamepad2.a) {  /* elevator down */ // might require boolean controller
-                elevator.setPower(-0.8);
-
-            }else if(gamepad2.y) { /* elevator up */
-                elevator.setPower(0.8);
-
-            }else{
-                elevator.setPower(0);}
-                elevator.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+//            if (gamepad2.a) {  /* elevator down */ // might require boolean controller
+//                elevator.setPower(-0.8);
+//
+//            }else if(gamepad2.y) { /* elevator up */
+//                elevator.setPower(0.8);
+//
+//            }else{
+//                elevator.setPower(0);}
+//                elevator.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
             if (gamepad2.dpad_up) {
                 armMotor.setPower(-0.7);
@@ -271,6 +271,10 @@ public class TeleOPMyName extends LinearOpMode {
             } else {
                 bucket.setPosition(0.2);
             }
+
+
+            elevator.setPower(slidePower);
+
 //            if(gamepad2.left_trigger>0) {
 //                elevator.setPower(0.8);
 //

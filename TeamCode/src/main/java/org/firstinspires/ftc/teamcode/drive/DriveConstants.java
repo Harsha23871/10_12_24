@@ -23,8 +23,8 @@ public class DriveConstants {
     /*
      * These are motor constants that should be listed online for your motors.
      */
-    public static final double TICKS_PER_REV = 537.7;
-    public static final double MAX_RPM = 312;
+    public static final double TICKS_PER_REV = 384.5; // 384.5
+    public static final double MAX_RPM = 435;
 
     /*
      * Set RUN_USING_ENCODER to true to enable built-in hub velocity control using drive encoders.
@@ -57,7 +57,7 @@ public class DriveConstants {
      * empirically tuned.
      */
     public static double kV = 1.0 / rpmToVelocity(MAX_RPM);// in dashboard we figured out that kv final needed to be== 0.0155086849 --2_4_24 --kilian
-    public static double kA = 0.002;
+    public static double kA = 0.004;
     public static double kStatic = 0.01;
 
     public static RevHubOrientationOnRobot.LogoFacingDirection LOGO_FACING_DIR =
@@ -91,13 +91,13 @@ public class DriveConstants {
      *
      * Maximum Angular Velocity is calculated as: maximum velocity / trackWidth * (180 / Math.PI) but capped at 360°/s.
      * You are free to raise this on your own if you would like. It is best determined through experimentation.
-
+    // Max VEL is final dont change the old was 68
      */
-    public static double MAX_VEL = 46.28;
+    public static double MAX_VEL = 86.04;//86.044139292
             // was 73.17330064499293 --2_4_24--kilian
-    public static double MAX_ACCEL =  46.28;
-    public static double MAX_ANG_VEL = 264.7438;
-    public static double MAX_ANG_ACCEL = 1;
+    public static double MAX_ACCEL =  86.04;//86.044139292
+    public static double MAX_ANG_VEL = Math.toRadians(180);//264.7438;
+    public static double MAX_ANG_ACCEL = Math.toRadians(180);//1;
 
 
     public static double encoderTicksToInches(double ticks) {

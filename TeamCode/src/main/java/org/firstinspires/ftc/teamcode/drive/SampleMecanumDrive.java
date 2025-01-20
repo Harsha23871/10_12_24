@@ -55,10 +55,10 @@ import java.util.List;
 @Config
 //@TeleOp(name="sample mechna drive ", group="Linear OpMode")
 public class SampleMecanumDrive extends MecanumDrive {
-    public static PIDCoefficients TRANSLATIONAL_PID = new PIDCoefficients(10, 0, 0);
-    public static PIDCoefficients HEADING_PID = new PIDCoefficients(9, 0, 0);
-
-    public static double LATERAL_MULTIPLIER = 1.27815133;//never less than zero if 2 then distance is doubled
+    public static PIDCoefficients TRANSLATIONAL_PID = new PIDCoefficients(0, 0, 0);
+    public static PIDCoefficients HEADING_PID = new PIDCoefficients(0, 0, 0);
+    // 1.818181818181818 PLS DO PROCESS
+    public static double LATERAL_MULTIPLIER = 1.818181818181818;//1.935483870967742;//0.9244992295839753;//1.27815133;//never less than zero if 2 then distance is doubled
 
     //justin--cannot go out of order, tune lateral distance befor late
 

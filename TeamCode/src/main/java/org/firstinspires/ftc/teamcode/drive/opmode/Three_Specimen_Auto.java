@@ -81,8 +81,8 @@ public class Three_Specimen_Auto extends LinearOpMode {
                 .lineToLinearHeading(new Pose2d(0, -31, Math.toRadians(270.00)))
                 .build();
 
-        TrajectorySequence trajectory4 = drive.trajectorySequenceBuilder(backalittle.end())
-                .lineToLinearHeading(new Pose2d(-3, -29, Math.toRadians(270.00)))
+        TrajectorySequence trajectory4 = drive.trajectorySequenceBuilder(trajectory1uhoh.end())
+                .lineToLinearHeading(new Pose2d(-7, -31, Math.toRadians(270.00)))
                 .build();
 
         //back a little after trajectory 2
@@ -204,7 +204,7 @@ public class Three_Specimen_Auto extends LinearOpMode {
         elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         elevator.setPower(0.6);
         sleep(500);
-        drive.followTrajectorySequence(trajectory3);
+        drive.followTrajectorySequence(trajectory4);
         //drive.followTrajectorySequence(backalittle2);
         elevator.setTargetPosition(1400);
         elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION);
