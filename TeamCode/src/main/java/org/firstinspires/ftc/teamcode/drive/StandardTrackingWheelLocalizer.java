@@ -33,14 +33,14 @@ public class StandardTrackingWheelLocalizer extends ThreeTrackingWheelLocalizer 
     public static double WHEEL_RADIUS = 0.944882; // in diamater:1.858268// in raidisu of goblida 0.9291339//
     public static double GEAR_RATIO = 1; // output (wheel) speed / input (encoder) speed
 
-    public static double LATERAL_DISTANCE = 8.25; //8.5 originally// in; distance between the left and right wheels
+    public static double LATERAL_DISTANCE = 8.6157; //8.5 originally// in; distance between the left and right wheels
     public static double FORWARD_OFFSET = 1 ; // in; offset of the lateral wheel// was -2.5 12.19.23//
-    public static double X_MULTIPLIER =0.995497035078 ; // M0.995497035078ltiplier in the X direction
-    public static double Y_MULTIPLIER = 0.995344735806; // Multiplier in the Y direction
+    public static double X_MULTIPLIER = 1.00070111111 ; // 0.995497035078ltiplier in the X direction
+    public static double Y_MULTIPLIER = 1.00108333333 ; // 0.995344735806 Multiplier in the Y direction
     private Encoder leftEncoder, rightEncoder, frontEncoder;
 
     private List<Integer> lastEncPositions, lastEncVels;
-
+//
     public StandardTrackingWheelLocalizer(HardwareMap hardwareMap, List<Integer> lastTrackingEncPositions, List<Integer> lastTrackingEncVels) {
         super(Arrays.asList(
                 new Pose2d(0, LATERAL_DISTANCE / 2, 0), // left
@@ -52,7 +52,7 @@ public class StandardTrackingWheelLocalizer extends ThreeTrackingWheelLocalizer 
         lastEncVels = lastTrackingEncVels;
 
         leftEncoder = new Encoder(hardwareMap.get(DcMotorEx.class, "left_front_drive" ));// corrected
-        rightEncoder = new Encoder(hardwareMap.get(DcMotorEx.class, "right_back_drive"));
+        rightEncoder = new Encoder(hardwareMap.get(DcMotorEx.class, "right_front_drive"));
         frontEncoder = new Encoder(hardwareMap.get(DcMotorEx.class, "left_back_drive"));
 
         leftEncoder.setDirection(Encoder.Direction.FORWARD);

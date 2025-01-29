@@ -23,8 +23,8 @@ public class DriveConstants {
     /*
      * These are motor constants that should be listed online for your motors.
      */
-    public static final double TICKS_PER_REV = 537.7;
-    public static final double MAX_RPM = 312;
+    public static final double TICKS_PER_REV = 384.5; // 384.5
+    public static final double MAX_RPM = 435;
 
     /*
      * Set RUN_USING_ENCODER to true to enable built-in hub velocity control using drive encoders.
@@ -48,7 +48,7 @@ public class DriveConstants {
      */
     public static double WHEEL_RADIUS = 1.88976; // in 12.19.23k
     public static double GEAR_RATIO = 1.0; // output (wheel) speed / input (motor) speed
-    public static double TRACK_WIDTH = 16.75; // in
+    public static double TRACK_WIDTH = 16.85; // in
 
     /*
      * These are the feedforward parameters used to model the drive motor behavior. If you are using
@@ -57,7 +57,7 @@ public class DriveConstants {
      * empirically tuned.
      */
     public static double kV = 1.0 / rpmToVelocity(MAX_RPM);// in dashboard we figured out that kv final needed to be== 0.0155086849 --2_4_24 --kilian
-    public static double kA = 0.002;
+    public static double kA = 0.004;
     public static double kStatic = 0.01;
 
     public static RevHubOrientationOnRobot.LogoFacingDirection LOGO_FACING_DIR =
@@ -72,7 +72,7 @@ public class DriveConstants {
      * small and gradually increase them later after everything is working. All distance units are
      * inches.
      */
-    /*
+    /*////
      * Note from LearnRoadRunner.com:
      * The velocity and acceleration constraints were calculated based on the following equation:
      * ((MAX_RPM / 60) * GEAR_RATIO * WHEEL_RADIUS * 2 * Math.PI) * 0.85
@@ -91,12 +91,13 @@ public class DriveConstants {
      *
      * Maximum Angular Velocity is calculated as: maximum velocity / trackWidth * (180 / Math.PI) but capped at 360°/s.
      * You are free to raise this on your own if you would like. It is best determined through experimentation.
-
+    // Max VEL is final dont change the old was 68
      */
-    public static double MAX_VEL = 43.220312;// was 73.17330064499293 --2_4_24--kilian
-    public static double MAX_ACCEL =  43.220312;
-    public static double MAX_ANG_VEL = 264.7438;
-    public static double MAX_ANG_ACCEL = 1;
+   public static double MAX_VEL = 68.80;//68.80;//86.044139292
+            // was 73.17330064499293 --2_4_24--kilian
+    public static double MAX_ACCEL =  68.80;//86.044139292
+    public static double MAX_ANG_VEL =306.5883;//264.7438;
+    public static double MAX_ANG_ACCEL = Math.toRadians(180);//1;
 
 
     public static double encoderTicksToInches(double ticks) {
