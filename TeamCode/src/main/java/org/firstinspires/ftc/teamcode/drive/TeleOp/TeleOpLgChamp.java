@@ -55,6 +55,7 @@ public class TeleOpLgChamp extends LinearOpMode {
         rightBackDrive.setDirection(DcMotor.Direction.REVERSE);
 
 
+
 //        armMotor.setDirection(DcMotorSimple.Direction.REVERSE);
         armMotor.setDirection(REVERSE);
         elevator.setDirection(FORWARD);

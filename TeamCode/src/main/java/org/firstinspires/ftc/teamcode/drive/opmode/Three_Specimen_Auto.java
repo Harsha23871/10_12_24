@@ -54,7 +54,7 @@ public class    Three_Specimen_Auto extends LinearOpMode {
         drive.setPoseEstimate(startPose);
         // to the submersible
         TrajectorySequence trajectory0 = drive.trajectorySequenceBuilder(new Pose2d(11, -61, Math.toRadians(270.00)))
-                .splineToConstantHeading(new Vector2d(-8, -27), Math.toRadians(34.39),
+                .splineToConstantHeading(new Vector2d(-8, -28), Math.toRadians(34.39), // -27 OG  //- -27.5 first change
                     SampleMecanumDrive.getVelocityConstraint(35, DriveConstants.MAX_ANG_VEL, DriveConstants.TRACK_WIDTH),
                     SampleMecanumDrive.getAccelerationConstraint(DriveConstants.MAX_ACCEL)
                 )
@@ -187,7 +187,7 @@ public class    Three_Specimen_Auto extends LinearOpMode {
                 .build();
 
         wrist.setPosition(0);
-            elevator.setTargetPosition(2000);                  //FIRST SPECIMEN old:2000 put to all others
+            elevator.setTargetPosition(1900); // 2000                 //FIRST SPECIMEN old:2000 put to all others
         elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION); ///////////// Reduced by 1000
         elevator.setPower(0.8);
         drive.followTrajectorySequence(trajectory0);
