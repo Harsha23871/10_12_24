@@ -86,7 +86,7 @@ public class Four_Sample_Sigma extends LinearOpMode {
                 .build();                         //-57   //-59
 
         TrajectorySequence ParkieParkie = drive.trajectorySequenceBuilder(new Pose2d(-57.00, -59.00, Math.toRadians(90.00)))
-                .splineToLinearHeading(new Pose2d(-24.84, 0.22, Math.toRadians(180.00)), Math.toRadians(10.00))
+                .splineToLinearHeading(new Pose2d(-24, 0, Math.toRadians(180.00)), Math.toRadians(10.00))
                 .build();
 
 

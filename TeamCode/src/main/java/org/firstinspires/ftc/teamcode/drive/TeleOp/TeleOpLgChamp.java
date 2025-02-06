@@ -11,6 +11,7 @@ import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive;
+import org.firstinspires.ftc.teamcode.trajectorysequence.TrajectorySequence;
 
 /**
  * This is a simple teleop routine for testing localization. Drive the robot around like a normal
@@ -53,6 +54,15 @@ public class TeleOpLgChamp extends LinearOpMode {
         leftBackDrive.setDirection(DcMotor.Direction.REVERSE);
         rightFrontDrive.setDirection(FORWARD);
         rightBackDrive.setDirection(DcMotor.Direction.REVERSE);
+
+
+
+        Pose2d startPose = new Pose2d(-24, 0, Math.toRadians(180));
+        drive.setPoseEstimate(startPose);
+
+        TrajectorySequence Score = drive.trajectorySequenceBuilder(new Pose2d(-57,-59))
+                .lineToLinearHeading(new Pose2d(-57, -59, Math.toRadians(45)))
+                .build();
 
 
 
