@@ -29,7 +29,7 @@ public class TestBlueRIGHTspike extends LinearOpMode {
         SampleMecanumDrive drive = new SampleMecanumDrive(hardwareMap);
 
         Pose2d startPose = new Pose2d(13.5, 63,Math.toRadians(90));
-        TrajectorySequence middleSpike = drive.trajectorySequenceBuilder(startPose)
+        TrajectorySequence middleSpike = drive.trajectorySequenceBuilder(startPose, Math.toRadians(270))
                 .lineTo(new Vector2d(26,38))
                 .turn(Math.toRadians(-100)) // adds x deggres to start pos heading
                 .lineTo(new Vector2d(15,38))

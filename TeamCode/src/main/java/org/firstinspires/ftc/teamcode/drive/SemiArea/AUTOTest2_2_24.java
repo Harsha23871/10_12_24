@@ -18,7 +18,7 @@ public class AUTOTest2_2_24 extends LinearOpMode {
     public void runOpMode() throws InterruptedException {
 
         Pose2d startPose = new Pose2d(12, 67,Math.toRadians(90));
-        TrajectorySequence middleSpike = drive.trajectorySequenceBuilder(startPose)
+        TrajectorySequence middleSpike = drive.trajectorySequenceBuilder(startPose, Math.toRadians(270))
                 .lineTo(new Vector2d(12,12))
 //                .turn(Math.toRadians(45)) // Turns 45 degrees counter-clockwise
                 .build();

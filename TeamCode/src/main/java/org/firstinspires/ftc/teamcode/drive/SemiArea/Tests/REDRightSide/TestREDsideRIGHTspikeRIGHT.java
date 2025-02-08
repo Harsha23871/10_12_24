@@ -29,7 +29,7 @@ public class TestREDsideRIGHTspikeRIGHT extends LinearOpMode {
         SampleMecanumDrive drive = new SampleMecanumDrive(hardwareMap);
 
         Pose2d startPose = new Pose2d(14.5, 61,Math.toRadians(90));
-        TrajectorySequence middleSpike = drive.trajectorySequenceBuilder(startPose)
+        TrajectorySequence middleSpike = drive.trajectorySequenceBuilder(startPose, Math.toRadians(270))
 
                 .lineToConstantHeading(new Vector2d(0, 33))// error acounting is 5.5 --6.5in
                 .lineToConstantHeading(new Vector2d(0, 50))// error acounting is 5.5 --6.5in

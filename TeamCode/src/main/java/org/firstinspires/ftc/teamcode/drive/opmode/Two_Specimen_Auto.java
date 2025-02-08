@@ -45,7 +45,7 @@ public class Two_Specimen_Auto extends LinearOpMode {
         Pose2d startPose = new Pose2d(11,  -61, Math.toRadians(270));
         drive.setPoseEstimate(startPose);
         // to the submersible
-        TrajectorySequence trajectory0 = drive.trajectorySequenceBuilder(new Pose2d(11, -61, Math.toRadians(270.00)))
+        TrajectorySequence trajectory0 = drive.trajectorySequenceBuilder(new Pose2d(11, -61, Math.toRadians(270.00)), Math.toRadians(270))
                 .splineToConstantHeading(new Vector2d(0, -29), Math.toRadians(34.39),
 
                         SampleMecanumDrive.getVelocityConstraint(20, DriveConstants.MAX_ANG_VEL, DriveConstants.TRACK_WIDTH),
@@ -54,13 +54,13 @@ public class Two_Specimen_Auto extends LinearOpMode {
                 )
                 .build();
         //to the parking zone
-        TrajectorySequence trajectory1 = drive.trajectorySequenceBuilder(new Pose2d(0, -29, Math.toRadians(90.00)))
+        TrajectorySequence trajectory1 = drive.trajectorySequenceBuilder(new Pose2d(0, -29, Math.toRadians(90.00)), Math.toRadians(270))
                 .lineTo(new Vector2d(46, -55))
                 .setVelConstraint(SampleMecanumDrive.getVelocityConstraint(5, DriveConstants.MAX_ANG_VEL, DriveConstants.TRACK_WIDTH))  // Velocity constraint
                 .setAccelConstraint(SampleMecanumDrive.getAccelerationConstraint(DriveConstants.MAX_ACCEL))  // Acceleration constraint
                 .build();
 
-        TrajectorySequence trajectory1uhoh = drive.trajectorySequenceBuilder(new Pose2d(-0.07, -33.74, Math.toRadians(270)))
+        TrajectorySequence trajectory1uhoh = drive.trajectorySequenceBuilder(new Pose2d(-0.07, -33.74, Math.toRadians(270)), Math.toRadians(270))
                 .lineToLinearHeading(new Pose2d(46, -55, Math.toRadians(90)))
                 .setVelConstraint(SampleMecanumDrive.getVelocityConstraint(5, DriveConstants.MAX_ANG_VEL, DriveConstants.TRACK_WIDTH))  // Velocity constraint
                 .setAccelConstraint(SampleMecanumDrive.getAccelerationConstraint(DriveConstants.MAX_ACCEL))  // Acceleration constraint
@@ -74,20 +74,20 @@ public class Two_Specimen_Auto extends LinearOpMode {
 
 
         // back a little after trajectory 1
-        TrajectorySequence backalittle = drive.trajectorySequenceBuilder(trajectory1.end())
+        TrajectorySequence backalittle = drive.trajectorySequenceBuilder(trajectory1.end(), Math.toRadians(270))
                 .back(7 )
                 .setVelConstraint(SampleMecanumDrive.getVelocityConstraint(10, DriveConstants.MAX_ANG_VEL, DriveConstants.TRACK_WIDTH))  // Slower velocity
                 .setAccelConstraint(SampleMecanumDrive.getAccelerationConstraint(DriveConstants.MAX_ACCEL / 8))  // Reduced acceleration
                 .build();
 
-        TrajectorySequence trajectory3 = drive.trajectorySequenceBuilder(backalittle.end())
+        TrajectorySequence trajectory3 = drive.trajectorySequenceBuilder(backalittle.end(), Math.toRadians(270))
                 .lineToLinearHeading(new Pose2d(-4, -31, Math.toRadians(270.00)))
                 .setVelConstraint(SampleMecanumDrive.getVelocityConstraint(10, DriveConstants.MAX_ANG_VEL, DriveConstants.TRACK_WIDTH))  // Slower velocity
                 .setAccelConstraint(SampleMecanumDrive.getAccelerationConstraint(DriveConstants.MAX_ACCEL / 8))  // Reduced acceleration
                 .build();
 
         //back a little after trajectory 2
-        TrajectorySequence backalittle2 = drive.trajectorySequenceBuilder(trajectory3.end())
+        TrajectorySequence backalittle2 = drive.trajectorySequenceBuilder(trajectory3.end(), Math.toRadians(270))
                 .back(5)
                 .setVelConstraint(SampleMecanumDrive.getVelocityConstraint(20, DriveConstants.MAX_ANG_VEL, DriveConstants.TRACK_WIDTH))  // Slower velocity
                 .setAccelConstraint(SampleMecanumDrive.getAccelerationConstraint(DriveConstants.MAX_ACCEL / 8))  // Reduced acceleration

@@ -35,7 +35,7 @@ public class TestBLUEsideRIGHTspikeMID extends LinearOpMode {
 
 
         Pose2d startPose = new Pose2d(14.5, 61, Math.toRadians(90));
-        TrajectorySequence middleSpike = drive.trajectorySequenceBuilder(startPose)
+        TrajectorySequence middleSpike = drive.trajectorySequenceBuilder(startPose, Math.toRadians(270))
 
 // left blue left spike
                 .lineToConstantHeading(new Vector2d(14.5, 33))// error acounting is 5.5 --6.5in

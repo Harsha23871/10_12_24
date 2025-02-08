@@ -53,7 +53,7 @@ public class    Three_Specimen_Auto extends LinearOpMode {
         Pose2d startPose = new Pose2d(11,  -61, Math.toRadians(270));
         drive.setPoseEstimate(startPose);
         // to the submersible
-        TrajectorySequence trajectory0 = drive.trajectorySequenceBuilder(new Pose2d(11, -61, Math.toRadians(270.00)))
+        TrajectorySequence trajectory0 = drive.trajectorySequenceBuilder(new Pose2d(11, -61, Math.toRadians(270.00)), Math.toRadians(270))
                 .splineToConstantHeading(new Vector2d(-8, -28), Math.toRadians(34.39), // -27 OG  //- -27.5 first change
                     SampleMecanumDrive.getVelocityConstraint(35, DriveConstants.MAX_ANG_VEL, DriveConstants.TRACK_WIDTH),
                     SampleMecanumDrive.getAccelerationConstraint(DriveConstants.MAX_ACCEL)
@@ -61,14 +61,14 @@ public class    Three_Specimen_Auto extends LinearOpMode {
                 .build();
         //to the parking zone
 
-        TrajectorySequence trajectory1 = drive.trajectorySequenceBuilder(new Pose2d(-8, -29, Math.toRadians(90.00)))
+        TrajectorySequence trajectory1 = drive.trajectorySequenceBuilder(new Pose2d(-8, -29, Math.toRadians(90.00)), Math.toRadians(270))
                 .lineTo(new Vector2d(46, -55))
                 .setVelConstraint(SampleMecanumDrive.getVelocityConstraint(5, DriveConstants.MAX_ANG_VEL, DriveConstants.TRACK_WIDTH))  // Velocity constraint
                 .setAccelConstraint(SampleMecanumDrive.getAccelerationConstraint(DriveConstants.MAX_ACCEL))  // Acceleration constraint
                 .build();
 
 
-        TrajectorySequence trajectory1uhoh = drive.trajectorySequenceBuilder(new Pose2d(-0.07, -33.74, Math.toRadians(270)))
+        TrajectorySequence trajectory1uhoh = drive.trajectorySequenceBuilder(new Pose2d(-0.07, -33.74, Math.toRadians(270)), Math.toRadians(270))
                 .lineToLinearHeading(new Pose2d(40, -64, Math.toRadians(95)),
 
         SampleMecanumDrive.getVelocityConstraint(40, DriveConstants.MAX_ANG_VEL, DriveConstants.TRACK_WIDTH),
@@ -76,30 +76,30 @@ public class    Three_Specimen_Auto extends LinearOpMode {
                 )
                 .build();
 
-        TrajectorySequence trajectory1uhohtest = drive.trajectorySequenceBuilder(new Pose2d(0.00, -33.00, Math.toRadians(270.00)))
+        TrajectorySequence trajectory1uhohtest = drive.trajectorySequenceBuilder(new Pose2d(0.00, -33.00, Math.toRadians(270.00)), Math.toRadians(270))
                 .splineToLinearHeading(new Pose2d(40.00, -64.00, Math.toRadians(95.00)), Math.toRadians(0.00))
                 .build();
 
 
 
-        TrajectorySequence park = drive.trajectorySequenceBuilder(new Pose2d(-0.07, -33.74, Math.toRadians(270.00)))
+        TrajectorySequence park = drive.trajectorySequenceBuilder(new Pose2d(-0.07, -33.74, Math.toRadians(270.00)), Math.toRadians(270))
                 .lineToConstantHeading(new Vector2d(40, -64))
                 .build();
 
         // back a little after trajectory 1
-        TrajectorySequence backalittle = drive.trajectorySequenceBuilder(trajectory1.end())
+        TrajectorySequence backalittle = drive.trajectorySequenceBuilder(trajectory1.end(), Math.toRadians(270))
                 .back(15)
                 .build();
 
 
-        TrajectorySequence trajectory3 = drive.trajectorySequenceBuilder(trajectory1uhoh.end())
+        TrajectorySequence trajectory3 = drive.trajectorySequenceBuilder(trajectory1uhoh.end(), Math.toRadians(270))
 
                 .lineToLinearHeading(new Pose2d(-7, -29, Math.toRadians(-90))) // 270 (-5) try normal 90
 
        //
               .build();
 
-        TrajectorySequence trajectory4 = drive.trajectorySequenceBuilder(trajectory1uhoh.end())
+        TrajectorySequence trajectory4 = drive.trajectorySequenceBuilder(trajectory1uhoh.end(), Math.toRadians(270))
                 .lineToLinearHeading(new Pose2d(-9, -29, Math.toRadians(-90)))
                 .back(5)
 
@@ -107,7 +107,7 @@ public class    Three_Specimen_Auto extends LinearOpMode {
 
         //back a little after trajectory 2
 //
-        TrajectorySequence backalittle2 = drive.trajectorySequenceBuilder(trajectory3.end())
+        TrajectorySequence backalittle2 = drive.trajectorySequenceBuilder(trajectory3.end(), Math.toRadians(270))
                 .back(5)
                 .build();//
       //////////////                                                                                      // -33.74
@@ -116,7 +116,7 @@ public class    Three_Specimen_Auto extends LinearOpMode {
 //
 
 
-       TrajectorySequence FirstPush = drive.trajectorySequenceBuilder(trajectory0.end())
+       TrajectorySequence FirstPush = drive.trajectorySequenceBuilder(trajectory0.end(), Math.toRadians(270))
                 .lineToLinearHeading(new Pose2d(33.59, -47.38, Math.toRadians(90)))//weird turny
                 .lineToConstantHeading(new Vector2d(33.59, -4.37)) //straight
                 .lineToConstantHeading(new Vector2d(43, -4.37))//right
@@ -125,14 +125,14 @@ public class    Three_Specimen_Auto extends LinearOpMode {
                 .lineTo(new Vector2d(35, -64))//y = - 64 towards human
                 .build();
        
-       TrajectorySequence SecondFirstPush = drive.trajectorySequenceBuilder(FirstPush.end())
+       TrajectorySequence SecondFirstPush = drive.trajectorySequenceBuilder(FirstPush.end(), Math.toRadians(270))
                .lineTo(new Vector2d(49.16, -10.31))
                .lineTo(new Vector2d(58.21, -9.71))
                .lineTo(new Vector2d(55.24, -58.65))
                .build();
 
         //First Push alternative that poushes two
-        TrajectorySequence TwoPush = drive.trajectorySequenceBuilder(new Pose2d(0.22, -28.99, Math.toRadians(90.00)))
+        TrajectorySequence TwoPush = drive.trajectorySequenceBuilder(new Pose2d(0.22, -28.99, Math.toRadians(90.00)), Math.toRadians(270))
                 .lineToConstantHeading(new Vector2d(33.74, -33.89))
                 .lineTo(new Vector2d(36.11, -13.87))
                 .lineTo(new Vector2d(47.98, -8.68))
@@ -143,7 +143,7 @@ public class    Three_Specimen_Auto extends LinearOpMode {
                 .build();
 
 
-        TrajectorySequence FirstPushTest = drive.trajectorySequenceBuilder(trajectory0.end())
+        TrajectorySequence FirstPushTest = drive.trajectorySequenceBuilder(trajectory0.end(), Math.toRadians(270))
                 .splineTo(new Vector2d(32.26, -33.74), Math.toRadians(33.98))
                 .splineToLinearHeading(new Pose2d(40, -8.68, Math.toRadians(90.00)), Math.toRadians(22.74))
                 .build();
@@ -175,11 +175,11 @@ public class    Three_Specimen_Auto extends LinearOpMode {
 
 
 
-            TrajectorySequence backalittle3 = drive.trajectorySequenceBuilder(FirstPushTest.end())
+            TrajectorySequence backalittle3 = drive.trajectorySequenceBuilder(FirstPushTest.end(), Math.toRadians(270))
                 .back(15)
                 .build();
 //guuj
-        TrajectorySequence SecondPush =  drive.trajectorySequenceBuilder(trajectory3.end())
+        TrajectorySequence SecondPush =  drive.trajectorySequenceBuilder(trajectory3.end(), Math.toRadians(270))
 
                 .lineToLinearHeading(new Pose2d(33.59, -40, Math.toRadians(270)))
                 .lineToConstantHeading(new Vector2d(49, -4.37))

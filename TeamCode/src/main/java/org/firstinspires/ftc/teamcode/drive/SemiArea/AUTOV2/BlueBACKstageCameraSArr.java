@@ -127,7 +127,7 @@ public class BlueBACKstageCameraSArr extends LinearOpMode {
                 telemetry.addLine("i see the prop its on spike right ");
                 telemetry.update();
                 Pose2d startPose1 = new Pose2d(14.5, 61,Math.toRadians(90));
-                TrajectorySequence middleSpike1 = drive.trajectorySequenceBuilder(startPose1)
+                TrajectorySequence middleSpike1 = drive.trajectorySequenceBuilder(startPose1, Math.toRadians(270))
 
 // left blue left spike
                         .lineToConstantHeading(new Vector2d(29, 35))// error acounting is 5.5 --6.5in
@@ -145,7 +145,7 @@ public class BlueBACKstageCameraSArr extends LinearOpMode {
                 telemetry.addLine("i see the prop its on spike middle 999999999999999");
                 telemetry.update();
                     Pose2d startPose2 = new Pose2d(14.5, 61,Math.toRadians(90));
-                    TrajectorySequence middleSpike2 = drive.trajectorySequenceBuilder(startPose2)
+                    TrajectorySequence middleSpike2 = drive.trajectorySequenceBuilder(startPose2, Math.toRadians(270))
 
                             .lineToConstantHeading(new Vector2d(12, 33))// error acounting is 5.5 --6.5in
                             .lineTo(new Vector2d(29,59))
@@ -159,7 +159,7 @@ public class BlueBACKstageCameraSArr extends LinearOpMode {
                 telemetry.addLine("i dont see it so it must be spike left");
                 telemetry.update();
                  Pose2d startPose3 = new Pose2d(14.5, 61,Math.toRadians(90));
-                 TrajectorySequence middleSpike3 = drive.trajectorySequenceBuilder(startPose3)
+                 TrajectorySequence middleSpike3 = drive.trajectorySequenceBuilder(startPose3, Math.toRadians(270))
 
 
                          .lineToConstantHeading(new Vector2d(28, 35))// error acounting is 5.5 --6.5in

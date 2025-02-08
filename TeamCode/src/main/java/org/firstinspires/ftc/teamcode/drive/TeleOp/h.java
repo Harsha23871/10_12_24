@@ -59,7 +59,7 @@ public class h extends LinearOpMode {
 
 
 
-        TrajectorySequence trajectorysigma = drive.trajectorySequenceBuilder(new Pose2d(47.38, -33.44, Math.toRadians(90.00)))
+        TrajectorySequence trajectorysigma = drive.trajectorySequenceBuilder(new Pose2d(47.38, -33.44, Math.toRadians(90.00)), Math.toRadians(270))
                 .lineTo(new Vector2d(60, -33.44))
                 .build();
 

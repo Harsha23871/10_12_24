@@ -10,6 +10,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
+import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive;
 import org.firstinspires.ftc.teamcode.trajectorysequence.TrajectorySequence;
 
@@ -24,7 +25,7 @@ import org.firstinspires.ftc.teamcode.trajectorysequence.TrajectorySequence;
 @TeleOp(name = "TeleOpLgChamp")
 public class TeleOpLgChamp extends LinearOpMode {
     private ElapsedTime runtime = new ElapsedTime();
-    private DcMotor leftFrontDrive, leftBackDrive, rightFrontDrive, rightBackDrive, armMotor, elevator = null;
+    private DcMotor leftFrontDrive, leftBackDrive, rightFrontDrive, rightBackDrive, armMotor, elevator, elevator2 = null;
     private Servo claw, bucket, wrist, intakeClaw, intake_extension = null;
     private ElapsedTime armTimer = new ElapsedTime();
     double ticks = 2786.2;
@@ -45,6 +46,7 @@ public class TeleOpLgChamp extends LinearOpMode {
         wrist = hardwareMap.get(Servo.class, "wrist");
         intakeClaw = hardwareMap.get(Servo.class, "intake_claw");
         intake_extension = hardwareMap.get(Servo.class, "intake_extension");
+        elevator2 = hardwareMap.get(DcMotor.class, "elevator_motor2");
         //elevatorHang = hardwareMap.get(DcMotor.class, "elevator_hang");
         armMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
@@ -54,16 +56,6 @@ public class TeleOpLgChamp extends LinearOpMode {
         leftBackDrive.setDirection(DcMotor.Direction.REVERSE);
         rightFrontDrive.setDirection(FORWARD);
         rightBackDrive.setDirection(DcMotor.Direction.REVERSE);
-
-
-
-        Pose2d startPose = new Pose2d(-24, 0, Math.toRadians(180));
-        drive.setPoseEstimate(startPose);
-
-        TrajectorySequence Score = drive.trajectorySequenceBuilder(new Pose2d(-57,-59))
-                .lineToLinearHeading(new Pose2d(-57, -59, Math.toRadians(45)))
-                .build();
-
 
 
 //        armMotor.setDirection(DcMotorSimple.Direction.REVERSE);
@@ -90,8 +82,12 @@ public class TeleOpLgChamp extends LinearOpMode {
 
                 //game pad 1
                 double slidePower = -gamepad2.right_stick_y;
-//            double alpha = -gamepad2.right_stick_y;
 
+                elevator.setPower(slidePower);
+                elevator2.setPower(slidePower * -1);
+                //            double alpha = -gamepad2.right_stick_y;
+
+            elevator.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
                 //drive G1
 //            double elevatorUp = sigma;
 //            double elevatorDown = alpha;
@@ -133,7 +129,7 @@ public class TeleOpLgChamp extends LinearOpMode {
 //                elevator.setPower(0.8);
 //
 //            }
-//            if (gamepad2.back)
+//            if (gamep ad2.back)
 //                elevator.setTargetPosition(3400);
 
                 if (gamepad2.right_bumper)
@@ -141,6 +137,27 @@ public class TeleOpLgChamp extends LinearOpMode {
 
                 if (gamepad2.left_bumper)
                     intake_extension.setPosition(0);
+
+
+            if (gamepad2.y) { // preset arm intake
+                armMotor.setTargetPosition(1400);
+                armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+                armMotor.setPower(-0.7);
+                sleep(400);
+                intakeClaw.setPosition(1);
+                intake_extension.setPosition(1);
+            }
+            if (gamepad2.a) { // preset arm intake
+                intakeClaw.setPosition(0.5);
+                armMotor.setTargetPosition(-1400);
+                armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+                armMotor.setPower(-0.7);
+                sleep(200);
+              //  intakeClaw.setPosition(0.5);
+                intake_extension.setPosition(0);
+            }
+    // while button not pressed run preset -- this while loop will run inside of a if state
+
 
 
             /*if (gamepad1.dpad_down){
@@ -166,7 +183,13 @@ public class TeleOpLgChamp extends LinearOpMode {
 //            }else{
 //                elevator.setPower(0);}
 //                elevator.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-                elevator.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+            //
+            //
+            //    elevator.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+
+
+
+
 
                 if (gamepad2.dpad_up) {
                     armMotor.setPower(-0.7);
@@ -206,12 +229,15 @@ public class TeleOpLgChamp extends LinearOpMode {
 
                 elevator.setPower(slidePower);
 
-
+                //
 
 
             drive.update();
 
+
             Pose2d poseEstimate = drive.getPoseEstimate();
+            telemetry.addData("elevator pose",elevator.getCurrentPosition());
+            telemetry.addData("elevator pose2",elevator2.getCurrentPosition());
             telemetry.addData("x", poseEstimate.getX());
             telemetry.addData("y", poseEstimate.getY());
             telemetry.addData("heading", poseEstimate.getHeading());
