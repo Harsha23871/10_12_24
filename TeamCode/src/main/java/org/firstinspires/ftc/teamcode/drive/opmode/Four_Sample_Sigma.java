@@ -22,13 +22,13 @@ public class Four_Sample_Sigma extends LinearOpMode {
 
     public void runOpMode() {
         elevator = hardwareMap.get(DcMotor.class, "elevator_motor");
+        elevator2 = hardwareMap.get(DcMotor.class, "elevator_motor2");
         claw = hardwareMap.get(Servo.class, "claw");
         bucket = hardwareMap.get(Servo.class, "bucket");
         wrist = hardwareMap.get(Servo.class, "wrist");
         armMotor = hardwareMap.get(DcMotor.class, "arm_motor");
         intakeClaw = hardwareMap.get(Servo.class, "intake_claw");
         intake_extension = hardwareMap.get(Servo.class, "intake_extension");
-        elevator2 = hardwareMap.get(DcMotor.class, "elevator_motor2");
         elevator.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         elevator.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         elevator2.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -115,9 +115,9 @@ public class Four_Sample_Sigma extends LinearOpMode {
         intakeClaw.setPosition(0.5);
         //  sleep(1000);
 
-        elevator.setTargetPosition(3200); elevator2.setTargetPosition(3200);
+        elevator.setTargetPosition(3400);elevator2.setTargetPosition(-3400);
         elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION);elevator2.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        elevator.setPower(0.8);  elevator2.setPower(-0.8);
+        elevator.setPower(0.8);elevator2.setPower(-0.8);
 
         elevator.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE); // may reduce noise
         elevator2.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);

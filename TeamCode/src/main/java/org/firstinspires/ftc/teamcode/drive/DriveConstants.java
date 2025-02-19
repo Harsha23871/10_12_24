@@ -36,7 +36,7 @@ public class DriveConstants {
      */
     public static final boolean RUN_USING_ENCODER = false;
     public static PIDFCoefficients MOTOR_VELO_PID = new PIDFCoefficients(0, 0, 0,
-      getMotorVelocityF(MAX_RPM / 60 * TICKS_PER_REV));
+            getMotorVelocityF(MAX_RPM / 60 * TICKS_PER_REV));
 
     /*
      * These are physical constants that can be determined from your robot (including the track
@@ -93,8 +93,8 @@ public class DriveConstants {
      * You are free to raise this on your own if you would like. It is best determined through experimentation.
     // Max VEL is final dont change the old was 68
      */
-   public static double MAX_VEL = 68.80;//68.80;//86.044139292
-            // was 73.17330064499293 --2_4_24--kilian
+    public static double MAX_VEL = 68.80;//68.80;//86.044139292
+    // was 73.17330064499293 --2_4_24--kilian
     public static double MAX_ACCEL =  68.80;//86.044139292
     public static double MAX_ANG_VEL =306.5883;//264.7438;
     public static double MAX_ANG_ACCEL = Math.toRadians(180);//1;
@@ -109,7 +109,7 @@ public class DriveConstants {
     }
 
     public static double getMotorVelocityF(double ticksPerSecond) {
-      // see https://docs.google.com/document/d/1tyWrXDfMidwYyP_5H4mZyVgaEswhOC35gvdmP-V-5hA/edit#heading=h.61g9ixenznbx
-      return 32767 / ticksPerSecond;
+        // see https://docs.google.com/document/d/1tyWrXDfMidwYyP_5H4mZyVgaEswhOC35gvdmP-V-5hA/edit#heading=h.61g9ixenznbx
+        return 32767 / ticksPerSecond;
     }
 }

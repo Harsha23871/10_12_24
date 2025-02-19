@@ -138,24 +138,24 @@ public class TeleOpLgChamp extends LinearOpMode {
                 if (gamepad2.left_bumper)
                     intake_extension.setPosition(0);
 
-
-            if (gamepad2.y) { // preset arm intake
-                armMotor.setTargetPosition(1400);
-                armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-                armMotor.setPower(-0.7);
-                sleep(400);
-                intakeClaw.setPosition(1);
-                intake_extension.setPosition(1);
-            }
-            if (gamepad2.a) { // preset arm intake
-                intakeClaw.setPosition(0.5);
-                armMotor.setTargetPosition(-1400);
-                armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-                armMotor.setPower(-0.7);
-                sleep(200);
-              //  intakeClaw.setPosition(0.5);
-                intake_extension.setPosition(0);
-            }
+//
+//            if (gamepad2.y) { // preset arm intake
+//                armMotor.setTargetPosition(1400);
+//                armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+//                armMotor.setPower(-0.7);
+//                sleep(400);
+//                intakeClaw.setPosition(1);
+//                intake_extension.setPosition(1);
+//            }
+//            if (gamepad2.a) { // preset arm intake
+//                intakeClaw.setPosition(0.5);
+//                armMotor.setTargetPosition(-1400);
+//                armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+//                armMotor.setPower(-0.7);
+//                sleep(200);
+//              //  intakeClaw.setPosition(0.5);
+//                intake_extension.setPosition(0);
+//            }
     // while button not pressed run preset -- this while loop will run inside of a if state
 
 
@@ -201,8 +201,8 @@ public class TeleOpLgChamp extends LinearOpMode {
                 /*elevator.setPower();*/
 
 //
-                if (gamepad2.dpad_left)
-                    wrist.setPosition(0.5);
+                if (gamepad2.dpad_left) //dropping
+                    wrist.setPosition(0.37);
                 if (gamepad2.dpad_right)
                     wrist.setPosition(0);
 //            if(gamepad1.b)
@@ -212,7 +212,8 @@ public class TeleOpLgChamp extends LinearOpMode {
 
                 if (gamepad2.b) {
                     claw.setDirection(Servo.Direction.FORWARD);
-                    claw.setPosition(0.7);
+                    claw.setPosition(0.8);
+                    intakeClaw.setDirection(Servo.Direction.FORWARD);
                     intakeClaw.setPosition(0.5);
                 } else {
                     claw.setPosition(1);
