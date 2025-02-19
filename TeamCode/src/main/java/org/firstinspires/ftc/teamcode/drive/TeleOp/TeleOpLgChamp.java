@@ -212,7 +212,7 @@ public class TeleOpLgChamp extends LinearOpMode {
 
                 if (gamepad2.b) {
                     claw.setDirection(Servo.Direction.FORWARD);
-                    claw.setPosition(0.8);
+                    claw.setPosition(0.8);//h
                     intakeClaw.setDirection(Servo.Direction.FORWARD);
                     intakeClaw.setPosition(0.5);
                 } else {

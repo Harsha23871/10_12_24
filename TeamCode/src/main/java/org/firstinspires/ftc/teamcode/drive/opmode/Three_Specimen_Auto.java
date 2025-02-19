@@ -199,7 +199,7 @@ public class    Three_Specimen_Auto extends LinearOpMode {
         elevator.setTargetPosition(0);
         elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         elevator.setPower(0.8);
-
+//
 //     claw position 1 is close
         //0.7 is open
         //RETURN TO WALL AND INTAKE
