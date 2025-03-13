@@ -115,7 +115,7 @@ public class Four_Sample_Sigma extends LinearOpMode {
         intakeClaw.setPosition(0.5);
         //  sleep(1000);
 
-        elevator.setTargetPosition(3400);elevator2.setTargetPosition(-3400);
+        elevator.setTargetPosition(3000);elevator2.setTargetPosition(-3000);//3400 elevator used to be
         elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION);elevator2.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         elevator.setPower(0.8);elevator2.setPower(-0.8);
 
@@ -170,7 +170,7 @@ public class Four_Sample_Sigma extends LinearOpMode {
         armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         armMotor.setPower(0.8);
 
-        elevator.setTargetPosition(3400); elevator2.setTargetPosition(-3400);
+        elevator.setTargetPosition(3000); elevator2.setTargetPosition(-3000);//used to be 3400
         elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION);elevator2.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         elevator.setPower(0.8);  elevator2.setPower(-0.8);
 
@@ -222,7 +222,7 @@ public class Four_Sample_Sigma extends LinearOpMode {
         armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         armMotor.setPower(0.8);
 
-        elevator.setTargetPosition(3400); elevator2.setTargetPosition(-3400);
+        elevator.setTargetPosition(3000); elevator2.setTargetPosition(-3000);// used to be 3400
         elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION);elevator2.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         elevator.setPower(0.8);  elevator2.setPower(-0.8);
 
@@ -268,7 +268,7 @@ public class Four_Sample_Sigma extends LinearOpMode {
         armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         armMotor.setPower(0.8);
 
-        elevator.setTargetPosition(3400); elevator2.setTargetPosition(-3400);
+        elevator.setTargetPosition(3000); elevator2.setTargetPosition(-3000);//used to be 3400
         elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION);elevator2.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         elevator.setPower(0.8);  elevator2.setPower(-0.8);
 

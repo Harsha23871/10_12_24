@@ -70,19 +70,7 @@ public class CameraAutoBlueTest extends LinearOpMode {
         // Initialize the hardware variables. Note that the strings used here must correspond
         // to the names assigned during the robot configuration step on the DS or RC devices.
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
-        //drive
-        leftFrontDrive  = hardwareMap.get(DcMotor.class, "leftFront");
-        leftBackDrive  = hardwareMap.get(DcMotor.class, "leftRear");
-        rightFrontDrive = hardwareMap.get(DcMotor.class, "rightFront");
-        rightBackDrive = hardwareMap.get(DcMotor.class, "rightRear");
-        //intake
-        intakeMotor = hardwareMap.get(DcMotor.class, "intakeMotor");
-////////////////////////////////////////////////////////////////////////////////////
-        //drive
-        leftFrontDrive.setDirection(DcMotor.Direction.REVERSE);
-        leftBackDrive.setDirection(DcMotor.Direction.REVERSE);
-        rightFrontDrive.setDirection(DcMotor.Direction.FORWARD);
-        rightBackDrive.setDirection(DcMotor.Direction.FORWARD);
+
 ////////////////////////////////////////////////////////////////////////////////////
 
 
