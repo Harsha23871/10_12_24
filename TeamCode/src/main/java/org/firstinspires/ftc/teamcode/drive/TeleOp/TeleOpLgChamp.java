@@ -192,9 +192,9 @@ public class TeleOpLgChamp extends LinearOpMode {
 
 
                 if (gamepad2.dpad_up) {
-                    armMotor.setPower(-0.7);
+                    armMotor.setPower(-1);
                 }else if (gamepad2.dpad_down)
-                    armMotor.setPower(0.7);
+                    armMotor.setPower(1);
                 else{
                     armMotor.setPower(0);
                     armMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);}
