@@ -59,8 +59,8 @@ public class    SpecimenAutoNoPreload extends LinearOpMode {
                 .build();
 //score first
         TrajectorySequence ScorePath = drive.trajectorySequenceBuilder(new Pose2d(36, -64), Math.toRadians(90))
-                .splineToLinearHeading(new Pose2d(4, -30.5, Math.toRadians(-90)), Math.toRadians(90))
-                .build();
+                .splineToLinearHeading(new Pose2d(4, -28.5, Math.toRadians(-90)), Math.toRadians(90))
+                .build();                            //8
         //pick second
         TrajectorySequence PickUpPath = drive.trajectorySequenceBuilder(new Pose2d(4, -31.5), Math.toRadians(270))
 //                .splineToLinearHeading(new Pose2d(36, -64, Math.toRadians(90.00)), Math.toRadians(250)) // -64
@@ -74,8 +74,8 @@ public class    SpecimenAutoNoPreload extends LinearOpMode {
 
 //score second
         TrajectorySequence ScorePath2 = drive.trajectorySequenceBuilder(new Pose2d(36, -64), Math.toRadians(90))
-                .splineToLinearHeading(new Pose2d(7, -28.5, Math.toRadians(270.00)), Math.toRadians(90)) //-30.5 y
-                .build();
+                .splineToLinearHeading(new Pose2d(6, -27.5, Math.toRadians(270.00)), Math.toRadians(90)) //-30.5 y
+                .build();                             //6
 //ppick third
         TrajectorySequence PickUpPath2 = drive.trajectorySequenceBuilder(ScorePath2.end(), Math.toRadians(270))
                 //                .splineToLinearHeading(new Pose2d(36, -64, Math.toRadians(90.00)), Math.toRadians(250)) // -64
@@ -86,8 +86,8 @@ public class    SpecimenAutoNoPreload extends LinearOpMode {
 //score third
 
         TrajectorySequence ScorePath3 = drive.trajectorySequenceBuilder(new Pose2d(36, -64), Math.toRadians(90))
-                .splineToLinearHeading(new Pose2d(10, -27.5, Math.toRadians(270.00)), Math.toRadians(90))
-                .build();
+                .splineToLinearHeading(new Pose2d(1, -26.5, Math.toRadians(270.00)), Math.toRadians(90))
+                .build();                             //8
 //pick fouth
         TrajectorySequence PickUpPath3 = drive.trajectorySequenceBuilder(ScorePath3.end(), Math.toRadians(270))
                 //                .splineToLinearHeading(new Pose2d(36, -64, Math.toRadians(90.00)), Math.toRadians(250)) // -64
@@ -97,8 +97,8 @@ public class    SpecimenAutoNoPreload extends LinearOpMode {
                 .build();
 //score fourth
         TrajectorySequence ScorePath4 = drive.trajectorySequenceBuilder(new Pose2d(36, -64), Math.toRadians(90))
-                .splineToLinearHeading(new Pose2d(13, -26.5, Math.toRadians(270.00)), Math.toRadians(90))
-                .build();
+                .splineToLinearHeading(new Pose2d(-1, -25, Math.toRadians(270.00)), Math.toRadians(90))
+                .build();                           //4
 // machine leaening camera code techniques below
         //limelight
         //opencv sigma
@@ -121,7 +121,9 @@ public class    SpecimenAutoNoPreload extends LinearOpMode {
         armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         armMotor.setPower(0.8);
         claw.setPosition(1);//close
-        sleep(80);
+
+        sleep(100); // 125 to 100
+
         elevator.setTargetPosition(1900); // 2000                 //FIRST SPECIMEN old:2000 put to all others
         elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION); ///////////// Reduced by 1000
         elevator.setPower(0.9);
@@ -130,13 +132,13 @@ public class    SpecimenAutoNoPreload extends LinearOpMode {
         elevator2.setPower(-0.9);
 
         drive.followTrajectorySequence(ScorePath);
-        elevator.setTargetPosition(1400); // 2000                 //FIRST SPECIMEN old:2000 put to all others
+        elevator.setTargetPosition(1350); // 2000                 //FIRST SPECIMEN old:2000 put to all others
         elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION); ///////////// Reduced by 1000
         elevator.setPower(0.9);
         elevator2.setTargetPosition(-1400);
         elevator2.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         elevator2.setPower(-0.9);
-        sleep(30); // old 1000
+        sleep(100); // old 1000
         claw.setPosition(0.7);
 
         elevator.setTargetPosition(0);
@@ -152,7 +154,9 @@ public class    SpecimenAutoNoPreload extends LinearOpMode {
 //SECOND SCORE
 
         claw.setPosition(1);//close
-        sleep(100);
+
+        sleep(100); // 125 to 100 maybe
+
         elevator.setTargetPosition(1900); // 2000                 //FIRST SPECIMEN old:2000 put to all others
         elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION); ///////////// Reduced by 1000
         elevator.setPower(0.9);
@@ -167,7 +171,7 @@ public class    SpecimenAutoNoPreload extends LinearOpMode {
         elevator2.setTargetPosition(-1400);
         elevator2.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         elevator2.setPower(-0.9);
-        sleep(100);  // old 1000
+        sleep(125);  // old 1000
         claw.setPosition(0.7);
 
         elevator.setTargetPosition(0);
@@ -184,7 +188,9 @@ public class    SpecimenAutoNoPreload extends LinearOpMode {
 
 
         claw.setPosition(1);//close
-        sleep(100);
+
+        sleep(100); // 125 to 100
+
         elevator.setTargetPosition(1900); // 2000                 //FIRST SPECIMEN old:2000 put to all others
         elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION); ///////////// Reduced by 1000
         elevator.setPower(0.9);
@@ -199,7 +205,7 @@ public class    SpecimenAutoNoPreload extends LinearOpMode {
         elevator2.setTargetPosition(-1400);
         elevator2.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         elevator2.setPower(-0.9);
-        sleep(100); // old 1000
+        sleep(125); // old 1000
         claw.setPosition(0.7);
 
         elevator.setTargetPosition(0);
@@ -216,7 +222,9 @@ public class    SpecimenAutoNoPreload extends LinearOpMode {
 
         //FOURTH SCORE
         claw.setPosition(1);//close
+
         sleep(100);
+
         elevator.setTargetPosition(1900); // 2000                 //FIRST SPECIMEN old:2000 put to all others
         elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION); ///////////// Reduced by 1000
         elevator.setPower(0.9);
@@ -231,7 +239,7 @@ public class    SpecimenAutoNoPreload extends LinearOpMode {
         elevator2.setTargetPosition(-1400);
         elevator2.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         elevator2.setPower(-0.9);
-        sleep(100);  // old 1000
+        sleep(125);  // old 150
         claw.setPosition(0.7);
 
         elevator.setTargetPosition(0);

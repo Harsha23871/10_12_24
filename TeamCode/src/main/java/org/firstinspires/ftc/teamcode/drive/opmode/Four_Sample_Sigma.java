@@ -36,7 +36,7 @@ public class Four_Sample_Sigma extends LinearOpMode {
         armMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         armMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         armMotor.setDirection(DcMotorSimple.Direction.REVERSE);
-
+        wrist.setDirection(Servo.Direction.REVERSE);
 
 
 //        hwMapForAuto.elevator_Scoring_Pos();  // Moves elevator to scoring position
@@ -46,7 +46,7 @@ public class Four_Sample_Sigma extends LinearOpMode {
 
 
         waitForStart();
-        wrist.setPosition(0);
+
 
 //        elevator.setMode(DcMotorEx.RunMode.ST
 //
@@ -65,27 +65,27 @@ public class Four_Sample_Sigma extends LinearOpMode {
         //-57   //-59
 
         TrajectorySequence FirstGrab = drive.trajectorySequenceBuilder(trajectory0.end(), Math.toRadians(270))
-                .lineToLinearHeading(new Pose2d(-51.5, -45, Math.toRadians(90.00)))
+                .lineToLinearHeading(new Pose2d(-51.5, -45.5, Math.toRadians(90.00))) //-45
                 .build();
 
         TrajectorySequence FirstScore = drive.trajectorySequenceBuilder(FirstGrab.end(), Math.toRadians(270))
-                .lineToLinearHeading(new Pose2d(-57, -59, Math.toRadians(45)))
+                .lineToLinearHeading(new Pose2d(-58, -60, Math.toRadians(45)))
                 .build();                         //-57   //-59
 
         TrajectorySequence SecondGrab = drive.trajectorySequenceBuilder(FirstScore.end(), Math.toRadians(270))
-                .lineToLinearHeading(new Pose2d(-62, -45.5, Math.toRadians(90.00)))
+                .lineToLinearHeading(new Pose2d(-62, -45.5, Math.toRadians(90.00))) //-45.5
                 .build();
 
         TrajectorySequence SecondScore = drive.trajectorySequenceBuilder(SecondGrab.end(), Math.toRadians(270))
-                .lineToLinearHeading(new Pose2d(-57, -59, Math.toRadians(45)))
+                .lineToLinearHeading(new Pose2d(-58, -60, Math.toRadians(45)))
                 .build();                         //-57   //-59
 
         TrajectorySequence ThirdGrab = drive.trajectorySequenceBuilder(SecondScore.end(), Math.toRadians(270))
-                .lineToLinearHeading(new Pose2d(-62, -43, Math.toRadians(120)))
+                .lineToLinearHeading(new Pose2d(-61, -44, Math.toRadians(120))) //-46
                 .build();
 
         TrajectorySequence ThirdScore = drive.trajectorySequenceBuilder(ThirdGrab.end(), Math.toRadians(270))
-                .lineToLinearHeading(new Pose2d(-57, -59, Math.toRadians(45)))
+                .lineToLinearHeading(new Pose2d(-58, -60, Math.toRadians(45)))
                 .build();                         //-57   //-59
 
         TrajectorySequence ParkieParkie = drive.trajectorySequenceBuilder(new Pose2d(-57.00, -59.00, Math.toRadians(90.00)), Math.toRadians(270))
@@ -107,21 +107,24 @@ public class Four_Sample_Sigma extends LinearOpMode {
 
 
         intake_extension.setPosition(0);
-        wrist.setPosition(0);
-        armMotor.setTargetPosition(1100);
+
+        wrist.setPosition(0.4);
+
+        armMotor.setTargetPosition(800);
         armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         armMotor.setPower(0.8);
 
-        intakeClaw.setPosition(0.5);
+//        intakeClaw.setPosition(0.75);
         //  sleep(1000);
 
-        elevator.setTargetPosition(3000);elevator2.setTargetPosition(-3000);//3400 elevator used to be
+        elevator.setTargetPosition(3500);elevator2.setTargetPosition(-3500);//3400 elevator used to be
         elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION);elevator2.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         elevator.setPower(0.8);elevator2.setPower(-0.8);
 
         elevator.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE); // may reduce noise
         elevator2.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         drive.followTrajectorySequence(trajectory0);
+        wrist.setPosition(0.9);
         ///////////////
         sleep(250); // 1000
         ////////////
@@ -132,7 +135,7 @@ public class Four_Sample_Sigma extends LinearOpMode {
         //////////////////////
         sleep(900); //1000
         /////////////////////
-
+        intakeClaw.setPosition(0.75);
         bucket.setPosition(0.2);
         elevator.setTargetPosition(0); elevator2.setTargetPosition(0);
         elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION);elevator2.setMode(DcMotor.RunMode.RUN_TO_POSITION);
@@ -146,7 +149,7 @@ public class Four_Sample_Sigma extends LinearOpMode {
         //  sleep(1000); // 1000
         /////////////////////////////
 
-        armMotor.setTargetPosition(1500);
+        armMotor.setTargetPosition(1250); //1500
         armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         armMotor.setPower(0.8);
         sleep(500);//1000
@@ -156,6 +159,7 @@ public class Four_Sample_Sigma extends LinearOpMode {
         armMotor.setTargetPosition(0);
         armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         armMotor.setPower(0.8);
+        sleep(500);
 
         //////////////////////////////
         sleep(1000); // 1000
@@ -163,14 +167,15 @@ public class Four_Sample_Sigma extends LinearOpMode {
 
         elevator2.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         elevator.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        intakeClaw.setPosition(0.5);
+        intakeClaw.setPosition(0.75);
         sleep(500);
-        wrist.setPosition(0);
-        armMotor.setTargetPosition(1100);
+        wrist.setPosition(0.9);
+        armMotor.setTargetPosition(800); // 1100
         armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         armMotor.setPower(0.8);
 
-        elevator.setTargetPosition(3000); elevator2.setTargetPosition(-3000);//used to be 3400
+
+        elevator.setTargetPosition(3500); elevator2.setTargetPosition(-3500);//used to be 3400
         elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION);elevator2.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         elevator.setPower(0.8);  elevator2.setPower(-0.8);
 
@@ -186,7 +191,7 @@ public class Four_Sample_Sigma extends LinearOpMode {
 
         bucket.setDirection(Servo.Direction.FORWARD);
         bucket.setPosition(0.7);
-        sleep(1000); //500
+        sleep(1000); //1000
         bucket.setPosition(0.2);
         sleep(200);
 
@@ -201,7 +206,7 @@ public class Four_Sample_Sigma extends LinearOpMode {
 
         drive.followTrajectorySequence(SecondGrab);
         //sleep(1000);
-        armMotor.setTargetPosition(1400);
+        armMotor.setTargetPosition(1250);
         armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         armMotor.setPower(0.8);
         sleep(500); //1000
@@ -213,16 +218,16 @@ public class Four_Sample_Sigma extends LinearOpMode {
         armMotor.setPower(0.8);
         elevator.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         elevator2.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        sleep(1000);
-        intakeClaw.setPosition(0.5);
+        sleep(1100);
+        intakeClaw.setPosition(0.75);
         sleep(500);
-        wrist.setPosition(0);
+        wrist.setPosition(0.9);
 
-        armMotor.setTargetPosition(1100);
+        armMotor.setTargetPosition(800);
         armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         armMotor.setPower(0.8);
 
-        elevator.setTargetPosition(3000); elevator2.setTargetPosition(-3000);// used to be 3400
+        elevator.setTargetPosition(3500); elevator2.setTargetPosition(-3500);// used to be 3400
         elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION);elevator2.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         elevator.setPower(0.8);  elevator2.setPower(-0.8);
 
@@ -231,10 +236,11 @@ public class Four_Sample_Sigma extends LinearOpMode {
 //        elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 //        elevator.setPower(0.8);
         drive.followTrajectorySequence(SecondScore);
-        sleep(1000); //1000
+
+        sleep(500); //1000
         bucket.setDirection(Servo.Direction.FORWARD); /////
         bucket.setPosition(0.7);
-        sleep(600);
+        sleep(1000); //1000
         bucket.setPosition(0.2);
         sleep(200);
 
@@ -242,18 +248,15 @@ public class Four_Sample_Sigma extends LinearOpMode {
         elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION);elevator2.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         elevator.setPower(0.8); elevator2.setPower(-0.8);
 
-//        elevator.setTargetPosition(0);
-//        elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-//        elevator.setPower(0.8);
 
         drive.followTrajectorySequence(ThirdGrab);
         //  sleep(1000);//1000
-        armMotor.setTargetPosition(1400);
+        armMotor.setTargetPosition(1250);
         armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         armMotor.setPower(0.8);
         sleep(1000);
         intakeClaw.setPosition(1);
-        sleep(500);
+        sleep(500); //500 - 475
         wrist.setPosition(0.5);//releasing position!!!!
         armMotor.setTargetPosition(0);
         armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
@@ -261,14 +264,15 @@ public class Four_Sample_Sigma extends LinearOpMode {
         elevator.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         elevator2.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         sleep(1000);
-        intakeClaw.setPosition(0.5);
-        sleep(500);
-        wrist.setPosition(0);
-        armMotor.setTargetPosition(1000);
+        intakeClaw.setPosition(0.75);
+        sleep(500
+        ); // 500 -475
+        wrist.setPosition(0.9);
+        armMotor.setTargetPosition(800);
         armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         armMotor.setPower(0.8);
 
-        elevator.setTargetPosition(3000); elevator2.setTargetPosition(-3000);//used to be 3400
+        elevator.setTargetPosition(3500); elevator2.setTargetPosition(-3500);//used to be 3400
         elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION);elevator2.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         elevator.setPower(0.8);  elevator2.setPower(-0.8);
 
