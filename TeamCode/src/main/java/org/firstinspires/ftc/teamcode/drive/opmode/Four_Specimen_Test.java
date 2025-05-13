@@ -111,10 +111,10 @@ public class    Four_Specimen_Test extends LinearOpMode {
         elevator2.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         elevator2.setPower(-0.9);
         drive.followTrajectorySequence(trajectory0);
-        elevator.setTargetPosition(1100); //old: 1400 put to all others reduced by 600
-        elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        elevator.setTargetPosition(1400); // 2000                 //FIRST SPECIMEN old:2000 put to all others
+        elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION); ///////////// Reduced by 1000
         elevator.setPower(0.9);
-        elevator2.setTargetPosition(-1100);
+        elevator2.setTargetPosition(-1400);
         elevator2.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         elevator2.setPower(-0.9);
 

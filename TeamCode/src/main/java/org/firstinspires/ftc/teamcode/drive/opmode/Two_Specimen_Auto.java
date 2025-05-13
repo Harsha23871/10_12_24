@@ -7,6 +7,7 @@ import com.acmerobotics.roadrunner.geometry.Vector2d;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Servo;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
@@ -16,13 +17,20 @@ import org.firstinspires.ftc.teamcode.trajectorysequence.TrajectorySequence;
 
 @Autonomous(group = "a", name="2 Specimen")
 public class Two_Specimen_Auto extends LinearOpMode {
-    public DcMotor elevator = null;
-    public Servo claw = null;
+    public DcMotor elevator, elevator2 = null;
+    public Servo claw,wrist = null;
 
 
 
     public void runOpMode() {
         elevator = hardwareMap.get(DcMotor.class,"elevator_motor");
+        elevator2 = hardwareMap.get(DcMotor.class, "elevator_motor2");
+        claw = hardwareMap.get(Servo.class, "claw");
+        wrist = hardwareMap.get(Servo.class, "wrist");
+        elevator.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        elevator.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        elevator2.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        elevator2.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         claw =  hardwareMap.get(Servo.class, "claw");
 
         elevator.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -102,13 +110,20 @@ public class Two_Specimen_Auto extends LinearOpMode {
 
 
 
-        elevator.setTargetPosition(2000);                  //FIRST SPECIMEN
-        elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        elevator.setPower(0.6);
-        drive.followTrajectorySequence(trajectory0);
-        elevator.setTargetPosition(1500);
-        elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        elevator.setTargetPosition(1900); // 2000                 //FIRST SPECIMEN old:2000 put to all others
+        elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION); ///////////// Reduced by 1000
         elevator.setPower(0.9);
+        elevator2.setTargetPosition(-1900);
+        elevator2.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        elevator2.setPower(-0.9);
+        drive.followTrajectorySequence(trajectory0);
+        elevator.setTargetPosition(1400); // 2000                 //FIRST SPECIMEN old:2000 put to all others
+        elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION); ///////////// Reduced by 1000
+        elevator.setPower(0.9);
+        elevator2.setTargetPosition(-1400);
+        elevator2.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        elevator2.setPower(-0.9);
+
         sleep(500);
         claw.setPosition(0.7);
         elevator.setTargetPosition(0);

@@ -88,7 +88,7 @@ public class    SpecimenAutoNoPreload extends LinearOpMode {
         TrajectorySequence ScorePath3 = drive.trajectorySequenceBuilder(new Pose2d(36, -64), Math.toRadians(90))
                 .splineToLinearHeading(new Pose2d(1, -26.5, Math.toRadians(270.00)), Math.toRadians(90))
                 .build();                             //8
-//pick fouth
+
         TrajectorySequence PickUpPath3 = drive.trajectorySequenceBuilder(ScorePath3.end(), Math.toRadians(270))
                 //                .splineToLinearHeading(new Pose2d(36, -64, Math.toRadians(90.00)), Math.toRadians(250)) // -64
 //                .waitSeconds(0.1)

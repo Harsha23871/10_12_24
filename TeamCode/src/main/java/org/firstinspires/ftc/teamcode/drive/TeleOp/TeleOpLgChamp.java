@@ -133,10 +133,10 @@ public class TeleOpLgChamp extends LinearOpMode {
 //                elevator.setTargetPosition(3400);
 
                 if (gamepad2.right_bumper)
-                    intake_extension.setPosition(1);
+                    intake_extension.setPosition(0);
 
                 if (gamepad2.left_bumper)
-                    intake_extension.setPosition(0);
+                    intake_extension.setPosition(1);
 
 //
 //            if (gamepad2.y) { // preset arm intake
@@ -202,9 +202,9 @@ public class TeleOpLgChamp extends LinearOpMode {
 
 //
                 if (gamepad2.dpad_left) //dropping
-                    wrist.setPosition(0.37);
-                if (gamepad2.dpad_right)
-                    wrist.setPosition(0);
+                    wrist.setPosition(0); // in
+                if (gamepad2.dpad_right)//uppy
+                    wrist.setPosition(0.37); // out
 //            if(gamepad1.b)
 //                intakeClaw.setPosition(1);
 //            if(gamepad1.x)
@@ -222,9 +222,9 @@ public class TeleOpLgChamp extends LinearOpMode {
                 //bucket
                 if (gamepad2.x) {
                     bucket.setDirection(Servo.Direction.FORWARD);
-                    bucket.setPosition(1);
+                    bucket.setPosition(0);
                 } else {
-                    bucket.setPosition(0.2);
+                    bucket.setPosition(0.9);
                 }
 
 

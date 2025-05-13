@@ -13,8 +13,8 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive;
 import org.firstinspires.ftc.teamcode.trajectorysequence.TrajectorySequence;
 
-@Autonomous(group = "a", name="4 Sample Sigma")
-public class Four_Sample_Sigma extends LinearOpMode {
+@Autonomous(group = "a", name="Queso Sample Mi+rror")
+public class Quesosamplemirror extends LinearOpMode {
     public DcMotor elevator, armMotor, elevator2 = null;
     public Servo claw, wrist, bucket , intakeClaw, intake_extension= null;
 
@@ -95,7 +95,7 @@ public class Four_Sample_Sigma extends LinearOpMode {
 
 
         TrajectorySequence extraSample = drive.trajectorySequenceBuilder(ThirdScore.end(), Math.toRadians(270))
-                .lineToLinearHeading(new Pose2d(-23.5, -59, Math.toRadians(0)))
+                .lineToLinearHeading(new Pose2d(-23.5, -58, Math.toRadians(0)))
                 .build();
 
         TrajectorySequence extraSampleScore = drive.trajectorySequenceBuilder(extraSample.end(), Math.toRadians(270))
@@ -120,7 +120,7 @@ public class Four_Sample_Sigma extends LinearOpMode {
 
 
 
-      intake_extension.setPosition(1);
+        intake_extension.setPosition(1);
 
         wrist.setPosition(0.6); // was 0.4
 
@@ -207,7 +207,7 @@ public class Four_Sample_Sigma extends LinearOpMode {
 
         bucket.setDirection(Servo.Direction.FORWARD);
         bucket.setPosition(0);
-        sleep(800); //1000
+        sleep(1000); //1000
         bucket.setPosition(0.9);
         sleep(200);
 
@@ -234,7 +234,7 @@ public class Four_Sample_Sigma extends LinearOpMode {
         armMotor.setPower(0.8);
 //        elevator.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 //        elevator2.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        sleep(800);
+        sleep(1100);
         intakeClaw.setPosition(0.75);
         sleep(500);
         wrist.setPosition(0.6); // 0 for the 0.9s
@@ -256,7 +256,7 @@ public class Four_Sample_Sigma extends LinearOpMode {
         sleep(100); //1000
         bucket.setDirection(Servo.Direction.FORWARD); /////
         bucket.setPosition(0);
-        sleep(800); //1000
+        sleep(1000); //1000
         bucket.setPosition(0.9);
         sleep(200);
 
@@ -270,7 +270,7 @@ public class Four_Sample_Sigma extends LinearOpMode {
         armMotor.setTargetPosition(1250);
         armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         armMotor.setPower(0.8);
-        sleep(800);
+        sleep(1000);
         intakeClaw.setPosition(1);
         sleep(500); //500 - 475
         wrist.setPosition(1);//releasing position!!!!
@@ -279,7 +279,7 @@ public class Four_Sample_Sigma extends LinearOpMode {
         armMotor.setPower(0.8);
 //        elevator.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 //        elevator2.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        sleep(800);
+        sleep(1000);
         intakeClaw.setPosition(0.75);
         sleep(500
         ); // 500 -475
@@ -301,7 +301,7 @@ public class Four_Sample_Sigma extends LinearOpMode {
 
         bucket.setDirection(Servo.Direction.FORWARD);
         bucket.setPosition(0);
-        sleep(800); //1000
+        sleep(1000); //1000
         bucket.setPosition(0.9);
         sleep(500);
 
@@ -340,7 +340,7 @@ public class Four_Sample_Sigma extends LinearOpMode {
         armMotor.setPower(0.8);
 //        elevator.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 //        elevator2.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        sleep(800);
+        sleep(1000);
         intakeClaw.setPosition(0.75);
         sleep(500
         ); // 500 -475
@@ -348,7 +348,7 @@ public class Four_Sample_Sigma extends LinearOpMode {
         armMotor.setTargetPosition(800);
         armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         armMotor.setPower(0.8);
-    sleep(100);
+        sleep(100);
 
         elevator.setTargetPosition(3500); elevator2.setTargetPosition(-3500);//used to be 3400
         elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION);elevator2.setMode(DcMotor.RunMode.RUN_TO_POSITION);
@@ -360,11 +360,9 @@ public class Four_Sample_Sigma extends LinearOpMode {
         elevator.setPower(0.8);
 
         drive.followTrajectorySequence(extraSampleScore);
-     //   bucket.setPosition(0);
+        //   bucket.setPosition(0);
         bucket.setPosition(-0.9);
 
-        intake_extension.setPosition(0);
-        drive.followTrajectorySequence(extraSample);
         sleep(1000);
 
 
